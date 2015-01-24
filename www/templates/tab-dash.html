@@ -1,28 +1,24 @@
-<ion-view view-title="Dashboard">
+<ion-view>
+
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
-        </div>
-      </div>
-    </div>
+      <ion-slide-box delegate-handle="image-viewer" show-pager="false" on-slide-changed="slideHasChanged($index)">
+          <ion-slide ng-repeat="deal in deals">
+              <img ng-src="{{deal.displayImage}}"/>
+              <h2>{{deal.name}}</h2>
+          </ion-slide>
+          <!--<ion-slide>-->
+              <!--<div class="box yellow"><h1>2</h1></div>-->
+          <!--</ion-slide>-->
+          <!--<ion-slide>-->
+              <!--<div class="box pink"><h1>3</h1></div>-->
+          <!--</ion-slide>-->
+      </ion-slide-box>
   </ion-content>
+
+    <div class="selectionArea">
+    <!-- First Button to Accept Deal-->
+
+    <!--Second Button to Reject Deal-->
+    </div>
+
 </ion-view>
