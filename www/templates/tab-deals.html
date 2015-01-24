@@ -1,7 +1,7 @@
 <ion-view>
  <ion-content>
     <ion-list>
-        <ion-item class="item item-thumbnail-left" ng-repeat="deal in deals" type="item-text-wrap">
+        <ion-item class="item item-thumbnail-left" ng-repeat="deal in deals | filter:{swipeState : 1}" type="item-text-wrap">
             <img ng-src="{{deal.displayImage}}">
             <h2>{{deal.name}}</h2>
         </ion-item>

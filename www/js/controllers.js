@@ -3,8 +3,14 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {})
 
 .controller('DealsCtrl', function($scope, Deals, $ionicSlideBoxDelegate ) {
-  $scope.deals = Deals.all();
+
+   $scope.deals = Deals.all();
    $ionicSlideBoxDelegate.update();
+
+   // Swipe Handler
+   $scope.slideHasChanged = function(index) {
+
+   }
 })
 
 .controller('DealDetailCtrl', function($scope, $stateParams, Deals) {
