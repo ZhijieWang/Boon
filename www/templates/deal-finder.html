@@ -1,0 +1,11 @@
+<ion-view title="Finder">
+    <ion-content class="dealview" style="text-align: center">
+        <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+            <ion-slide ng-repeat="deal in deals">
+                <h2>{{deal.name}}</h2>
+                <br>
+                <h3>{{deal.notes}}</h3>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+</ion-view>
