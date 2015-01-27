@@ -1,4 +1,12 @@
 {
-  "name": "vortex",
-  "app_id": ""
+  "name": "BoonDev",
+  "app_id": "",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }
