@@ -1,11 +1,13 @@
 <ion-view title="Finder">
-    <ion-content class="dealview" style="text-align: center">
-        <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
-            <ion-slide ng-repeat="deal in deals">
-                <h2>{{deal.name}}</h2>
-                <br>
-                <h3>{{deal.notes}}</h3>
-            </ion-slide>
-        </ion-slide-box>
+    <ion-content class="dealview" style="text-align: center  "  ng-controller="DealsCtrl">
+        <td-cards>
+            <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)">
+                <div class="image">
+                    <div class="no-text">NOPE</div>
+                    <img ng-src="{{card.image}}">
+                    <div class="yes-text">LIKE</div>
+                </div>
+            </td-card>
+        </td-cards>
     </ion-content>
 </ion-view>
