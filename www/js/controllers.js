@@ -1,6 +1,5 @@
 angular.module('starter.controllers', [])
 
-
     .directive('noScroll', function() {
 
         return {
@@ -25,10 +24,10 @@ angular.module('starter.controllers', [])
         $scope.showRightMenu = function () {
             $ionicSideMenuDelegate.toggleRight();
         };
+
+        $scope.fields = {};
     })
-    .controller('DealsCtrl',[ '$scope','$ionicSlideBoxDelegate','Deals','TDCardDelegate', function($scope, $ionicSlideBoxDelegate ,Deals,TDCardDelegate) {
-        $scope.selectedDeals = [];
-        $scope.rejectedDeals = [];
+    .controller('DealsCtrl',[ '$scope','$ionicSlideBoxDelegate','Deals','TDCardDelegate','dealsService', function($scope, $ionicSlideBoxDelegate ,Deals,TDCardDelegate,dealsService) {
 
         // Controls deals that user has viewed and their selection
         // state of those deals ( user's reaction to deal, how long
@@ -48,24 +47,23 @@ angular.module('starter.controllers', [])
             $scope.cards.unshift(angular.extend({}, newCard));
         }
 
-
         $scope.cards = [];
-        for(var i = 0; i < 3; i++) $scope.addCard();
+        for(var i = 0; i < 5; i++) $scope.addCard();
 
 
         // Rejects the deal and removes from user's possible list of deals for the day
         $scope.cardSwipedLeft = function(currentDeal) {
-            $scope.rejectedDeals.push($scope.deals[ currentDeal ])
+            dealsService.rejectDeal(currentDeal);
         }
 
         // Adds deal to stash and logs that user accepted the deal
         $scope.cardSwipedRight = function(currentDeal) {
             /* TODO Sort deals upon insertion in following manner:
              // Active deals appear first
-             // Deals yet to be active second
+             // Deals yet to be active secon
              // Within each catagory deal with closest expiry time appears first
              */
-            $scope.selectedDeals.push($scope.deals[ currentDeal ])
+            dealsService.acceptDeal(currentDeal);
         }
     }])
     .controller('PriceCtrl', function($scope) {
@@ -76,7 +74,6 @@ angular.module('starter.controllers', [])
             { text: " 5 - 10 $$ ", checked: false },
             { text: " 10-20 $$$ ", checked: false }
         ];
-
     })
     .controller('GeoCtrl',['$geolocation', '$scope', function($geolocation, $scope) {
         $scope.myPosition = $geolocation.getCurrentPosition({

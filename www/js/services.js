@@ -62,3 +62,28 @@ angular.module('starter.services', [])
             }
         }
     })
+    .service('dealsService', function() {
+        var freshDeals = [];
+        var rejectedDeals = [];
+        var stashedDeals = [];
+
+        return {
+            deals: function () {
+                return freshDeals;
+            },
+            acceptedDeals: function() {
+                return stashedDeals;
+            },
+            rejectDeal: function(currentDeal) {
+                // Get current time
+
+                // Reject deal with specified ID
+            },
+            acceptDeal: function(currentDeal) {
+                stashedDeals.push(currentDeal);
+            },
+            getDeal: function(dealID) {
+                // Get deal wih the specified ID if it exists
+            }
+        };
+    })
