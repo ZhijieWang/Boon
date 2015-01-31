@@ -17,7 +17,7 @@ Which will launch an iPhone VM running the cordova packaged app
 
 Currently there is no database connectivity and deals are hardcoded in for testing.
 
-# Executing Tests
+# Unit Tests
 
 To Add a New Angular Unit Test: call the file \<name\>_test.js and put it under the jasmine/spec/ directory
 
