@@ -20,4 +20,5 @@ Currently there is no database connectivity and deals are hardcoded in for testi
 # Executing Tests
 
 To Add a New Angular Unit Test: call the file \<name\>_test.js and put it under the jasmine/spec/ directory
+
 To execute the Test Suite: execute_tests.sh contains the karma command for running browser tests
