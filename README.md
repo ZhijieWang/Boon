@@ -22,8 +22,11 @@ Currently there is no database connectivity and deals are hardcoded in for testi
 Before executing tests the following commands need to be run to prepare local testing enviroment:
 
 ``` npm install -g karma
+
 npm install -g karma-cli
+
 npm install karma-jasmine
+
 npm install karma-chrome-launcher ```
 
 To Add a New Angular Unit Test: call the file \<name\>_test.js and put it under the jasmine/spec/ directory
