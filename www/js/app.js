@@ -50,7 +50,7 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
                 views: {
                     'deal-stash': {
                         templateUrl: 'templates/deal-stash.html',
-                        controller: 'DealsCtrl'
+                        controller: 'StashCtrl'
                     }
                 }
             })

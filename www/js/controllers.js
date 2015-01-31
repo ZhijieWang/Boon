@@ -26,18 +26,14 @@ angular.module('starter.controllers', [])
         };
 
     })
-    .controller('DealsCtrl',[ '$scope','$ionicSlideBoxDelegate','TDCardDelegate','dealsService', function($scope, $ionicSlideBoxDelegate ,TDCardDelegate,dealsService) {
+    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService',function($scope ,TDCardDelegate,dealsService,dealCacheService) {
         $scope.deals = [];
 
-        // Holds deals that have been rejected
-        $scope.rejectedDeals = [];
-        // Holds deals that user has stashed
-        $scope.stashedDeals = [];
 
         // Adds deal to list of rejected deals
         $scope.cardSwipedLeft = function(currentDeal) {
             //dealsService.rejectDeal(currentDeal);
-            $scope.rejectedDeals.push(currentDeal);
+            dealsService.rejectDeal(currentDeal);
         }
 
         /*
@@ -48,12 +44,12 @@ angular.module('starter.controllers', [])
          */
         $scope.cardSwipedRight = function(currentDeal) {
             /* TODO Sort deals upon insertion in following manner:
-             // Active deals appear first
+             // Active deals athppear first
              // Deals yet to be active secon
              // Within each catagory deal with closest expiry time appears first
              */
             //dealsService.acceptDeal(currentDeal);
-            $scope.stashedDeals.push(currentDeal);
+            dealCacheService.stashDeal(currentDeal);
             dealsService.acceptDeal(currentDeal).then(function(response) {
 
             });
@@ -70,7 +66,7 @@ angular.module('starter.controllers', [])
         Adds deal to rejected list
          */
         $scope.rejectDeal = function ( currentDeal ) {
-            dealsService.rejectDeal( currentDeal );
+            dealsService.rejectDeal(currentDeal);
         }
 
         /*
@@ -78,14 +74,6 @@ angular.module('starter.controllers', [])
          */
         $scope.getDeal = function( dealId ) {
             return dealsService.getDeal(dealId);
-        }
-
-        /*
-        Returns accepted deals array
-         */
-        $scope.acceptedDeals = function () {
-            //return dealsService.acceptedDeals();
-            return $scope.stashedDeals;
         }
 
         /*
@@ -101,8 +89,12 @@ angular.module('starter.controllers', [])
         // state of those deals ( user's reaction to deal, how long
         // they spent looking at the deal )
 
+    }])
+    .controller('StashCtrl',['$scope','dealCacheService', function($scope, dealCacheService){
+        $scope.acceptedDeals = function () {
+            return dealCacheService.stashedDeals();
+        }
 
-        $ionicSlideBoxDelegate.update();
     }])
     .controller('PriceCtrl', function($scope) {
 

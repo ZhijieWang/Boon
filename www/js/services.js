@@ -8,6 +8,7 @@
  */
 
 angular.module('starter.services', [])
+
     .service('dealsService', ['$http', '$log', function dealsService($http, $log) {
         var freshDeals  = [{
             dealId: 0,
@@ -52,11 +53,9 @@ angular.module('starter.services', [])
             return freshDeals;
         };
 
-        this.acceptedDeals = function() {
-            return stashedDeals;
-        };
 
         this.rejectDeal = function(currentDeal) {
+            // TODO: inform server of deal rejection
         };
 
         //returns a promise resulting from posting the server with accepted deal data
@@ -83,6 +82,19 @@ angular.module('starter.services', [])
                 return freshDeals;
         };
     }])
+    .service('dealCacheService', function dealCacheService() {
+        // Holds deals that user has stashed
+        var stashedDeals = [];
 
-    ;
+        this.stashedDeals = function() {
+            return stashedDeals;
+        };
+
+        this.stashDeal = function(dealToStash) {
+            stashedDeals.push(dealToStash);
+        };
+
+    })
+
+
 
