@@ -84,7 +84,8 @@ angular.module('starter.controllers', [])
         Returns accepted deals array
          */
         $scope.acceptedDeals = function () {
-            return dealsService.acceptedDeals();
+            //return dealsService.acceptedDeals();
+            return $scope.stashedDeals;
         }
 
         /*
