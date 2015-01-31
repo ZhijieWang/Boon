@@ -1,10 +1,10 @@
 <ion-view title="Finder">
-    <ion-content class="dealview" style="text-align: center  "  ng-controller="DealsCtrl">
+    <ion-content class="dealview"  ng-controller="DealsCtrl">
         <td-cards>
-            <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)">
+            <td-card ng-repeat="deal in deals" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft(deal)" on-swipe-right="cardSwipedRight(deal)" on-partial-swipe="cardPartialSwipe(amt)">
                 <div class="image">
                     <div class="no-text">NOPE</div>
-                    <img ng-src="{{card.image}}">
+                    <img ng-src="{{deal.image}}">
                     <div class="yes-text">LIKE</div>
                 </div>
             </td-card>

@@ -25,32 +25,9 @@ angular.module('starter.controllers', [])
             $ionicSideMenuDelegate.toggleRight();
         };
 
-        $scope.fields = {};
     })
-    .controller('DealsCtrl',[ '$scope','$ionicSlideBoxDelegate','Deals','TDCardDelegate','dealsService', function($scope, $ionicSlideBoxDelegate ,Deals,TDCardDelegate,dealsService) {
-
-        // Controls deals that user has viewed and their selection
-        // state of those deals ( user's reaction to deal, how long
-        // they spent looking at the deal )
-
-        $scope.deals = Deals.all();
-
-        $ionicSlideBoxDelegate.update();
-
-        $scope.cardDestroyed = function(index) {
-            $scope.cards.splice(index, 1);
-        };
-
-        $scope.addCard = function() {
-            var newCard = $scope.deals[Math.floor(Math.random() * $scope.deals.length)];
-            newCard.id = Math.random();
-            $scope.cards.unshift(angular.extend({}, newCard));
-        }
-
-        $scope.cards = [];
-        for(var i = 0; i < 5; i++) $scope.addCard();
-
-
+    .controller('DealsCtrl',[ '$scope','$ionicSlideBoxDelegate','TDCardDelegate','dealsService', function($scope, $ionicSlideBoxDelegate ,TDCardDelegate,dealsService) {
+        $scope.deals = [];
         // Rejects the deal and removes from user's possible list of deals for the day
         $scope.cardSwipedLeft = function(currentDeal) {
             dealsService.rejectDeal(currentDeal);
@@ -65,6 +42,38 @@ angular.module('starter.controllers', [])
              */
             dealsService.acceptDeal(currentDeal);
         }
+
+        $scope.getDeals = function() {
+            return dealsService.getDeals();
+        }
+
+        $scope.rejectDeal = function ( currentDeal ) {
+            dealsService.rejectDeal( currentDeal )
+        }
+
+        $scope.getDeal = function( dealId ) {
+            return dealsService.getDeal(dealId);
+        }
+
+        $scope.acceptedDeals = function () {
+            return dealsService.acceptedDeals();
+        }
+
+        $scope.cardDestroyed = function(index) {
+            $scope.cards.splice(index, 1);
+        };
+
+
+        $scope.deals = $scope.getDeals();
+
+        // Controls deals that user has viewed and their selection
+        // state of those deals ( user's reaction to deal, how long
+        // they spent looking at the deal )
+
+
+        $ionicSlideBoxDelegate.update();
+
+
     }])
     .controller('PriceCtrl', function($scope) {
 

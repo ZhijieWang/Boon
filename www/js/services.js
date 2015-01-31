@@ -9,12 +9,9 @@
 
 angular.module('starter.services', [])
 
-    .factory('Deals', function() {
-        // Might use a resource here that returns a JSON array
-
-        // Fake Deals for Testing
-        var deals = [{
-            id: 0,
+    .service('dealsService', function() {
+        var freshDeals  = [{
+            dealId: 0,
             name: 'Hemingway\'s Half Off Food',
             image: 'test1.jpg',
             notes: 'Voted best college bar in Oakland!',
@@ -22,7 +19,7 @@ angular.module('starter.services', [])
             endTime: 0700
 
         }, {
-            id: 1,
+            dealId: 1,
             name: 'Peter\'s Pub',
             image: 'test1.jpg',
             notes: 'Odd obsession with everything',
@@ -30,40 +27,27 @@ angular.module('starter.services', [])
             endTime: 0700
 
         }, {
-            id: 2,
+            dealId: 2,
             name: 'Hemingway\'s Free Drinks',
             image: 'test1.jpg',
             notes: 'Wears a sweet leather Jacket. I\'m a bit jealous',
             startTime: 0500,
             endTime: 0700
         }, {
-            id: 3,
+            dealId: 3,
             name: 'Five Guys Bacon Dog',
             image: 'test1.jpg',
             notes: 'Can\'t go wrong with bacon!',
             startTime: 0500,
             endTime: 0700
         }, {
-            id: 4,
+            dealId: 4,
             name: 'Panera Free Drink With Purchase!',
             image: 'test1.jpg',
             notes: 'Freshly baked bread daily!',
             startTime: 0500,
             endTime: 0700
         }];
-
-        return {
-            all: function() {
-                return deals;
-            },
-            get: function(dealId) {
-                // Simple index lookup
-                return deals[dealId];
-            }
-        }
-    })
-    .service('dealsService', function() {
-        var freshDeals = [];
         var rejectedDeals = [];
         var stashedDeals = [];
 
@@ -76,14 +60,18 @@ angular.module('starter.services', [])
             },
             rejectDeal: function(currentDeal) {
                 // Get current time
-
                 // Reject deal with specified ID
+                rejectedDeals.push(currentDeal);
             },
             acceptDeal: function(currentDeal) {
                 stashedDeals.push(currentDeal);
             },
             getDeal: function(dealID) {
                 // Get deal wih the specified ID if it exists
+            },
+            getDeals: function() {
+                return freshDeals;
             }
+
         };
     })
