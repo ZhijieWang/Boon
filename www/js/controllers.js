@@ -33,7 +33,9 @@ angular.module('starter.controllers', [])
         // Adds deal to list of rejected deals
         $scope.cardSwipedLeft = function(currentDeal) {
             //dealsService.rejectDeal(currentDeal);
-            dealsService.rejectDeal(currentDeal);
+            dealsService.rejectDeal(currentDeal).then(function(response) {
+                
+            });
         }
 
         /*
@@ -48,7 +50,7 @@ angular.module('starter.controllers', [])
              // Deals yet to be active secon
              // Within each catagory deal with closest expiry time appears first
              */
-            //dealsService.acceptDeal(currentDeal);
+
             dealCacheService.stashDeal(currentDeal);
             dealsService.acceptDeal(currentDeal).then(function(response) {
 

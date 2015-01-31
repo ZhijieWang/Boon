@@ -10,6 +10,8 @@
 angular.module('starter.services', [])
 
     .service('dealsService', ['$http', '$log', function dealsService($http, $log) {
+        
+        //mock deal data
         var freshDeals  = [{
             dealId: 0,
             name: 'Hemingway\'s Half Off Food',
@@ -55,7 +57,18 @@ angular.module('starter.services', [])
 
 
         this.rejectDeal = function(currentDeal) {
-            // TODO: inform server of deal rejection
+            
+            // inform server of deal rejection
+            var jsonPayload = {
+                dealId: currentDeal.dealId,
+                action: 'dealState',
+                accepted: false,
+                csrfToken: '1234567890'
+            };            
+
+            $http.post('deals.htm', jsonPayload).then(function(response) {
+                return angular.fromJson(response.data).model.results;
+            });
         };
 
         //returns a promise resulting from posting the server with accepted deal data
@@ -63,6 +76,7 @@ angular.module('starter.services', [])
 
             var jsonPayload = {
                 dealId: currentDeal.dealId,
+                action: 'dealState',
                 accepted: true,
                 csrfToken: '1234567890'
             };
@@ -77,9 +91,23 @@ angular.module('starter.services', [])
 
         };
 
-        // TODO: get fresh deals from server using location and preferences
+        // TODO: uncomment ajax code when we have a backend
         this.getDeals = function(location, preferences) {
-                return freshDeals;
+
+            /*
+            var jsonPayload = {
+                action: 'getDeals',
+                location: location,
+                preferences: preferences,
+                csrfToken: '1234567890'
+            };
+
+            return $http.post('deals.htm', jsonPayload).then(function(response) {
+                return angular.fromJson(response.data).model.results;
+            });
+            */
+
+            return freshDeals;
         };
     }])
     .service('dealCacheService', function dealCacheService() {
