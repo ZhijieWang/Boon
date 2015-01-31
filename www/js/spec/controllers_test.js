@@ -42,9 +42,17 @@ describe('controllers module', function() {
         });        
     }));
 
-    it ('should add an accepted deal to the service\'s list of accepted deals', function() {
+    it ('should add an accepted deal to the services list of accepted deals', function() {
         var theController = getController('DealsCtrl');
         scope.cardSwipedRight(mockDeal);
         expect(dealerService.stashedDeals).toContain(mockDeal);
     });
+
+    it ('should add a rejected deal to the services master list of rejected deals', function() {
+        var theController = getController('DealsCtrl');
+        scope.cardSwipedLeft(mockDeal);
+        expect(dealerService.rejectedDeals).toContain(mockDeal);
+    }); 
+
+
 });
