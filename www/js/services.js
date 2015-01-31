@@ -8,8 +8,7 @@
  */
 
 angular.module('starter.services', [])
-
-    .service('dealsService', function() {
+    .service('dealsService', ['$http', '$log', function dealsService($http, $log) {
         var freshDeals  = [{
             dealId: 0,
             name: 'Hemingway\'s Half Off Food',
@@ -48,10 +47,6 @@ angular.module('starter.services', [])
             startTime: 0500,
             endTime: 0700
         }];
-        // Holds deals that have been rejected
-        var rejectedDeals = [];
-        // Holds deals that user has stashed
-        var stashedDeals = [];
 
         this.deals = function() {
             return freshDeals;
@@ -62,11 +57,19 @@ angular.module('starter.services', [])
         };
 
         this.rejectDeal = function(currentDeal) {
-            rejectedDeals.push(currentDeal);
         };
 
         this.acceptDeal = function(currentDeal) {
-            stashedDeals.push(currentDeal);
+
+            var jsonPayload = {
+                acceptedDeal: currentDeal,
+                date: new Date(),
+                timeStamp: new Date().getTime()
+            };
+
+            return $http.post('deals.htm', jsonPayload).then(function(response) {
+                return angular.fromJson(response.data).model.results;
+            });
         };
 
         // TODO
@@ -78,5 +81,7 @@ angular.module('starter.services', [])
         this.getDeals = function(location, preferences) {
                 return freshDeals;
         };
+    }])
 
-    })
+    ;
+
