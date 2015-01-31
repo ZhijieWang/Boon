@@ -30,7 +30,7 @@ angular.module('starter.services', [])
             dealId: 2,
             name: 'Hemingway\'s Free Drinks',
             image: 'test1.jpg',
-            notes: 'Wears a sweet leather Jacket. I\'m a bit jealous',
+            notes: 'Drinkup',
             startTime: 0500,
             endTime: 0700
         }, {
@@ -48,7 +48,9 @@ angular.module('starter.services', [])
             startTime: 0500,
             endTime: 0700
         }];
+        // Holds deals that have been rejected
         var rejectedDeals = [];
+        // Holds deals that user has stashed
         var stashedDeals = [];
 
         return {

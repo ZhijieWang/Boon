@@ -28,12 +28,19 @@ angular.module('starter.controllers', [])
     })
     .controller('DealsCtrl',[ '$scope','$ionicSlideBoxDelegate','TDCardDelegate','dealsService', function($scope, $ionicSlideBoxDelegate ,TDCardDelegate,dealsService) {
         $scope.deals = [];
-        // Rejects the deal and removes from user's possible list of deals for the day
+
+
+        // Adds deal to list of rejected deals
         $scope.cardSwipedLeft = function(currentDeal) {
             dealsService.rejectDeal(currentDeal);
         }
 
-        // Adds deal to stash and logs that user accepted the deal
+        /*
+         Adds deal to stash
+         TODO: log timing of accepting deal and send data to server in format:
+         w/ dealID and time of swipe, also send the current geolocation
+
+         */
         $scope.cardSwipedRight = function(currentDeal) {
             /* TODO Sort deals upon insertion in following manner:
              // Active deals appear first
@@ -43,24 +50,39 @@ angular.module('starter.controllers', [])
             dealsService.acceptDeal(currentDeal);
         }
 
+        /*
+        Gets deals from dealservice
+         */
         $scope.getDeals = function() {
             return dealsService.getDeals();
         }
 
+        /*
+        Adds deal to rejected list
+         */
         $scope.rejectDeal = function ( currentDeal ) {
             dealsService.rejectDeal( currentDeal )
         }
 
+        /*
+        Gets deal with following ID from dealService
+         */
         $scope.getDeal = function( dealId ) {
             return dealsService.getDeal(dealId);
         }
 
+        /*
+        Returns accepted deals array
+         */
         $scope.acceptedDeals = function () {
             return dealsService.acceptedDeals();
         }
 
+        /*
+
+         */
         $scope.cardDestroyed = function(index) {
-            $scope.cards.splice(index, 1);
+            $scope.deals.splice(index, 1);
         };
 
 
@@ -72,8 +94,6 @@ angular.module('starter.controllers', [])
 
 
         $ionicSlideBoxDelegate.update();
-
-
     }])
     .controller('PriceCtrl', function($scope) {
 
