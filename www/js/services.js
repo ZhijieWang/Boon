@@ -57,7 +57,7 @@ angular.module('starter.services', [])
 
 
         this.rejectDeal = function(currentDeal) {
-            
+
             // inform server of deal rejection
             var jsonPayload = {
                 dealId: currentDeal.dealId,
@@ -66,7 +66,7 @@ angular.module('starter.services', [])
                 csrfToken: '1234567890'
             };            
 
-            $http.post('deals.htm', jsonPayload).then(function(response) {
+            return $http.post('deals.htm', jsonPayload).then(function(response) {
                 return angular.fromJson(response.data).model.results;
             });
         };
