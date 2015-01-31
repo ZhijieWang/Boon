@@ -1,3 +1,8 @@
+/*
+ *  Unit test module for controller functions
+ *  author: rabornt (insomniac34@gmail.com)
+ */
+
 describe('controllers module', function() {
     beforeEach(module('starter'));
 
