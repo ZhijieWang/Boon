@@ -29,10 +29,15 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl',[ '$scope','$ionicSlideBoxDelegate','TDCardDelegate','dealsService', function($scope, $ionicSlideBoxDelegate ,TDCardDelegate,dealsService) {
         $scope.deals = [];
 
+        // Holds deals that have been rejected
+        $scope.rejectedDeals = [];
+        // Holds deals that user has stashed
+        $scope.stashedDeals = [];
 
         // Adds deal to list of rejected deals
         $scope.cardSwipedLeft = function(currentDeal) {
-            dealsService.rejectDeal(currentDeal);
+            //dealsService.rejectDeal(currentDeal);
+            $scope.rejectedDeals.push(currentDeal);
         }
 
         /*
@@ -47,7 +52,11 @@ angular.module('starter.controllers', [])
              // Deals yet to be active secon
              // Within each catagory deal with closest expiry time appears first
              */
-            dealsService.acceptDeal(currentDeal);
+            //dealsService.acceptDeal(currentDeal);
+            $scope.stashedDeals.push(currentDeal);
+            dealsService.acceptDeal(currentDeal).then(function(response) {
+
+            });
         }
 
         /*
