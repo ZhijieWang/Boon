@@ -53,27 +53,30 @@ angular.module('starter.services', [])
         // Holds deals that user has stashed
         var stashedDeals = [];
 
-        return {
-            deals: function () {
-                return freshDeals;
-            },
-            acceptedDeals: function() {
-                return stashedDeals;
-            },
-            rejectDeal: function(currentDeal) {
-                // Get current time
-                // Reject deal with specified ID
-                rejectedDeals.push(currentDeal);
-            },
-            acceptDeal: function(currentDeal) {
-                stashedDeals.push(currentDeal);
-            },
-            getDeal: function(dealID) {
-                // Get deal wih the specified ID if it exists
-            },
-            getDeals: function() {
-                return freshDeals;
-            }
+        this.deals = function() {
+            return freshDeals;
+        };
+
+        this.acceptedDeals = function() {
+            return stashedDeals;
+        };
+
+        this.rejectDeal = function(currentDeal) {
+            rejectedDeals.push(currentDeal);
+        };
+
+        this.acceptDeal = function(currentDeal) {
+            stashedDeals.push(currentDeal);
+        };
+
+        // TODO
+        this.getDeal = function (dealID) {
 
         };
+
+        // TODO: get fresh deals from server using location and preferences
+        this.getDeals = function(location, preferences) {
+                return freshDeals;
+        };
+
     })

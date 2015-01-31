@@ -54,14 +54,14 @@ angular.module('starter.controllers', [])
         Gets deals from dealservice
          */
         $scope.getDeals = function() {
-            return dealsService.getDeals();
+            return dealsService.deals();
         }
 
         /*
         Adds deal to rejected list
          */
         $scope.rejectDeal = function ( currentDeal ) {
-            dealsService.rejectDeal( currentDeal )
+            dealsService.rejectDeal( currentDeal );
         }
 
         /*
@@ -84,7 +84,6 @@ angular.module('starter.controllers', [])
         $scope.cardDestroyed = function(index) {
             $scope.deals.splice(index, 1);
         };
-
 
         $scope.deals = $scope.getDeals();
 

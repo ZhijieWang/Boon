@@ -2,6 +2,11 @@
     <ion-content ng-controller="DealsCtrl">
         <ion-list ng-repeat="deal in acceptedDeals()">
             <h3>{{deal.name}}</h3>
+
+            <span class="item-note">
+                {{deal.notes}}
+            </span>
+
         </ion-list>
     </ion-content>
 </ion-view>
