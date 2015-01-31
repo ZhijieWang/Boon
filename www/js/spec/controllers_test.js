@@ -23,6 +23,9 @@ describe('controllers module', function() {
             return $controller(theController, {$scope: scope});
         };
 
+        // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
+        // This allows us to inject a service but then attach it to a variable
+        // with the same name as the service.
         localStorageService = _localStorageService_;
         dealerService = _dealerService_;
 
