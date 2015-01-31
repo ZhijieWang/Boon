@@ -59,12 +59,13 @@ angular.module('starter.services', [])
         this.rejectDeal = function(currentDeal) {
         };
 
+        //returns a promise resulting from posting the server with accepted deal data
         this.acceptDeal = function(currentDeal) {
 
             var jsonPayload = {
-                acceptedDeal: currentDeal,
-                date: new Date(),
-                timeStamp: new Date().getTime()
+                dealId: currentDeal.dealId,
+                accepted: true,
+                csrfToken: '1234567890'
             };
 
             return $http.post('deals.htm', jsonPayload).then(function(response) {
