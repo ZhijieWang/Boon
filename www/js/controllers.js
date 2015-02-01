@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
                     e.preventDefault();
                 });
             }
-        }
+        };
     })
     .controller('MainCtrl', function($scope) {})
     .controller('NavCtrl', function($scope, $ionicSideMenuDelegate) {
@@ -26,7 +26,7 @@ angular.module('starter.controllers', [])
         };
 
     })
-    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService',function($scope ,TDCardDelegate,dealsService,dealCacheService) {
+    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log) {
         $scope.deals = [];
 
         // Adds deal to list of rejected deals
@@ -35,7 +35,7 @@ angular.module('starter.controllers', [])
             dealsService.rejectDeal(currentDeal).then(function(response) {
                 
             });
-        }
+        };
 
         /*
          Adds deal to stash
@@ -54,28 +54,28 @@ angular.module('starter.controllers', [])
             dealsService.acceptDeal(currentDeal).then(function(response) {
 
             });
-        }
+        };
 
         /*
         Gets deals from dealservice
          */
         $scope.getDeals = function() {
             return dealsService.deals();
-        }
+        };
 
         /*
         Adds deal to rejected list
          */
         $scope.rejectDeal = function ( currentDeal ) {
             dealsService.rejectDeal(currentDeal);
-        }
+        };
 
         /*
         Gets deal with following ID from dealService
          */
         $scope.getDeal = function( dealId ) {
             return dealsService.getDeal(dealId);
-        }
+        };
 
         /*
 
@@ -94,7 +94,7 @@ angular.module('starter.controllers', [])
     .controller('StashCtrl',['$scope','dealCacheService', function($scope, dealCacheService){
         $scope.acceptedDeals = function () {
             return dealCacheService.stashedDeals();
-        }
+        };
 
     }])
     .controller('PriceCtrl',[ '$scope','preferencesService' , function($scope, preferencesService) {
@@ -108,16 +108,16 @@ angular.module('starter.controllers', [])
 
         $scope.check = function(checkValue, priceID) {
 
-            if (checkValue == true) {
+            if (checkValue === true) {
                 preferencesService.enablePrice(priceID);
             } else {
                 preferencesService.disablePrice(priceID);
             }
 
-        }
+        };
     }])
     .controller('GeoCtrl',['$geolocation', '$scope', function($geolocation, $scope) {
         $scope.myPosition = $geolocation.getCurrentPosition({
             timeout: 60000
-        })
-    }])
+        });
+    }]);
