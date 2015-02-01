@@ -58,12 +58,13 @@ angular.module('starter.services', [])
 
         this.rejectDeal = function(currentDeal) {
 
-            // inform server of deal rejection
+            var currentTime = new Date();
             var jsonPayload = {
                 dealId: currentDeal.dealId,
                 action: 'dealState',
                 accepted: false,
-                csrfToken: '1234567890'
+                csrfToken: '1234567890',
+                timestamp: currentTime.toDateString() + currentTime.getTime()
             };            
 
             return $http.post('deals.htm', jsonPayload).then(function(response) {
@@ -74,11 +75,13 @@ angular.module('starter.services', [])
         //returns a promise resulting from posting the server with accepted deal data
         this.acceptDeal = function(currentDeal) {
 
+            var currentTime = new Date();
             var jsonPayload = {
                 dealId: currentDeal.dealId,
                 action: 'dealState',
                 accepted: true,
-                csrfToken: '1234567890'
+                csrfToken: '1234567890',
+                timestamp: currentTime.toDateString() + currentTime.getTime()
             };
 
             return $http.post('deals.htm', jsonPayload).then(function(response) {
@@ -95,11 +98,13 @@ angular.module('starter.services', [])
         this.getDeals = function(location, preferences) {
 
             /*
+            var currentTime = new Date();
             var jsonPayload = {
                 action: 'getDeals',
                 location: location,
                 preferences: preferences,
-                csrfToken: '1234567890'
+                csrfToken: '1234567890',
+                timestamp: currentTime.toDateString() + currentTime.getTime()
             };
 
             return $http.post('deals.htm', jsonPayload).then(function(response) {
