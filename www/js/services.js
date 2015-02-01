@@ -14,6 +14,7 @@ angular.module('starter.services', [])
         //mock deal data
         var freshDeals  = [{
             dealId: 0,
+            priceCategory: 1,
             name: 'Hemingway\'s Half Off Food',
             image: 'test1.jpg',
             notes: 'Voted best college bar in Oakland!',
@@ -22,6 +23,7 @@ angular.module('starter.services', [])
 
         }, {
             dealId: 1,
+            priceCategory: 1,
             name: 'Peter\'s Pub',
             image: 'test1.jpg',
             notes: 'Odd obsession with everything',
@@ -30,6 +32,7 @@ angular.module('starter.services', [])
 
         }, {
             dealId: 2,
+            priceCategory: 1,
             name: 'Hemingway\'s Free Drinks',
             image: 'test1.jpg',
             notes: 'Drinkup',
@@ -37,6 +40,7 @@ angular.module('starter.services', [])
             endTime: 0700
         }, {
             dealId: 3,
+            priceCategory: 1,
             name: 'Five Guys Bacon Dog',
             image: 'test1.jpg',
             notes: 'Can\'t go wrong with bacon!',
@@ -44,6 +48,7 @@ angular.module('starter.services', [])
             endTime: 0700
         }, {
             dealId: 4,
+            priceCategory: 2,
             name: 'Panera Free Drink With Purchase!',
             image: 'test1.jpg',
             notes: 'Freshly baked bread daily!',
@@ -126,6 +131,47 @@ angular.module('starter.services', [])
         this.stashDeal = function(dealToStash) {
             stashedDeals.push(dealToStash);
         };
+
+    })
+    /** This service handles communicating user preferences about deals
+     *  such as price, food type
+     *
+     *  TODO: add ability to store distances from user ( store internally in metric
+     *  then convert to feet in view because America )
+     * */
+    .service('preferencesService', function preferencesService() {
+        var prices = {
+              lowPrice: false,
+              mediumPrice: true,
+              highPrice: true
+        };
+
+        var categories = {
+              drink: true,
+              pizza: true,
+              mexican: true,
+              italian: true,
+              cafe: true
+        };
+
+        /* Index must not exceed that of the prices array */
+        this.enablePrice = function(priceID) {
+            prices[priceID] = true;
+        };
+
+        this.disablePrice = function(priceID) {
+            prices[priceID] = false;
+        };
+
+        this.enableCategory = function(categoryID) {
+            categories[categoryID] = true;
+        };
+
+        this.disableCategory = function(categoryID) {
+           categories[categoryID] = false;
+        }
+
+
 
     })
 
