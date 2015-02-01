@@ -10,14 +10,23 @@ describe('controllers module', function() {
     var dealCacheService;
     var getController;
 
-    var mockDeal = {
+    var mockExpiredDeal = {
         dealId: 4,
         name: 'Panera Free Drink With Purchase!',
         image: 'test1.jpg',
         notes: 'Freshly baked bread daily!',
-        startTime: 0500,
-        endTime: 0700
+        startTime: 'December 17, 2015 11:30:00',
+        endTime: 'December 17, 2015 13:30:00'
     };    
+
+    var mockDeal = {
+        dealId: 5,
+        name: 'Free Alcohol!',
+        image: 'test1.jpg',
+        notes: 'Freshly baked bread daily!',
+        startTime: 'December 17, 2015 17:30:00',
+        endTime: 'December 17, 2015 19:30:00'
+    };        
 
     beforeEach(inject(function($rootScope, $controller, $injector, _dealsService_, _dealCacheService_) {
         

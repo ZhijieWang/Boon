@@ -1,5 +1,5 @@
 /**
- * Created by adnankhan on 1/24/15.
+ * Written by Adnan Khan & Tyler Raborn
  *
  *
  *      Initially we have mocked deal data for testing, but we will
@@ -18,48 +18,53 @@ angular.module('starter.services', [])
             name: 'Hemingway\'s Half Off Food',
             image: 'test1.jpg',
             notes: 'Voted best college bar in Oakland!',
-            startTime: 0500,
-            endTime: 0700
-
+            startTime: 'December 17, 2015 17:30:00',
+            endTime: 'December 17, 2015 19:30:00'
         }, {
             dealId: 1,
             priceCategory: 1,
             name: 'Peter\'s Pub',
             image: 'test1.jpg',
             notes: 'Odd obsession with everything',
-            startTime: 0500,
-            endTime: 0700
-
+            startTime: 'December 17, 2015 17:30:00',
+            endTime: 'December 17, 2015 19:30:00'
         }, {
             dealId: 2,
             priceCategory: 1,
             name: 'Hemingway\'s Free Drinks',
             image: 'test1.jpg',
             notes: 'Drinkup',
-            startTime: 0500,
-            endTime: 0700
+            startTime: 'December 17, 2015 17:30:00',
+            endTime: 'December 17, 2015 19:30:00'
         }, {
             dealId: 3,
             priceCategory: 1,
             name: 'Five Guys Bacon Dog',
             image: 'test1.jpg',
             notes: 'Can\'t go wrong with bacon!',
-            startTime: 0500,
-            endTime: 0700
+            startTime: 'December 17, 2015 17:30:00',
+            endTime: 'December 17, 2015 19:30:00'
         }, {
             dealId: 4,
             priceCategory: 2,
             name: 'Panera Free Drink With Purchase!',
             image: 'test1.jpg',
             notes: 'Freshly baked bread daily!',
-            startTime: 0500,
-            endTime: 0700
+            startTime: 'December 17, 2015 17:30:00',
+            endTime: 'December 17, 2015 19:30:00'
+        }, {
+            dealId: 5,
+            priceCategory: 2,
+            name: 'Free alcohol!',
+            image: 'test2.jpg',
+            notes: 'deal stuff',
+            startTime: 'December 17, 2014 15:30:00',
+            endTime: 'December 17, 2014 17:30:00'
         }];
 
         this.deals = function() {
             return freshDeals;
         };
-
 
         this.rejectDeal = function(currentDeal) {
 
@@ -120,19 +125,56 @@ angular.module('starter.services', [])
             return freshDeals;
         };
     }])
-    .service('dealCacheService', function dealCacheService() {
+
+    .service('dealCacheService', ['$log', function dealCacheService($log) {
         // Holds deals that user has stashed
         var stashedDeals = [];
 
+        //every time deal data is requested from the cache, it purges expired deals
         this.stashedDeals = function() {
+            purgeExpiredDeals();
             return stashedDeals;
         };
 
         this.stashDeal = function(dealToStash) {
             stashedDeals.push(dealToStash);
+
+            //sort deals - this will ensure that deal order is maintained from most current to least current
+            stashedDeals = sortByKey(
+                stashedDeals, 
+                'startTime'
+            );   
         };
 
-    })
+        //remove deals from stash that have expired
+        var purgeExpiredDeals = function() {
+            var currentDate = new Date();
+            var validDeals = [];
+            angular.forEach(stashedDeals, function(deal) {
+                $log.info("comparing " + currentDate.getTime() + " to " + Date.parse(deal.endTime));
+                if (currentDate.getTime() < Date.parse(deal.endTime)) {
+                    validDeals.push(deal);
+                }
+            });
+            stashedDeals = validDeals;
+        };     
+
+        var sortByKey = function(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key]; var y = b[key];
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            });
+        };
+
+        var reverseSortByKey = function(array, key) {
+            return array.sort(function(a, b) {
+                var x = a[key]; var y = b[key];
+                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+            });
+        };          
+
+    }])
+
     /** This service handles communicating user preferences about deals
      *  such as price, food type
      *
@@ -169,11 +211,11 @@ angular.module('starter.services', [])
 
         this.disableCategory = function(categoryID) {
            categories[categoryID] = false;
-        }
+        };
 
 
 
     })
-
+;
 
 
