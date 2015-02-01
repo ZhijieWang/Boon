@@ -29,7 +29,6 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService',function($scope ,TDCardDelegate,dealsService,dealCacheService) {
         $scope.deals = [];
 
-
         // Adds deal to list of rejected deals
         $scope.cardSwipedLeft = function(currentDeal) {
             //dealsService.rejectDeal(currentDeal);
@@ -98,15 +97,25 @@ angular.module('starter.controllers', [])
         }
 
     }])
-    .controller('PriceCtrl', function($scope) {
+    .controller('PriceCtrl',[ '$scope','preferencesService' , function($scope, preferencesService) {
 
         // Holds user's selections for price ranges
         $scope.devList = [
-            { text: " 0 - 5 $ ", checked: false },
-            { text: " 5 - 10 $$ ", checked: false },
-            { text: " 10-20 $$$ ", checked: false }
+            { text: " 0 - 5 $ ",   checked: false, priceID: "lowPrice" },
+            { text: " 5 - 10 $$ ", checked: false, priceID: "mediumPrice" },
+            { text: " 10-20 $$$ ", checked: false, priceID: "highPrice"  }
         ];
-    })
+
+        $scope.check = function(checkValue, priceID) {
+
+            if (checkValue == true) {
+                preferencesService.enablePrice(priceID);
+            } else {
+                preferencesService.disablePrice(priceID);
+            }
+
+        }
+    }])
     .controller('GeoCtrl',['$geolocation', '$scope', function($geolocation, $scope) {
         $scope.myPosition = $geolocation.getCurrentPosition({
             timeout: 60000
