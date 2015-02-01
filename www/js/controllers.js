@@ -29,6 +29,10 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log) {
         $scope.deals = [];
 
+        // Placeholder function, since card is destroyed after being swiped the
+        // placeholder will never execute
+        $scope.cardExitAction= function(currentDeal) {};
+
         // Adds deal to list of rejected deals
         $scope.cardSwipedLeft = function(currentDeal) {
             //dealsService.rejectDeal(currentDeal);
@@ -57,6 +61,16 @@ angular.module('starter.controllers', [])
 
             });
         };
+
+
+        $scope.cardLeftSet = function() {
+            $scope.cardExitAction = $scope.cardSwipedLeft;
+        }
+
+        $scope.cardRightSet = function() {
+            $scope.cardExitAction = $scope.cardSwipedRight;
+        }
+
 
         /*
         Gets deals from dealservice
