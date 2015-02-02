@@ -42,17 +42,17 @@ angular.module('starter.controllers', [])
             });
         };
 
+        // Reject button acts as if the card were swiped left
         $scope.rejectButton = function() {
-
             $scope.cardExitAction = $scope.cardSwipedLeft;
             var tempDeal = $scope.deals.shift();
             $scope.cardExitAction(tempDeal);
 
         };
 
+        // Accept button acts as if card were swiped right
         $scope.acceptButton = function() {
             $scope.cardExitAction = $scope.cardSwipedRight;
-
             var tempDeal = $scope.deals.shift();
             $scope.cardExitAction(tempDeal);
 
