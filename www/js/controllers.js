@@ -42,6 +42,21 @@ angular.module('starter.controllers', [])
             });
         };
 
+        $scope.rejectButton = function() {
+
+            $scope.cardExitAction = $scope.cardSwipedLeft;
+            var tempDeal = $scope.deals.shift();
+            $scope.cardExitAction(tempDeal);
+
+        };
+
+        $scope.acceptButton = function() {
+            $scope.cardExitAction = $scope.cardSwipedRight;
+
+            var tempDeal = $scope.deals.shift();
+            $scope.cardExitAction(tempDeal);
+
+        };
         /*
          Adds deal to stash
          TODO: log timing of accepting deal and send data to server in format:
@@ -122,6 +137,7 @@ angular.module('starter.controllers', [])
             { text: " 10-20 $$$ ", checked: false, priceID: "highPrice"  }
         ];
 
+        // Pushes new checkbox values to service
         $scope.check = function(checkValue, priceID) {
 
             if (checkValue === true) {
