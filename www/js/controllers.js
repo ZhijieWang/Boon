@@ -122,9 +122,19 @@ angular.module('starter.controllers', [])
         // they spent looking at the deal )
 
     }])
-    .controller('StashCtrl',['$scope','dealCacheService', function($scope, dealCacheService){
+    .controller('StashCtrl',['$scope','dealCacheService','$log', function($scope, dealCacheService, $log){
+
+
         $scope.acceptedDeals = function () {
             return dealCacheService.stashedDeals();
+        };
+
+    }])
+    .controller('StashItemCtrl',['$scope',function($scope) {
+        // NOTE: infinite loop bug occuring when using this function
+        // perhaps add a timestamp to deal to avoid parsing?
+        $scope.dealTime = function(endTime) {
+            return Date.parse(endTime);
         };
 
     }])
