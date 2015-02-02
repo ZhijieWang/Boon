@@ -62,6 +62,24 @@ angular.module('starter.services', [])
             endTime: 'December 17, 2014 17:30:00'
         }];
 
+/*
+        [{
+          "promotion": {
+            "dealId": 1,
+            "priceCategory": 0,
+            "notes": "half price menu item",
+            "expire": "December 17, 1995, 03:24:00"
+          }
+        }, {
+          "promotion": {
+            "dealId": 2,
+            "priceCategory": 0,
+            "notes": "half price menu item",
+            "expire": "December 17, 1995, 03:24:00"
+          }
+        }]        
+*/
+
         this.deals = function() {
             return freshDeals;
         };
@@ -106,8 +124,6 @@ angular.module('starter.services', [])
 
         // TODO: uncomment ajax code when we have a backend
         this.getDeals = function(location, preferences) {
-
-            /*
             var currentTime = new Date();
             var jsonPayload = {
                 action: 'getDeals',
@@ -117,12 +133,12 @@ angular.module('starter.services', [])
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
 
-            return $http.post('deals.htm', jsonPayload).then(function(response) {
-                return angular.fromJson(response.data).model.results;
+            //$log.info("about to receive data...");
+            return $http.get('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
+                $log.info(JSON.stringify(response.data));
+                return angular.fromJson(response.data);
             });
-            */
-
-            return freshDeals;
+            //return freshDeals;
         };
     }])
 

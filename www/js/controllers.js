@@ -24,7 +24,6 @@ angular.module('starter.controllers', [])
         $scope.showRightMenu = function () {
             $ionicSideMenuDelegate.toggleRight();
         };
-
     })
     .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log) {
         $scope.deals = [];
@@ -33,8 +32,7 @@ angular.module('starter.controllers', [])
         $scope.cardSwipedLeft = function(currentDeal) {
             //dealsService.rejectDeal(currentDeal);
             $log.info("REJECTING!");
-            dealsService.rejectDeal(currentDeal).then(function(response) {
-                
+            dealsService.rejectDeal(currentDeal).then(function(response) { 
             });
         };
 
@@ -80,18 +78,21 @@ angular.module('starter.controllers', [])
         };
 
         /*
-
+                
          */
         $scope.cardDestroyed = function(index) {
             $scope.deals.splice(index, 1);
         };
 
-        $scope.deals = $scope.getDeals();
+        dealsService.getDeals().then(function(newDeals) {
+            $scope.deals = newDeals;
+        });
+
+        $log.info("deals is " + JSON.stringify($scope.deals));
 
         // Controls deals that user has viewed and their selection
         // state of those deals ( user's reaction to deal, how long
         // they spent looking at the deal )
-
     }])
     .controller('StashCtrl',['$scope','dealCacheService', function($scope, dealCacheService){
         $scope.acceptedDeals = function () {
