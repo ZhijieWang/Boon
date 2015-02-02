@@ -64,3 +64,17 @@ td-card img {
     transition: 0.2s opacity linear;
     opacity: 0;
 }
+
+.dealInfoPane {
+    width: 320px;
+    text-align: center;
+    top: 78%;
+    z-index: 2;
+    margin-left:-160px;
+    left:50%;
+    position: absolute;
+}
+
+.deal-button {
+    width: 140px;
+}
