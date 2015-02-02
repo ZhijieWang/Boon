@@ -1,23 +1,21 @@
 <ion-view title="Finder">
     <ion-content class="dealview"  ng-controller="DealsCtrl">
         <td-cards>
-            <td-card ng-repeat="deal in deals" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft(deal)" on-swipe-right="cardSwipedRight(deal)" on-partial-swipe="cardPartialSwipe(amt)">
+            <td-card ng-repeat="deal in deals" on-destroy="cardExitAction(deal);cardDestroyed($index)" on-swipe-left="cardLeftSet()" on-swipe-right="cardRightSet()" on-partial-swipe="cardPartialSwipe(amt)" >
                 <div class="image">
                     <div class="no-text">No Thanks!</div>
                     <img ng-src="{{deal.image}}">
                     <div class="yes-text">Yes Please!</div>
                 </div>
             </td-card>
-
-            <div class="dealInfoPane">
-                <button class="button button-large button-positive" >
-                    No Thanks!
-                </button>
-                <button class="button button-large button-positive">
-                    Yes!
-                </button>
-            </div>
         </td-cards>
-
+        <div class="dealInfoPane">
+            <button class="button button-large button-positive deal-button" ng-click="rejectButton()" >
+                No Thanks!
+            </button>
+            <button class="button button-large button-positive deal-button" ng-click="acceptButton()">
+                Yes!
+            </button>
+        </div>
     </ion-content>
 </ion-view>

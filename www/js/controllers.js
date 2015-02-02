@@ -28,6 +28,10 @@ angular.module('starter.controllers', [])
     .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log) {
         $scope.deals = [];
 
+        // Placeholder function, since card is destroyed after being swiped the
+        // placeholder will never execute
+        $scope.cardExitAction= function(currentDeal) {};
+
         // Adds deal to list of rejected deals
         $scope.cardSwipedLeft = function(currentDeal) {
             //dealsService.rejectDeal(currentDeal);
@@ -36,6 +40,21 @@ angular.module('starter.controllers', [])
             });
         };
 
+        // Reject button acts as if the card were swiped left
+        $scope.rejectButton = function() {
+            $scope.cardExitAction = $scope.cardSwipedLeft;
+            var tempDeal = $scope.deals.shift();
+            $scope.cardExitAction(tempDeal);
+
+        };
+
+        // Accept button acts as if card were swiped right
+        $scope.acceptButton = function() {
+            $scope.cardExitAction = $scope.cardSwipedRight;
+            var tempDeal = $scope.deals.shift();
+            $scope.cardExitAction(tempDeal);
+
+        };
         /*
          Adds deal to stash
          TODO: log timing of accepting deal and send data to server in format:
@@ -55,6 +74,16 @@ angular.module('starter.controllers', [])
 
             });
         };
+
+
+        $scope.cardLeftSet = function() {
+            $scope.cardExitAction = $scope.cardSwipedLeft;
+        }
+
+        $scope.cardRightSet = function() {
+            $scope.cardExitAction = $scope.cardSwipedRight;
+        }
+
 
         /*
         Gets deals from dealservice
@@ -109,6 +138,7 @@ angular.module('starter.controllers', [])
             { text: " 10-20 $$$ ", checked: false, priceID: "highPrice"  }
         ];
 
+        // Pushes new checkbox values to service
         $scope.check = function(checkValue, priceID) {
 
             if (checkValue === true) {
