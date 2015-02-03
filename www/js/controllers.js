@@ -29,16 +29,13 @@ angular.module('starter.controllers', [])
 
     })
     .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation) {
+        $scope.$geolocation = $geolocation;
 
-        $geolocation.watchPosition({
-            timeout: 60000,
-            maximumAge: 250,
-            enableHighAccuracy: true
+        // basic usage
+        $geolocation.getCurrentPosition().then(function(location) {
+            $scope.location = location;
+            $log.info("The coords are " + $scope.location.longitude + " " + $scope.location.latitude);
         });
-        $scope.myCoords = $geolocation.position.coords; // this is regularly updated
-        $scope.myError = $geolocation.position.error; // this becomes truthy, and has 'code' and 'message' if an error occurs
-
-        $log.info("The coords are" + $scope.myCoords);
 
         $scope.deals = [];
 
