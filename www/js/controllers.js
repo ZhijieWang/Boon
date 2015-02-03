@@ -124,17 +124,34 @@ angular.module('starter.controllers', [])
     }])
     .controller('StashCtrl',['$scope','dealCacheService','$log', function($scope, dealCacheService, $log){
 
-
         $scope.acceptedDeals = function () {
             return dealCacheService.stashedDeals();
         };
 
     }])
+/**
+ *  This controller handles each stash element from the ng-repeat
+ */
     .controller('StashItemCtrl',['$scope',function($scope) {
-        // NOTE: infinite loop bug occuring when using this function
-        // perhaps add a timestamp to deal to avoid parsing?
-        $scope.dealTime = function(endTime) {
-            return Date.parse(endTime);
+
+        // Sets the start and end times of the respective deal
+        $scope.setDealTime = function(startTime,endTime) {
+            $scope.dealExpireTime = Date.parse(endTime);
+            $scope.dealStartTime = Date.parse(startTime);
+        }
+
+
+        // Gets timers in unix timestamp for the deal, which was parsed in from the previous
+        // datestamp,
+        // 1 - Select Start Time
+        // 2 - Select Ending Time
+        $scope.getDealTimes = function(select) {
+            if (select == 1) {
+                return $scope.dealStartTime;
+
+            } else if (select == 2) {
+                return $scope.dealExpireTime;
+            }
         };
 
     }])
