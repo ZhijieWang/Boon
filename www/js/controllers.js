@@ -12,7 +12,9 @@ angular.module('starter.controllers', [])
             }
         };
     })
-    .controller('MainCtrl', function($scope) {})
+    .controller('MainCtrl',['$scope',function($scope) {
+
+     }])
     .controller('NavCtrl', function($scope, $ionicSideMenuDelegate) {
 
         // Opens the left menu when left button is hit
@@ -26,7 +28,18 @@ angular.module('starter.controllers', [])
         };
 
     })
-    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log) {
+    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation) {
+
+        $geolocation.watchPosition({
+            timeout: 60000,
+            maximumAge: 250,
+            enableHighAccuracy: true
+        });
+        $scope.myCoords = $geolocation.position.coords; // this is regularly updated
+        $scope.myError = $geolocation.position.error; // this becomes truthy, and has 'code' and 'message' if an error occurs
+
+        $log.info("The coords are" + $scope.myCoords);
+
         $scope.deals = [];
 
         // Placeholder function, since card is destroyed after being swiped the
@@ -129,9 +142,9 @@ angular.module('starter.controllers', [])
         };
 
     }])
-/**
- *  This controller handles each stash element from the ng-repeat
- */
+    /**
+     *  This controller handles each stash element from the ng-repeat
+     */
     .controller('StashItemCtrl',['$scope',function($scope) {
 
         // Sets the start and end times of the respective deal
@@ -139,7 +152,6 @@ angular.module('starter.controllers', [])
             $scope.dealExpireTime = Date.parse(endTime);
             $scope.dealStartTime = Date.parse(startTime);
         }
-
 
         // Gets timers in unix timestamp for the deal, which was parsed in from the previous
         // datestamp,
@@ -176,7 +188,5 @@ angular.module('starter.controllers', [])
         };
     }])
     .controller('GeoCtrl',['$geolocation', '$scope', function($geolocation, $scope) {
-        $scope.myPosition = $geolocation.getCurrentPosition({
-            timeout: 60000
-        });
+
     }]);
