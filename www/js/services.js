@@ -132,12 +132,11 @@ angular.module('starter.services', [])
                 csrfToken: '1234567890',
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
-
-            //$log.info("about to receive data...");
+            
             return $http.get('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
-                $log.info(JSON.stringify(response.data));
                 return angular.fromJson(response.data);
             });
+            
             //return freshDeals;
         };
     }])

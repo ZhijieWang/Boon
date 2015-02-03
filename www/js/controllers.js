@@ -112,12 +112,16 @@ angular.module('starter.controllers', [])
         $scope.cardDestroyed = function(index) {
             $scope.deals.splice(index, 1);
         };
-
+        
         dealsService.getDeals().then(function(newDeals) {
             $scope.deals = newDeals;
+            $log.info("deals is " + JSON.stringify($scope.deals));
         });
-
-        $log.info("deals is " + JSON.stringify($scope.deals));
+        
+        /*
+        $scope.deals = dealsService.getDeals();
+        $log.info("$scope.deals is: " + JSON.stringify($scope.deals));
+        */
 
         // Controls deals that user has viewed and their selection
         // state of those deals ( user's reaction to deal, how long
