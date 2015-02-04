@@ -9,7 +9,7 @@
 
 angular.module('starter.services', [])
 
-    .service('dealsService', ['$http', '$log', function dealsService($http, $log) {
+    .service('dealsService', ['$http', '$log', '$auth', function dealsService($http, $log, $auth) {
         
         //mock deal data
         var freshDeals  = [{

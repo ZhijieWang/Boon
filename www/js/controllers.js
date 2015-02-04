@@ -28,7 +28,7 @@ angular.module('starter.controllers', [])
         };
 
     })
-    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation) {
+    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', '$auth', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation, $auth) {
         $scope.$geolocation = $geolocation;
 
         // basic usage

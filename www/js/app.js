@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.services','starter.controllers','timer','ngGeolocation'])
+angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.services','starter.controllers','timer','ngGeolocation', 'ng-token-auth'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,7 +18,7 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $authProvider) {
 
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router
@@ -58,4 +58,45 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/deal-finder');
 
+        $authProvider.configure({
+            apiUrl:                  '/api',
+            tokenValidationPath:     '/auth/validate_token',
+            signOutUrl:              '/auth/sign_out',
+            emailRegistrationPath:   '/auth',
+            accountUpdatePath:       '/auth',
+            accountDeletePath:       '/auth',
+            confirmationSuccessUrl:  window.location.href,
+            passwordResetPath:       '/auth/password',
+            passwordUpdatePath:      '/auth/password',
+            passwordResetSuccessUrl: window.location.href,
+            emailSignInPath:         '/auth/sign_in',
+            storage:                 'cookies',
+            proxyIf:                 function() { return false; },
+            proxyUrl:                '/proxy',
+            authProviderPaths: {
+                github:   '/auth/github',
+                facebook: '/auth/facebook',
+                google:   '/auth/google'
+            },
+            tokenFormat: {
+                "access-token": "{{ token }}",
+                "token-type":   "Bearer",
+                "client":       "{{ clientId }}",
+                "expiry":       "{{ expiry }}",
+                "uid":          "{{ uid }}"
+            },
+            parseExpiry: function(headers) {
+                // convert from UTC ruby (seconds) to UTC js (milliseconds)
+                return (parseInt(headers['expiry']) * 1000) || null;
+            },
+            handleLoginResponse: function(response) {
+                return response.data;
+            },
+            handleAccountResponse: function(response) {
+                return response.data;
+            },
+            handleTokenValidationResponse: function(response) {
+                return response.data;
+            }
+        });        
     });
