@@ -145,6 +145,9 @@ angular.module('starter.controllers', [])
      *  This controller handles each stash element from the ng-repeat
      */
     .controller('StashItemCtrl',['$scope',function($scope) {
+        // Strings to be displayed depending on if deal is active to waiting to be active
+        var expireText = "Expires In:";
+        var startText = "Starts In:";
 
         // Ng-style variable to change timer color
         // based on deal starting
@@ -152,6 +155,8 @@ angular.module('starter.controllers', [])
             'color': "blue",
             'font-size': "200%"
         };
+
+        $scope.timeText =  expireText;
 
         // Sets the start and end times of the respective deal
         $scope.setDealTime = function(startTime,endTime) {
@@ -163,9 +168,11 @@ angular.module('starter.controllers', [])
         $scope.getDealTimes = function() {
             if (Date.now() > $scope.dealStartTime) {
                 $scope.timerStyle.color = 'red';
+                $scope.timeText = startText;
                 return $scope.dealExpireTime;
             } else {
                 $scope.timerStyle.color = 'blue';
+                $scope.timeText = expireText;
                 return $scope.dealStartTime;
             }
         };

@@ -78,3 +78,9 @@ td-card img {
 .deal-button {
     width: 140px;
 }
+
+
+.stashItem {
+  border: 1px solid;
+    margin-bottom: 10px;
+}
