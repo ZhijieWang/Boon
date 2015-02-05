@@ -134,6 +134,8 @@ angular.module('starter.controllers', [])
     }])
     .controller('StashCtrl',['$scope','dealCacheService','$log', function($scope, dealCacheService, $log){
 
+
+
         $scope.acceptedDeals = function () {
             return dealCacheService.stashedDeals();
         };
@@ -144,6 +146,13 @@ angular.module('starter.controllers', [])
      */
     .controller('StashItemCtrl',['$scope',function($scope) {
 
+        // Ng-style variable to change timer color
+        // based on deal starting
+        $scope.timerStyle = {
+            'color': "blue",
+            'font-size': "200%"
+        };
+
         // Sets the start and end times of the respective deal
         $scope.setDealTime = function(startTime,endTime) {
             $scope.dealExpireTime = Date.parse(endTime);
@@ -151,18 +160,15 @@ angular.module('starter.controllers', [])
         }
 
         // Gets timers in unix timestamp for the deal, which was parsed in from the previous
-        // datestamp,
-        // 1 - Select Start Time
-        // 2 - Select Ending Time
-        $scope.getDealTimes = function(select) {
-            if (select == 1) {
-                return $scope.dealStartTime;
-
-            } else if (select == 2) {
+        $scope.getDealTimes = function() {
+            if (Date.now() > $scope.dealStartTime) {
+                $scope.timerStyle.color = 'red';
                 return $scope.dealExpireTime;
+            } else {
+                $scope.timerStyle.color = 'blue';
+                return $scope.dealStartTime;
             }
         };
-
     }])
     .controller('PriceCtrl',[ '$scope','preferencesService' , function($scope, preferencesService) {
 

@@ -5,9 +5,7 @@
             <span class="item-note">
                 {{deal.notes}}
             </span>
-            <!-- 1 - Starting time, 2 - Expiry Time-->
-            <timer end-time="getDealTimes(1);" interval="1000">Till Expiry: {{hours}}:{{mminutes}}:{{sseconds}}</timer>
-            <timer end-time="getDealTimes(2);" interval="1000">Till Start: {{hours}}:{{mminutes}}:{{sseconds}}</timer>
+            <timer  end-time="getDealTimes();" interval="1000" ng-style="timerStyle">{{hours}}:{{mminutes}}:{{sseconds}}</timer>
         </ion-list>
     </ion-content>
 </ion-view>
