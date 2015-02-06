@@ -134,10 +134,13 @@ angular.module('starter.services', [])
             };
             
             return $http.get('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
-                return angular.fromJson(response.data);
+                var freshDeals = [];
+                var dealsList = angular.fromJson(response.data);
+                angular.forEach(dealsList, function(deal) {
+                    freshDeals.push(deal.promotion);
+                });
+                return freshDeals;
             });
-            
-            //return freshDeals;
         };
     }])
 
@@ -169,6 +172,8 @@ angular.module('starter.services', [])
                 $log.info("comparing " + currentDate.getTime() + " to " + Date.parse(deal.endTime));
                 if (currentDate.getTime() < Date.parse(deal.endTime)) {
                     validDeals.push(deal);
+                } else {
+                    $log.info("PURGING DEAL with timestamp: " + Date.parse(deal.endTime));
                 }
             });
             stashedDeals = validDeals;
