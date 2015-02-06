@@ -1,11 +1,15 @@
 <ion-view title="Stash">
-    <ion-content ng-controller="StashCtrl">
-        <ion-list ng-repeat="deal in acceptedDeals()">
-            <h3>{{deal.name}}</h3>
-
+    <ion-content>
+        <ion-list ng-repeat="deal in acceptedDeals()" ng-controller="StashItemCtrl"  ng-init="setDealTime(deal.startTime,deal.endTime);">
+            <div class="stashItem" >
+                <h2>{{deal.name}}</h2>
             <span class="item-note">
                 {{deal.notes}}
+
             </span>
+                {{timeText}}
+                <timer  end-time="getDealTimes();" interval="1000" ng-style="timerStyle">  {{hours}}:{{mminutes}}:{{sseconds}}</timer>
+            </div>
 
         </ion-list>
     </ion-content>

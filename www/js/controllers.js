@@ -12,7 +12,9 @@ angular.module('starter.controllers', [])
             }
         };
     })
-    .controller('MainCtrl', function($scope) {})
+    .controller('MainCtrl',['$scope',function($scope) {
+
+     }])
     .controller('NavCtrl', function($scope, $ionicSideMenuDelegate) {
 
         // Opens the left menu when left button is hit
@@ -25,7 +27,15 @@ angular.module('starter.controllers', [])
             $ionicSideMenuDelegate.toggleRight();
         };
     })
-    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log) {
+    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', '$auth', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation, $auth) {
+        $scope.$geolocation = $geolocation;
+
+        // basic usage
+        $geolocation.getCurrentPosition().then(function(location) {
+            $scope.location = location;
+            $log.info("The coords are " + $scope.location.longitude + " " + $scope.location.latitude);
+        });
+
         $scope.deals = [];
 
         // Placeholder function, since card is destroyed after being swiped the
@@ -127,11 +137,50 @@ angular.module('starter.controllers', [])
         // state of those deals ( user's reaction to deal, how long
         // they spent looking at the deal )
     }])
-    .controller('StashCtrl',['$scope','dealCacheService', function($scope, dealCacheService){
+    .controller('StashCtrl',['$scope','dealCacheService','$log', function($scope, dealCacheService, $log){
+
+
+
         $scope.acceptedDeals = function () {
             return dealCacheService.stashedDeals();
         };
 
+    }])
+    /**
+     *  This controller handles each stash element from the ng-repeat
+     */
+    .controller('StashItemCtrl',['$scope',function($scope) {
+        // Strings to be displayed depending on if deal is active to waiting to be active
+        var expireText = "Expires In:";
+        var startText = "Starts In:";
+
+        // Ng-style variable to change timer color
+        // based on deal starting
+        $scope.timerStyle = {
+            'color': "blue",
+            'font-size': "200%"
+        };
+
+        $scope.timeText =  expireText;
+
+        // Sets the start and end times of the respective deal
+        $scope.setDealTime = function(startTime,endTime) {
+            $scope.dealExpireTime = Date.parse(endTime);
+            $scope.dealStartTime = Date.parse(startTime);
+        }
+
+        // Gets timers in unix timestamp for the deal, which was parsed in from the previous
+        $scope.getDealTimes = function() {
+            if (Date.now() > $scope.dealStartTime) {
+                $scope.timerStyle.color = 'red';
+                $scope.timeText = startText;
+                return $scope.dealExpireTime;
+            } else {
+                $scope.timerStyle.color = 'blue';
+                $scope.timeText = expireText;
+                return $scope.dealStartTime;
+            }
+        };
     }])
     .controller('PriceCtrl',[ '$scope','preferencesService' , function($scope, preferencesService) {
 
@@ -154,7 +203,5 @@ angular.module('starter.controllers', [])
         };
     }])
     .controller('GeoCtrl',['$geolocation', '$scope', function($geolocation, $scope) {
-        $scope.myPosition = $geolocation.getCurrentPosition({
-            timeout: 60000
-        });
+
     }]);
