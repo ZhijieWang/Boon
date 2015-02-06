@@ -62,6 +62,24 @@ angular.module('starter.services', [])
             endTime: 'December 17, 2014 17:30:00'
         }];
 
+/*
+        [{
+          "promotion": {
+            "dealId": 1,
+            "priceCategory": 0,
+            "notes": "half price menu item",
+            "expire": "December 17, 1995, 03:24:00"
+          }
+        }, {
+          "promotion": {
+            "dealId": 2,
+            "priceCategory": 0,
+            "notes": "half price menu item",
+            "expire": "December 17, 1995, 03:24:00"
+          }
+        }]        
+*/
+
         this.deals = function() {
             return freshDeals;
         };
@@ -106,8 +124,6 @@ angular.module('starter.services', [])
 
         // TODO: uncomment ajax code when we have a backend
         this.getDeals = function(location, preferences) {
-
-            /*
             var currentTime = new Date();
             var jsonPayload = {
                 action: 'getDeals',
@@ -116,13 +132,15 @@ angular.module('starter.services', [])
                 csrfToken: '1234567890',
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
-
-            return $http.post('deals.htm', jsonPayload).then(function(response) {
-                return angular.fromJson(response.data).model.results;
+            
+            return $http.get('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
+                var freshDeals = [];
+                var dealsList = angular.fromJson(response.data);
+                angular.forEach(dealsList, function(deal) {
+                    freshDeals.push(deal.promotion);
+                });
+                return freshDeals;
             });
-            */
-
-            return freshDeals;
         };
     }])
 
@@ -154,6 +172,8 @@ angular.module('starter.services', [])
                 $log.info("comparing " + currentDate.getTime() + " to " + Date.parse(deal.endTime));
                 if (currentDate.getTime() < Date.parse(deal.endTime)) {
                     validDeals.push(deal);
+                } else {
+                    $log.info("PURGING DEAL with timestamp: " + Date.parse(deal.endTime));
                 }
             });
             stashedDeals = validDeals;
