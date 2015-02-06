@@ -9,7 +9,7 @@
 
 angular.module('starter.services', [])
 
-    .service('dealsService', ['$http', '$log', '$auth', function dealsService($http, $log, $auth) {
+    .service('dealsService', ['$http', '$log', '$auth', '$q', function dealsService($http, $log, $auth, $q) {
         
         //mock deal data
         var freshDeals  = [{
@@ -107,7 +107,6 @@ angular.module('starter.services', [])
         // TODO: uncomment ajax code when we have a backend
         this.getDeals = function(location, preferences) {
 
-            /*
             var currentTime = new Date();
             var jsonPayload = {
                 action: 'getDeals',
@@ -116,63 +115,72 @@ angular.module('starter.services', [])
                 csrfToken: '1234567890',
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
-
-            return $http.post('deals.htm', jsonPayload).then(function(response) {
-                return angular.fromJson(response.data).model.results;
+            
+            
+            return $http.get('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
+                return angular.fromJson(response.data);
             });
-            */
-
-            return freshDeals;
         };
+
     }])
 
-    .service('dealCacheService', ['$log', function dealCacheService($log) {
+    .factory('dealCacheService', ['$log', function dealCacheService($log) {
         // Holds deals that user has stashed
         var stashedDeals = [];
 
-        //every time deal data is requested from the cache, it purges expired deals
-        this.stashedDeals = function() {
-            purgeExpiredDeals();
-            return stashedDeals;
+        return {
+
+            stashDeal: function(dealToStash) {
+                $log.info("dealToStash is: " + JSON.stringify(dealToStash));
+                stashedDeals.push(dealToStash);
+
+                //sort deals - this will ensure that deal order is maintained from most current to least current
+                stashedDeals = this.sortByKey(
+                    stashedDeals, 
+                    'startTime'
+                );   
+            },
+
+            //every time deal data is requested from the cache, it purges expired deals
+            getStashedDeals: function() {
+                $log.info("DEALS TO RETURN is: " + JSON.stringify(stashedDeals));
+                //this.purgeExpiredDeals();
+                return stashedDeals;
+            },             
+
+            //remove deals from stash that have expired
+            purgeExpiredDeals: function() {
+
+                $log.info("INSIDE OF PURGEEXPIREDDEALS()! DEALSTORETURN IS: " + JSON.stringify(stashedDeals));
+
+                var currentDate = new Date();
+                var validDeals = [];
+                angular.forEach(stashedDeals, function(deal) {
+                    $log.info("comparing " + currentDate.getTime() + " to " + Date.parse(deal.endTime));
+                    if (currentDate.getTime() < Date.parse(deal.endTime)) {
+                        validDeals.push(deal);
+                    }
+                });
+                if (validDeals.length > 0) stashedDeals = validDeals;
+            },     
+
+           
+
+            sortByKey: function(array, key) {
+                return array.sort(function(a, b) {
+                    var x = a[key]; var y = b[key];
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                });
+            },
+
+            reverseSortByKey: function(array, key) {
+                return array.sort(function(a, b) {
+                    var x = a[key]; var y = b[key];
+                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                });
+            }        
+
         };
-
-        this.stashDeal = function(dealToStash) {
-            stashedDeals.push(dealToStash);
-
-            //sort deals - this will ensure that deal order is maintained from most current to least current
-            stashedDeals = sortByKey(
-                stashedDeals, 
-                'startTime'
-            );   
-        };
-
-        //remove deals from stash that have expired
-        var purgeExpiredDeals = function() {
-            var currentDate = new Date();
-            var validDeals = [];
-            angular.forEach(stashedDeals, function(deal) {
-                $log.info("comparing " + currentDate.getTime() + " to " + Date.parse(deal.endTime));
-                if (currentDate.getTime() < Date.parse(deal.endTime)) {
-                    validDeals.push(deal);
-                }
-            });
-            stashedDeals = validDeals;
-        };     
-
-        var sortByKey = function(array, key) {
-            return array.sort(function(a, b) {
-                var x = a[key]; var y = b[key];
-                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-            });
-        };
-
-        var reverseSortByKey = function(array, key) {
-            return array.sort(function(a, b) {
-                var x = a[key]; var y = b[key];
-                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
-            });
-        };          
-
     }])
 
     /** This service handles communicating user preferences about deals

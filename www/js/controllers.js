@@ -47,9 +47,10 @@ angular.module('starter.controllers', [])
         $scope.cardSwipedLeft = function(currentDeal) {
             //dealsService.rejectDeal(currentDeal);
             $log.info("REJECTING!");
-            dealsService.rejectDeal(currentDeal).then(function(response) {
+
+            // dealsService.rejectDeal(currentDeal).then(function(response) {
                 
-            });
+            // });
         };
 
         // Reject button acts as if the card were swiped left
@@ -82,9 +83,11 @@ angular.module('starter.controllers', [])
 
             $log.info("ACCEPTING!");
             dealCacheService.stashDeal(currentDeal);
+            /*
             dealsService.acceptDeal(currentDeal).then(function(response) {
 
             });
+            */
         };
 
 
@@ -125,7 +128,20 @@ angular.module('starter.controllers', [])
             $scope.deals.splice(index, 1);
         };
 
-        $scope.deals = $scope.getDeals();
+        //$log.info("about to get deals returned from service!!!");
+        dealsService.getDeals().then(function(response) {
+            $scope.deals = response;
+            $log.info("$scope.deals is " + JSON.stringify(response));    
+        });
+
+
+        
+        /*
+        dealsService.getDeals().then(function(response) {
+            $scope.deals = response;
+            $log.info("$scope.deals is " + JSON.stringify(response));
+        });
+        */
 
         // Controls deals that user has viewed and their selection
         // state of those deals ( user's reaction to deal, how long
@@ -134,8 +150,10 @@ angular.module('starter.controllers', [])
     }])
     .controller('StashCtrl',['$scope','dealCacheService','$log', function($scope, dealCacheService, $log){
 
+        $scope.theDeals = dealCacheService.getStashedDeals();
+        $log.info("theDeals is: " + JSON.stringify($scope.theDeals));
         $scope.acceptedDeals = function () {
-            return dealCacheService.stashedDeals();
+            return $scope.theDeals;
         };
 
     }])
