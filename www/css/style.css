@@ -81,6 +81,11 @@ td-card img {
 
 
 .stashItem {
-  border: 1px solid;
+
     margin-bottom: 10px;
+    background-color: #f7f7f7;
+}
+
+.stashItem.expanded {
+    height: 200px;
 }

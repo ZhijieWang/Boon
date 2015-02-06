@@ -127,7 +127,7 @@ angular.module('starter.controllers', [])
             $scope.deals = newDeals;
             $log.info("deals is " + JSON.stringify($scope.deals));
         });
-        
+
         /*
         $scope.deals = dealsService.getDeals();
         $log.info("$scope.deals is: " + JSON.stringify($scope.deals));
@@ -153,6 +153,7 @@ angular.module('starter.controllers', [])
         // Strings to be displayed depending on if deal is active to waiting to be active
         var expireText = "Expires In:";
         var startText = "Starts In:";
+        $scope.detailView = false;
 
         // Ng-style variable to change timer color
         // based on deal starting
@@ -181,6 +182,18 @@ angular.module('starter.controllers', [])
                 return $scope.dealStartTime;
             }
         };
+
+        // Expands the size of the list element and adds information about
+        // the deal
+        $scope.showDetailView = function() {
+            if (!$scope.detailView) {
+                $scope.detailView = true;
+
+            } else {
+                $scope.detailView = false;
+            }
+
+        }
     }])
     .controller('PriceCtrl',[ '$scope','preferencesService' , function($scope, preferencesService) {
 
