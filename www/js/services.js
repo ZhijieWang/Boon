@@ -134,12 +134,12 @@ angular.module('starter.services', [])
             };
             
             return $http.get('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
-                var freshDeals = [];
+                var promotions = [];
                 var dealsList = angular.fromJson(response.data);
                 angular.forEach(dealsList, function(deal) {
-                    freshDeals.push(deal.promotion);
+                    promotions.push(deal.promotion);
                 });
-                return freshDeals;
+                return promotions;
             });
         };
     }])
