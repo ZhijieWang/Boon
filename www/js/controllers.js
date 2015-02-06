@@ -199,9 +199,9 @@ angular.module('starter.controllers', [])
 
         // Holds user's selections for price ranges
         $scope.devList = [
-            { text: " 0 - 5 $ ",   checked: false, priceID: "lowPrice" },
-            { text: " 5 - 10 $$ ", checked: false, priceID: "mediumPrice" },
-            { text: " 10-20 $$$ ", checked: false, priceID: "highPrice"  }
+            { text: "$",   checked: false, priceID: "lowPrice" },
+            { text: "$$", checked: false, priceID: "mediumPrice" },
+            { text: "$$$", checked: false, priceID: "highPrice"  }
         ];
 
         // Pushes new checkbox values to service
@@ -217,4 +217,13 @@ angular.module('starter.controllers', [])
     }])
     .controller('GeoCtrl',['$geolocation', '$scope', function($geolocation, $scope) {
 
-    }]);
+    }])
+    .controller('TagsCtrl',['$scope', function($scope) {
+
+    }])
+    .controller('SplashCtrl',['$scope','$state',function($scope,$state) {
+
+        $scope.dealClick = function() {
+            $state.go('tab.deal-finder');
+        }
+    }])

@@ -32,15 +32,18 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
         // Each state's controller can be found in controllers.js
         $stateProvider
 
+            .state('splash', {
+                 url: "/splash",
+                 templateUrl: "templates/splash.html",
+                 controller: 'SplashCtrl'
+            })
             // setup an abstract state for the tabs directive
             .state('tab', {
                 url: "/tab",
                 abstract: true,
                 templateUrl: "templates/tabs.html"
             })
-
             // Each tab has its own nav history stack:
-
             .state('tab.deal-finder', {
                 url: '/deal-finder',
                 views: {
@@ -50,7 +53,6 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
                     }
                 }
             })
-
             .state('tab.deal-stash', {
                 url: '/deal-stash',
                 views: {
@@ -59,10 +61,29 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
                         controller: 'StashCtrl'
                     }
                 }
+
+            })
+            .state('tab.tag-cloud', {
+              url: '/tag-cloud',
+              views: {
+                  'deal-stash': {
+                      templateUrl: 'templates/tag-cloud.html',
+                      controller: 'TagsCtrl'
+                  }
+              }
+            })
+            .state('tab.deal-detail', {
+                url: '/deal-detail',
+                views: {
+                    'deal-stash': {
+                        templateUrl: 'templates/deal-detail.html',
+                        controller: 'DealsCtrl'
+                    }
+                }
             })
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/tab/deal-finder');
+        $urlRouterProvider.otherwise('/splash');
 
         $authProvider.configure({
             apiUrl:                  '/api',

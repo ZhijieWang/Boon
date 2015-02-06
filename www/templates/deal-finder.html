@@ -2,6 +2,7 @@
     <ion-content class="dealview">
         <td-cards>
             <td-card ng-repeat="deal in deals" on-destroy="cardExitAction(deal);cardDestroyed($index)" on-swipe-left="cardLeftSet()" on-swipe-right="cardRightSet()" on-partial-swipe="cardPartialSwipe(amt)" >
+                <div class="deal-blurb">{{deal.name}}</div>
                 <div class="image">
                     <div class="no-text">No Thanks!</div>
                     <img ng-src="{{deal.image}}">
