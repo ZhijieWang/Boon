@@ -95,7 +95,7 @@ angular.module('starter.services', [])
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };            
 
-            return $http.post('deals.htm', jsonPayload).then(function(response) {
+            return $http.post('http://intense-castle-3862.herokuapp.com/reject', jsonPayload).then(function(response) {
                 return angular.fromJson(response.data).model.results;
             });
         };
@@ -112,7 +112,7 @@ angular.module('starter.services', [])
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
 
-            return $http.post('deals.htm', jsonPayload).then(function(response) {
+            return $http.post('http://intense-castle-3862.herokuapp.com/accept', jsonPayload).then(function(response) {
                 return angular.fromJson(response.data).model.results;
             });
         };

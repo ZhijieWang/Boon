@@ -63,7 +63,6 @@ angular.module('starter.controllers', [])
             $scope.cardExitAction = $scope.cardSwipedRight;
             var tempDeal = $scope.deals.shift();
             $scope.cardExitAction(tempDeal);
-
         };
         /*
          Adds deal to stash
@@ -117,7 +116,7 @@ angular.module('starter.controllers', [])
         };
 
         /*
-                
+              
          */
         $scope.cardDestroyed = function(index) {
             $scope.deals.splice(index, 1);
@@ -130,8 +129,6 @@ angular.module('starter.controllers', [])
         });
 
         locationService.updateLocation();
-
-
 
         /*
         $scope.deals = dealsService.getDeals();
