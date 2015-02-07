@@ -233,15 +233,31 @@ angular.module('starter.services', [])
            categories[categoryID] = false;
         };
     })
-    .factory('tagService', function catagoryService() {
+    .service('tagService', function tagService() {
+        var tags = [
+            { tagName: 'Pizza',
+              tagID: 1,
+              selection: true
+            },
+            {
+                tagName: 'Pizza 2',
+                tagID: 2,
+                selection: true
+            }
+        ];
+
+        var filterTags = function(toFilter) {
+
+        };
+
         //
-        this.sendResults = function () {
+        this.sendResults = function (tagArray) {
 
-        }
+        };
 
         //
-        this.getTags = function () {
-
+        this.getCategories = function() {
+            return tags;
         }
     })
 ;

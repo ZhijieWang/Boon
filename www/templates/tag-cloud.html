@@ -21,13 +21,11 @@
                 <div class="cloudTag"> Price 3 </div>
             </div>
             <span>
-               <h4>Types</h4>
+               <h4>Tags</h4>
             </span>
             <!-- Item Type-->
             <div>
-                <div class="cloudTag"> ItemType 1 </div>
-                <div class="cloudTag"> ItemType 2 </div>
-                <div class="cloudTag"> ItemType 3 </div>
+                <div ng-repeat="tag in getTags()" class="cloudTag" ng-click="selectCatagory()" ng-controller="IndivTagCtrl">{{tag.tagName}}</div>
             </div>
         </ion-scroll>
     </ion-content>
