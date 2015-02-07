@@ -208,13 +208,20 @@ angular.module('starter.controllers', [])
             }
         };
     }])
-    .controller('TagsCtrl',['$scope','tagService', function($scope, tagService) {
+    .controller('TagsCtrl',['$scope','tagService','$log', function($scope, tagService,$log) {
         var stashedTags = tagService.getCategories();
 
         // Makes a request to tag service to get categories for user
         $scope.getTags = function() {
             return stashedTags;
         };
+
+        $scope.tagSelect = [];
+
+        $scope.selectTag = function(index) {
+            $scope.tagSelect[index] = $scope.tagSelect[index] === false ? true: false;
+        }
+
 
         // Selects the catagory and sends it to preferences service for processing
         $scope.selectCategory = function(index) {
@@ -225,15 +232,8 @@ angular.module('starter.controllers', [])
             tagService.switchTag(dealToSend.tagID,dealToSend.selection);
             $log.info("Sending tag selection to tagService");
         };
-
-
     }])
-    .controller('IndivTagCtrl',['$scope','preferencesService','tagService',function($scope,preferencesService,tagService) {
-        $scope.tagSelect = false;
-
-        $scope.selectTag = function() {
-            $scope.tagSelect = $scope.tagSelect === false ? true: false;
-        }
+    .controller('IndivTagCtrl',['$scope',function($scope) {
 
     }])
     .controller('SplashCtrl',['$scope','$state',function($scope,$state) {
