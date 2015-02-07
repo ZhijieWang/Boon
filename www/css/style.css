@@ -98,7 +98,10 @@ td-card img {
     width: auto;
     border: 1px solid #ababab;
     border-radius:45px / 40px;
-    background-color: #84deee;
     margin:10px;
     padding: 3px;
+}
+
+.active {
+    background-color: #84deee;
 }
