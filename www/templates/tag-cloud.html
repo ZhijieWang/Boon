@@ -25,7 +25,7 @@
             </span>
             <!-- Item Type-->
             <div>
-                <div ng-repeat="tag in getTags()" class="cloudTag" ng-click="selectCatagory()" ng-controller="IndivTagCtrl">{{tag.tagName}}</div>
+                <div ng-repeat="tag in getTags()" class="cloudTag" ng-click="selectCategory(tag.tagID, tag.selection)" ng-controller="IndivTagCtrl">{{tag.tagName}}</div>
             </div>
         </ion-scroll>
     </ion-content>
