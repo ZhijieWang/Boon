@@ -27,7 +27,7 @@ angular.module('starter.controllers', [])
             $ionicSideMenuDelegate.toggleRight();
         };
     })
-    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', '$auth', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation, $auth) {
+    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', '$auth', 'locationService', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation, $auth, locationService) {
         $scope.$geolocation = $geolocation;
 
         // basic usage
@@ -122,11 +122,16 @@ angular.module('starter.controllers', [])
         $scope.cardDestroyed = function(index) {
             $scope.deals.splice(index, 1);
         };
-        
-        dealsService.getDeals().then(function(newDeals) {
+
+        var currentLocation = locationService.getCurrentLocation();
+        dealsService.getDeals(currentLocation).then(function(newDeals) {
             $scope.deals = newDeals;
             $log.info("deals is " + JSON.stringify($scope.deals));
         });
+
+        locationService.updateLocation();
+
+
 
         /*
         $scope.deals = dealsService.getDeals();

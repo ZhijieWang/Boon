@@ -123,17 +123,17 @@ angular.module('starter.services', [])
         };
 
         // TODO: uncomment ajax code when we have a backend
-        this.getDeals = function(location, preferences) {
+        this.getDeals = function(location) {
             var currentTime = new Date();
             var jsonPayload = {
                 action: 'getDeals',
-                location: location,
-                preferences: preferences,
+                latitude: location.latitude,
+                longitude: location.longitude,
                 csrfToken: '1234567890',
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
 
-            return $http.get('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
+            return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
                 var promotions = [];
                 var dealsList = angular.fromJson(response.data);
                 angular.forEach(dealsList, function(deal) {
@@ -246,7 +246,6 @@ angular.module('starter.services', [])
             }
         ];
 
-
         // remove tags that are false
         var filterTags = function(toFilter) {
 
@@ -261,8 +260,57 @@ angular.module('starter.services', [])
         // TODO implement http call to backend
         this.getCategories = function() {
             return tags;
-        }
+        };
     })
+
+    .service('locationService', ['$geolocation', '$http', '$cookies', '$log', function locationService($geolocation, $http, $cookies, $log) {
+        
+        this.getCurrentLocation = function() {
+
+            if ($cookies !== undefined && $cookies.latitude) {
+                return {
+                    latitude: $cookies.latitude,
+                    longitude: $cookies.longitude
+                }
+            } else {
+                var longitude = '';
+                var latitude = '';
+                var currentPosition = $geolocation.getCurrentPosition({
+                    timeout: 60000
+                }).then(function(response) {
+                    $log.info("Updated gelocation data: " + JSON.stringify(response));
+
+                    longitude = angular.fromJson(response).longitude;
+                    latitude = angular.fromJson(response).latitude;                    
+
+                    $cookies.longitude = longitude;
+                    $cookies.latitude = latitude;
+                });          
+
+                return {
+                    longitude: longitude,
+                    latitude: latitude
+                };
+            }
+        };
+
+        this.updateLocation = function() {
+            var currentPosition = $geolocation.getCurrentPosition({
+                timeout: 60000
+            }).then(function(response) {
+                $log.info("Updated gelocation data: " + JSON.stringify(response));
+                $cookies.longitude = angular.fromJson(response).longitude;
+                $cookies.latitude = angular.fromJson(response).latitude;
+            });
+
+            $log.info("currentPosition is: " + JSON.stringify(currentPosition));
+        };
+
+
+
+
+
+    }])
 ;
 
 
