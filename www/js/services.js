@@ -246,16 +246,19 @@ angular.module('starter.services', [])
             }
         ];
 
+
+        // remove tags that are false
         var filterTags = function(toFilter) {
 
         };
 
-        //
+        // TODO: send the TagID and matching selection values
+        // to backend
         this.sendResults = function (tagArray) {
 
         };
 
-        //
+        // TODO implement http call to backend
         this.getCategories = function() {
             return tags;
         }
