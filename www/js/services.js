@@ -133,6 +133,8 @@ angular.module('starter.services', [])
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
 
+            $log.info("JSON object is: " + JSON.stringify(jsonPayload));
+
             return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
                 var promotions = [];
                 var dealsList = angular.fromJson(response.data);
@@ -270,31 +272,22 @@ angular.module('starter.services', [])
         
         this.getCurrentLocation = function() {
 
-            if ($cookies !== undefined && $cookies.latitude) {
-                return {
-                    latitude: $cookies.latitude,
-                    longitude: $cookies.longitude
-                }
-            } else {
+            // if ($cookies.latitude !== undefined) {
+            //     $log.info("latitude is: " + $cookies.latitude);
+            //     return {
+            //         latitude: $cookies.latitude,
+            //         longitude: $cookies.longitude
+            //     };
+            // } else {
                 var longitude = '';
                 var latitude = '';
-                var currentPosition = $geolocation.getCurrentPosition({
+                var location = {};
+                return $geolocation.getCurrentPosition({
                     timeout: 60000
                 }).then(function(response) {
-                    $log.info("Updated gelocation data: " + JSON.stringify(response));
-
-                    longitude = angular.fromJson(response).longitude;
-                    latitude = angular.fromJson(response).latitude;                    
-
-                    $cookies.longitude = longitude;
-                    $cookies.latitude = latitude;
+                    return angular.fromJson(response);
                 });          
-
-                return {
-                    longitude: longitude,
-                    latitude: latitude
-                };
-            }
+            // }
         };
 
         this.updateLocation = function() {

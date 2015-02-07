@@ -29,6 +29,7 @@ angular.module('starter.controllers', [])
     })
     .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', '$auth', 'locationService', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation, $auth, locationService) {
         $scope.$geolocation = $geolocation;
+        $scope.coords = {};
 
         // basic usage
         $geolocation.getCurrentPosition().then(function(location) {
@@ -122,13 +123,16 @@ angular.module('starter.controllers', [])
             $scope.deals.splice(index, 1);
         };
 
-        var currentLocation = locationService.getCurrentLocation();
-        dealsService.getDeals(currentLocation).then(function(newDeals) {
-            $scope.deals = newDeals;
-            $log.info("deals is " + JSON.stringify($scope.deals));
-        });
+        locationService.getCurrentLocation().then(function(response) {
+            $scope.coords = response.coords;
+            $log.info("currentLocation: " + JSON.stringify($scope.coords));
+            dealsService.getDeals($scope.coords).then(function(newDeals) {
+                $scope.deals = newDeals;
+                $log.info("deals is " + JSON.stringify($scope.deals));
+            });
+        });        
 
-        locationService.updateLocation();
+        //locationService.updateLocation();
 
         /*
         $scope.deals = dealsService.getDeals();
@@ -233,3 +237,9 @@ angular.module('starter.controllers', [])
             $state.go('tab.deal-finder');
         }
     }])
+
+    .controller('UserLoginCtrl', ['$scope', '$state', function UserLoginCtrl() {
+
+    }])
+
+;
