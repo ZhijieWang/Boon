@@ -234,8 +234,12 @@ angular.module('starter.services', [])
         };
     })
     .service('tagService', function tagService() {
+
+        var toSend = [];
+
         var tags = [
-            { tagName: 'Pizza',
+            {
+              tagName: 'Pizza',
               tagID: 1,
               selection: true
             },
@@ -246,14 +250,13 @@ angular.module('starter.services', [])
             }
         ];
 
-        // remove tags that are false
-        var filterTags = function(toFilter) {
-
-        };
+        this.switchTag = function(tagID,value) {
+            toSend.push({tagID: tagID, selection:value});
+        }
 
         // TODO: send the TagID and matching selection values
         // to backend
-        this.sendResults = function (tagArray) {
+        this.sendResults = function () {
 
         };
 

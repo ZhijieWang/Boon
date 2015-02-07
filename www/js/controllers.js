@@ -197,7 +197,6 @@ angular.module('starter.controllers', [])
 
         // Pushes new checkbox values to service
         $scope.check = function(checkValue, priceID) {
-
             if (checkValue == true) {
                 preferencesService.enablePrice(priceID);
             } else {
@@ -205,25 +204,33 @@ angular.module('starter.controllers', [])
             }
         };
     }])
-    .controller('GeoCtrl',['$geolocation', '$scope', function($geolocation, $scope) {
-
-    }])
     .controller('TagsCtrl',['$scope','tagService', function($scope, tagService) {
+        var stashedTags = tagService.getCategories();
+
         // Makes a request to tag service to get categories for user
         $scope.getTags = function() {
-            return tagService.getCategories();
+            return stashedTags;
         };
 
-    }])
-    .controller('IndivTagCtrl',['$scope','preferencesService',function($scope,preferencesService) {
         // Selects the catagory and sends it to preferences service for processing
-        $scope.selectCategory = function(categoryName, optionValue) {
-            if (optionValue == true) {
-                preferencesService.enablePrice(categoryName);
-            } else {
-                preferencesService.disablePrice(categoryName);
-            }
+        $scope.selectCategory = function(index) {
+            // Toggle Value in tag representation
+            stashedTags[index].selection = stashedTags[index].selection === false ? true: false;
+            var dealToSend = stashedTags[index];
+
+            tagService.switchTag(dealToSend.tagID,dealToSend.selection);
+            $log.info("Sending tag selection to tagService");
+        };
+
+
+    }])
+    .controller('IndivTagCtrl',['$scope','preferencesService','tagService',function($scope,preferencesService,tagService) {
+        $scope.tagSelect = false;
+
+        $scope.selectTag = function() {
+            $scope.tagSelect = $scope.tagSelect === false ? true: false;
         }
+
     }])
     .controller('SplashCtrl',['$scope','$state',function($scope,$state) {
         $scope.dealClick = function() {

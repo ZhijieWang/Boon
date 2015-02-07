@@ -19,7 +19,6 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
 })
 
 .config(function($stateProvider, $urlRouterProvider, $httpProvider, $authProvider) {
-
         // We need to setup some parameters for http requests
         // These three lines are all you need for CORS support
         $httpProvider.defaults.useXDomain = true;
@@ -61,7 +60,6 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
                         controller: 'StashCtrl'
                     }
                 }
-
             })
             .state('tab.tag-cloud', {
               url: '/tag-cloud',
@@ -81,7 +79,6 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
                     }
                 }
             })
-
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/splash');
 
