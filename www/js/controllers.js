@@ -182,12 +182,7 @@ angular.module('starter.controllers', [])
         // Expands the size of the list element and adds information about
         // the deal
         $scope.showDetailView = function() {
-            if (!$scope.detailView) {
-                $scope.detailView = true;
-
-            } else {
-                $scope.detailView = false;
-            }
+            $scope.detailView = !$scope.detailView;
         }
     }])
     .controller('PriceCtrl',[ '$scope','preferencesService' , function($scope, preferencesService) {
@@ -201,12 +196,11 @@ angular.module('starter.controllers', [])
         // Pushes new checkbox values to service
         $scope.check = function(checkValue, priceID) {
 
-            if (checkValue === true) {
+            if (checkValue == true) {
                 preferencesService.enablePrice(priceID);
             } else {
                 preferencesService.disablePrice(priceID);
             }
-
         };
     }])
     .controller('GeoCtrl',['$geolocation', '$scope', function($geolocation, $scope) {
@@ -215,13 +209,14 @@ angular.module('starter.controllers', [])
     .controller('TagsCtrl',['$scope','tagService', function($scope, tagService) {
         // Makes a request to tag service to get categories for user
         $scope.getTags = function() {
+            return tagService.getCategories();
+        };
 
-        }
     }])
     .controller('IndivTagCtrl',['$scope','preferencesService',function($scope,preferencesService) {
         // Selects the catagory and sends it to preferences service for processing
         $scope.selectCategory = function(categoryName, optionValue) {
-            if (optionValue === true) {
+            if (optionValue == true) {
                 preferencesService.enablePrice(categoryName);
             } else {
                 preferencesService.disablePrice(categoryName);
