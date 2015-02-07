@@ -1,5 +1,34 @@
 <ion-view title="Tags">
-    <ion-content>
+    <ion-content style="text-align: center;" ng-controller="TagsCtrl">
+        <ion-scroll zooming="false" direction="y" style="width: 100%; height: 100%">
+             <span>
+                 <h4>Category</h4>
+            </span>
+            <!-- Category -->
+            <div>
+                <div class="cloudTag"> Category 1 </div>
+                <div class="cloudTag"> Category 2 </div>
+                <div class="cloudTag"> Category 3 </div>
 
+            </div>
+            <span>
+                 <h4>Prices</h4>
+            </span>
+            <!-- Prices -->
+            <div>
+                <div class="cloudTag"> Price 1 </div>
+                <div class="cloudTag"> Price 2 </div>
+                <div class="cloudTag"> Price 3 </div>
+            </div>
+            <span>
+               <h4>Types</h4>
+            </span>
+            <!-- Item Type-->
+            <div>
+                <div class="cloudTag"> ItemType 1 </div>
+                <div class="cloudTag"> ItemType 2 </div>
+                <div class="cloudTag"> ItemType 3 </div>
+            </div>
+        </ion-scroll>
     </ion-content>
 </ion-view>

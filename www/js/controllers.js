@@ -138,13 +138,9 @@ angular.module('starter.controllers', [])
         // they spent looking at the deal )
     }])
     .controller('StashCtrl',['$scope','dealCacheService','$log', function($scope, dealCacheService, $log){
-
-
-
         $scope.acceptedDeals = function () {
             return dealCacheService.stashedDeals();
         };
-
     }])
     /**
      *  This controller handles each stash element from the ng-repeat
@@ -192,11 +188,9 @@ angular.module('starter.controllers', [])
             } else {
                 $scope.detailView = false;
             }
-
         }
     }])
     .controller('PriceCtrl',[ '$scope','preferencesService' , function($scope, preferencesService) {
-
         // Holds user's selections for price ranges
         $scope.devList = [
             { text: "$",   checked: false, priceID: "lowPrice" },
@@ -218,11 +212,23 @@ angular.module('starter.controllers', [])
     .controller('GeoCtrl',['$geolocation', '$scope', function($geolocation, $scope) {
 
     }])
-    .controller('TagsCtrl',['$scope', function($scope) {
+    .controller('TagsCtrl',['$scope','tagService', function($scope, tagService) {
+        // Makes a request to tag service to get categories for user
+        $scope.getTags = function() {
 
+        }
+    }])
+    .controller('IndivTagCtrl',['$scope','preferencesService',function($scope,preferencesService) {
+        // Selects the catagory and sends it to preferences service for processing
+        $scope.selectCategory = function(categoryName, optionValue) {
+            if (optionValue === true) {
+                preferencesService.enablePrice(categoryName);
+            } else {
+                preferencesService.disablePrice(categoryName);
+            }
+        }
     }])
     .controller('SplashCtrl',['$scope','$state',function($scope,$state) {
-
         $scope.dealClick = function() {
             $state.go('tab.deal-finder');
         }

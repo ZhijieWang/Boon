@@ -132,7 +132,7 @@ angular.module('starter.services', [])
                 csrfToken: '1234567890',
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
-            
+
             return $http.get('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
                 var promotions = [];
                 var dealsList = angular.fromJson(response.data);
@@ -232,9 +232,17 @@ angular.module('starter.services', [])
         this.disableCategory = function(categoryID) {
            categories[categoryID] = false;
         };
+    })
+    .factory('tagService', function catagoryService() {
+        //
+        this.sendResults = function () {
 
+        }
 
+        //
+        this.getTags = function () {
 
+        }
     })
 ;
 

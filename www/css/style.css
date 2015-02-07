@@ -89,3 +89,16 @@ td-card img {
 .stashItem.expanded {
     height: 200px;
 }
+
+.cloudTag
+{
+    display: inline-block;
+    text-align:center;
+    height:30px;
+    width: auto;
+    border: 1px solid #ababab;
+    border-radius:45px / 40px;
+    background-color: #84deee;
+    margin:10px;
+    padding: 3px;
+}
