@@ -235,7 +235,7 @@ angular.module('starter.controllers', [])
             tagService.switchCategory($scope.categories[index].categoryID,$scope.categories[index].selection );
         };
 
-        // Selects the catagory and sends it to preferences service for processing
+        // Selects the catagory and sends it to tags service for processing
         $scope.selectTag = function(index) {
             $scope.tagSelect[index] = $scope.tagSelect[index] === false ? true: false;
 

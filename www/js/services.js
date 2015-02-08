@@ -195,46 +195,8 @@ angular.module('starter.services', [])
         };          
 
     }])
-
-    /** This service handles communicating user preferences about deals
-     *  such as price, food type
-     *
-     *  TODO: add ability to store distances from user ( store internally in metric
-     *  then convert to feet in view because America )
-     * */
-    .service('preferencesService', function preferencesService() {
-        var prices = {
-              lowPrice: false,
-              mediumPrice: true,
-              highPrice: true
-        };
-
-        var categories = {
-              drink: true,
-              pizza: true,
-              mexican: true,
-              italian: true,
-              cafe: true
-        };
-
-        /* Index must not exceed that of the prices array */
-        this.enablePrice = function(priceID) {
-            prices[priceID] = true;
-        };
-
-        this.disablePrice = function(priceID) {
-            prices[priceID] = false;
-        };
-
-        this.enableCategory = function(categoryID) {
-            categories[categoryID] = true;
-        };
-
-        this.disableCategory = function(categoryID) {
-           categories[categoryID] = false;
-        };
-    })
-    .service('tagService', function tagService($log) {
+    
+    .service('tagService', ['$log', function tagService($log) {
 
         var toSend = { tags: [],prices: [], categories:[] };
 
@@ -260,7 +222,7 @@ angular.module('starter.services', [])
         }
 
         this.switchTag = function(tagID,value) {
-            toSend.tags[tagID] ={tagID: tagID, selection:value};
+            toSend.tags[tagID] = {tagID: tagID, selection:value};
         }
 
         // TODO: send the TagID and matching selection values
@@ -273,8 +235,7 @@ angular.module('starter.services', [])
         this.getCategories = function() {
             return tags;
         };
-    })
-
+    }])
     .service('locationService', ['$geolocation', '$http', '$cookieStore', '$log', '$q', function locationService($geolocation, $http, $cookieStore, $log, $q) {
         this.getCurrentLocation = function() {
             if ($cookieStore.get('longitude') === undefined) {
