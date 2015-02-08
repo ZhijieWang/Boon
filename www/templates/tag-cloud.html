@@ -13,7 +13,7 @@
             </span>
             <!-- Prices -->
             <div>
-                <div class="cloudTag" ng-repeat="price in priceList" ng-click="selectPrice($index)" ng-class="{'active' : priceSelect[$index]}">{{price.text}}</div>
+                <div class="cloudTag" ng-repeat="price in priceList" ng-click="selectPrice($index)" ng-class="{'active' : priceHighlight($index)}">{{price.text}}</div>
             </div>
             <span>
                <h4>Tags</h4>

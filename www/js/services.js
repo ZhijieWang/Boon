@@ -236,7 +236,7 @@ angular.module('starter.services', [])
     })
     .service('tagService', function tagService() {
 
-        var toSend = [];
+        var toSend = { tags: [],prices: [], categories:[] };
 
         var tags = [
             {
@@ -251,8 +251,16 @@ angular.module('starter.services', [])
             }
         ];
 
+        this.switchCategory = function(categoryID, value) {
+            toSend.categories[categoryID] = {categoryID: categoryID,selection:value};
+        }
+
+        this.switchPrice = function(priceID, value) {
+            toSend.prices[priceID] = {priceID: priceID,selection:value};
+        }
+
         this.switchTag = function(tagID,value) {
-            toSend.push({tagID: tagID, selection:value});
+            toSend.tags[tagID] ={tagID: tagID, selection:value};
         }
 
         // TODO: send the TagID and matching selection values
