@@ -122,7 +122,7 @@ angular.module('starter.services', [])
 
         };
 
-        // TODO: uncomment ajax code when we have a backend
+        //request deals from backend
         this.getDeals = function(location) {
             var currentTime = new Date();
             var jsonPayload = {
@@ -134,7 +134,6 @@ angular.module('starter.services', [])
             };
 
             $log.info("JSON object is: " + JSON.stringify(jsonPayload));
-
             return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
                 var promotions = [];
                 var dealsList = angular.fromJson(response.data);
@@ -268,26 +267,32 @@ angular.module('starter.services', [])
         };
     })
 
-    .service('locationService', ['$geolocation', '$http', '$cookies', '$log', function locationService($geolocation, $http, $cookies, $log) {
-        
+    .service('locationService', ['$geolocation', '$http', '$cookieStore', '$log', '$q', function locationService($geolocation, $http, $cookieStore, $log, $q) {
         this.getCurrentLocation = function() {
-
-            // if ($cookies.latitude !== undefined) {
-            //     $log.info("latitude is: " + $cookies.latitude);
-            //     return {
-            //         latitude: $cookies.latitude,
-            //         longitude: $cookies.longitude
-            //     };
-            // } else {
-                var longitude = '';
-                var latitude = '';
-                var location = {};
+            if ($cookieStore.get('longitude') === undefined) {
+                $log.info("no cookie set yet! Calling GoogleMaps API!");
                 return $geolocation.getCurrentPosition({
                     timeout: 60000
                 }).then(function(response) {
-                    return angular.fromJson(response);
-                });          
-            // }
+                    var locationObj = angular.fromJson(response);
+                    $cookieStore.put('longitude', locationObj.coords.longitude);
+                    $cookieStore.put('latitude', locationObj.coords.longitude);
+                    return locationObj;
+                });                
+            } else {
+                $log.info("Location data already exists; returning stored lat/long values.");
+                var deferred = $q.defer();
+                setTimeout(function() {
+                    deferred.resolve({
+                        coords: {
+                            latitude: $cookieStore.get('latitude'),
+                            longitude: $cookieStore.get('longitude')
+                        }
+                    });
+                    $log.info("cookies obj contains: " + $scookieStore.get('longitude') + " and " + $cookieStore.get('latitude'));
+                }, 1000);
+                return deferred.promise;
+            }
         };
 
         this.updateLocation = function() {
