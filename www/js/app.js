@@ -23,7 +23,7 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
         // These three lines are all you need for CORS support
         $httpProvider.defaults.useXDomain = true;
         $httpProvider.defaults.withCredentials = true;
-        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';   
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
 
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router
