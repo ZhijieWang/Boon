@@ -195,9 +195,9 @@ angular.module('starter.controllers', [])
         $scope.stashedTags = tagService.getCategories();
 
         $scope.priceList = [
-            { text: "$",   checked: false, priceID: "lowPrice" },
-            { text: "$$", checked: false, priceID: "mediumPrice" },
-            { text: "$$$", checked: false, priceID: "highPrice"  }
+            { text: "$",   checked: false, priceID: 1},
+            { text: "$$", checked: false, priceID: 2 },
+            { text: "$$$", checked: false, priceID: 3 }
         ];
 
         $scope.categories = [
@@ -208,16 +208,39 @@ angular.module('starter.controllers', [])
 
         // Arrays storing the toggle state of the buttons
         $scope.categorySelect = [];
-        $scope.priceSelect = [];
+        // Default value when no prices are selected
+        $scope.priceSelect = -1;
         $scope.tagSelect = [];
 
         $scope.selectPrice = function(index) {
-            // Toggle Value for price
-            $scope.priceSelect[index] = $scope.priceSelect[index] === false ? true: false;
+            // Clear old value if there was one set
+            if ($scope.priceSelect >= 0) {
+                $scope.priceList[$scope.priceSelect].checked = false;
+            }
+
+            // Select new price
+            $scope.priceSelect = index;
+            $scope.priceList[index].checked = true;
+
+            // Send to tag service
+            tagService.switchPrice($scope.priceList[index].priceID,$scope.priceList[index].checked);
         };
 
+
+        // Since only one price can be highlighted at once it
+        // highlights current price it equals the index
+        $scope.priceHighlight = function (index) {
+            if ($scope.priceSelect === index) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // Select new category and send to service for staging
         $scope.selectCategory = function(index) {
             $scope.categorySelect[index] =  $scope.categorySelect[index] === false ? true: false;
+            tagService.switchCategory($scope.categories[index].categoryID,$scope.categories[index].selection );
         };
 
         // Selects the catagory and sends it to preferences service for processing
@@ -229,7 +252,7 @@ angular.module('starter.controllers', [])
             var dealToSend = $scope.stashedTags[index];
 
             tagService.switchTag(dealToSend.tagID,dealToSend.selection);
-            $log.info("Sending tag selection to tagService");
+            $log.info("Sending tag " + index +  " to tagService");
         };
     }])
     .controller('SplashCtrl',['$scope','$state',function($scope,$state) {
