@@ -64,7 +64,7 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
             .state('tab.tag-cloud', {
               url: '/tag-cloud',
               views: {
-                  'deal-stash': {
+                  'tag-cloud': {
                       templateUrl: 'templates/tag-cloud.html',
                       controller: 'TagsCtrl'
                   }
@@ -73,7 +73,7 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
             .state('tab.deal-detail', {
                 url: '/deal-detail',
                 views: {
-                    'deal-stash': {
+                    'deal-detail': {
                         templateUrl: 'templates/deal-detail.html',
                         controller: 'DealsCtrl'
                     }
