@@ -183,7 +183,7 @@ angular.module('starter.controllers', [])
             $scope.detailView = !$scope.detailView;
         }
     }])
-    .controller('TagsCtrl',['$scope','tagService','$log', function($scope, tagService,$log) {
+    .controller('TagsCtrl',['$scope','tagService','$log','$state', function($scope, tagService,$log,$state) {
         $scope.stashedTags = tagService.getCategories();
 
         $scope.priceList = [
@@ -246,5 +246,9 @@ angular.module('starter.controllers', [])
             tagService.switchTag(dealToSend.tagID,dealToSend.selection);
             $log.info("Sending tag " + index +  " to tagService");
         };
+
+        $state.get('tab.tag-cloud').onExit = function() {
+            tagService.sendResults();
+        }
     }])
 ;

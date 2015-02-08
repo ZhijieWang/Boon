@@ -234,7 +234,7 @@ angular.module('starter.services', [])
            categories[categoryID] = false;
         };
     })
-    .service('tagService', function tagService() {
+    .service('tagService', function tagService($log) {
 
         var toSend = { tags: [],prices: [], categories:[] };
 
@@ -266,7 +266,7 @@ angular.module('starter.services', [])
         // TODO: send the TagID and matching selection values
         // to backend
         this.sendResults = function () {
-
+            $log.info("Sending:" + JSON.stringify(toSend));
         };
 
         // TODO implement http call to backend
