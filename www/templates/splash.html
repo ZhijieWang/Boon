@@ -4,10 +4,42 @@
         Morbi elementum ultricies lacinia. Nam aliquam ac leo ut commodo. <br>
         Proin consequat efficitur mi sed tempus.<br>
         Aenean fringilla porttitor mauris sit amet imperdiet. <br>
-
     </div>
 
-    <button class="button-light" ng-click="dealClick()">
-        Show me Deals!
-    </button>
+    <div class="row" style="padding:10px;">
+        <div class="col-xs-4"></div>
+        <div class="col-xs-4">
+            <div alert data-ng-repeat="notification in notifications" type="{{notification.type}}" close="closeNotification($index)">{{notification.msg}}</div>                                
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+             <label class="item item-input">
+                <span class="input-label">Email</span>
+                <input type="text" data-ng-model="user.attemptedEmail">
+            </label>           
+        </div>
+
+        <div class="col-xs-6">
+            <label class="item item-input">
+                <span class="input-label">Password</span>
+                <input type="password" data-ng-model="user.attemptedPassword">
+            </label>               
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-6">
+            <a class="button" data-ng-click="attemptLogin(user.attemptedEmail, user.attemptedPassword)">Get Deals!</a>                   
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <!-- THIS IS TEMPORARY!!! For bypassing login sytem -->
+        <div class="col-xs-6">
+            <a class="button" data-ng-click="goToApp()">Bypass Login (TEMPORARY)</a>             
+        </div>        
+    </div>
+
 </ion-view>

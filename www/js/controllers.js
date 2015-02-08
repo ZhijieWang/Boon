@@ -28,15 +28,7 @@ angular.module('starter.controllers', [])
         };
     })
     .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', '$auth', 'locationService', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation, $auth, locationService) {
-        $scope.$geolocation = $geolocation;
         $scope.coords = {};
-
-        // basic usage
-        $geolocation.getCurrentPosition().then(function(location) {
-            $scope.location = location;
-            $log.info("The coords are " + $scope.location.longitude + " " + $scope.location.latitude);
-        });
-
         $scope.deals = [];
 
         // Placeholder function, since card is destroyed after being swiped the
@@ -232,14 +224,4 @@ angular.module('starter.controllers', [])
             $log.info("Sending tag selection to tagService");
         };
     }])
-    .controller('SplashCtrl',['$scope','$state',function($scope,$state) {
-        $scope.dealClick = function() {
-            $state.go('tab.deal-finder');
-        }
-    }])
-
-    .controller('UserLoginCtrl', ['$scope', '$state', function UserLoginCtrl() {
-
-    }])
-
 ;

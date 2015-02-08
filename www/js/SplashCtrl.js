@@ -1,0 +1,59 @@
+    
+angular.module('starter.controllers')
+
+.controller('SplashCtrl', ['$scope', '$state', '$auth', '$log', function SplashCtrl($scope, $state, $auth, $log) {
+    $scope.notifications = [{
+        msg: 'Welcome!',
+        type: 'success'
+    }];
+
+    $scope.empty = {};
+    $scope.user = {};
+
+    $scope.reset = function() {
+        $scope.user = angular.copy($scope.empty);
+    };
+
+    $scope.closeNotification = function(index) {
+        $scope.notifications.splice(index, 1);
+    };    
+
+    //TEMPORARY: for bypassing login page
+    $scope.goToApp = function() {
+        $state.go('tab.deal-finder');
+    }
+
+    $scope.attemptLogin = function(attemptedEmail, attemptedPassword) {
+        $log.info("attempting login with: " + attemptedEmail + " and " + attemptedPassword);  
+        if (attemptedEmail === undefined || attemptedEmail === '' || 
+            attemptedPassword === undefined || attemptedPassword === '') {
+            $scope.notifications.push({
+                msg: 'Please fill in all forms!',
+                type: 'danger'
+            });
+            return;
+        }
+
+        var authenticationParams = {
+            email: attemptedEmail,
+            password: attemptedPassword
+        };
+
+        $auth.submitLogin(authenticationParams).then(function(response) {
+            if (angular.fromJson(response).data.status) {
+                $state.go('tab.deal-finder');                
+            }
+        }).catch(function(error) {
+            if (error) {
+                $log.info("User authentication error: " + JSON.stringify(error));
+                $scope.notifications.push({
+                    msg: 'We weren\'t able to find a user with those credentials!',
+                    type: 'danger'
+                });
+            }
+        });
+        $scope.reset();
+    };
+}])
+
+;
