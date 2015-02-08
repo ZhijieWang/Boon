@@ -289,7 +289,7 @@ angular.module('starter.services', [])
                             longitude: $cookieStore.get('longitude')
                         }
                     });
-                    $log.info("cookies obj contains: " + $scookieStore.get('longitude') + " and " + $cookieStore.get('latitude'));
+                    $log.info("cookies obj contains: " + $cookieStore.get('longitude') + " and " + $cookieStore.get('latitude'));
                 }, 1000);
                 return deferred.promise;
             }
@@ -303,14 +303,8 @@ angular.module('starter.services', [])
                 $cookies.longitude = angular.fromJson(response).longitude;
                 $cookies.latitude = angular.fromJson(response).latitude;
             });
-
             $log.info("currentPosition is: " + JSON.stringify(currentPosition));
         };
-
-
-
-
-
     }])
 ;
 
