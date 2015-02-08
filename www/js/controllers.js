@@ -191,50 +191,46 @@ angular.module('starter.controllers', [])
             $scope.detailView = !$scope.detailView;
         }
     }])
-    .controller('PriceCtrl',[ '$scope','preferencesService' , function($scope, preferencesService) {
-        // Holds user's selections for price ranges
-        $scope.devList = [
+    .controller('TagsCtrl',['$scope','tagService','$log', function($scope, tagService,$log) {
+        $scope.stashedTags = tagService.getCategories();
+
+        $scope.priceList = [
             { text: "$",   checked: false, priceID: "lowPrice" },
             { text: "$$", checked: false, priceID: "mediumPrice" },
             { text: "$$$", checked: false, priceID: "highPrice"  }
         ];
 
-        // Pushes new checkbox values to service
-        $scope.check = function(checkValue, priceID) {
-            if (checkValue == true) {
-                preferencesService.enablePrice(priceID);
-            } else {
-                preferencesService.disablePrice(priceID);
-            }
-        };
-    }])
-    .controller('TagsCtrl',['$scope','tagService','$log', function($scope, tagService,$log) {
-        var stashedTags = tagService.getCategories();
+        $scope.categories = [
+            {text: "Pizza", checked: false, categoryID: 4},
+            {text: "Bar Food", checked: false, categoryID: 3 },
+            {text: "Ice Cream", checked: false, categoryID: 2 }
+        ];
 
-        // Makes a request to tag service to get categories for user
-        $scope.getTags = function() {
-            return stashedTags;
-        };
-
+        // Arrays storing the toggle state of the buttons
+        $scope.categorySelect = [];
+        $scope.priceSelect = [];
         $scope.tagSelect = [];
 
-        $scope.selectTag = function(index) {
-            $scope.tagSelect[index] = $scope.tagSelect[index] === false ? true: false;
-        }
+        $scope.selectPrice = function(index) {
+            // Toggle Value for price
+            $scope.priceSelect[index] = $scope.priceSelect[index] === false ? true: false;
+        };
 
+        $scope.selectCategory = function(index) {
+            $scope.categorySelect[index] =  $scope.categorySelect[index] === false ? true: false;
+        };
 
         // Selects the catagory and sends it to preferences service for processing
-        $scope.selectCategory = function(index) {
+        $scope.selectTag = function(index) {
+            $scope.tagSelect[index] = $scope.tagSelect[index] === false ? true: false;
+
             // Toggle Value in tag representation
-            stashedTags[index].selection = stashedTags[index].selection === false ? true: false;
-            var dealToSend = stashedTags[index];
+            $scope.stashedTags[index].selection = $scope.stashedTags[index].selection === false ? true: false;
+            var dealToSend = $scope.stashedTags[index];
 
             tagService.switchTag(dealToSend.tagID,dealToSend.selection);
             $log.info("Sending tag selection to tagService");
         };
-    }])
-    .controller('IndivTagCtrl',['$scope',function($scope) {
-
     }])
     .controller('SplashCtrl',['$scope','$state',function($scope,$state) {
         $scope.dealClick = function() {

@@ -6,26 +6,21 @@
             </span>
             <!-- Category -->
             <div>
-                <div class="cloudTag"> Category 1 </div>
-                <div class="cloudTag"> Category 2 </div>
-                <div class="cloudTag"> Category 3 </div>
-
+                <div class="cloudTag" ng-repeat="category in categories" ng-click="selectCategory($index)" ng-class="{'active' : categorySelect[$index]}">{{category.text}}</div>
             </div>
             <span>
                  <h4>Prices</h4>
             </span>
             <!-- Prices -->
             <div>
-                <div class="cloudTag"> Price 1 </div>
-                <div class="cloudTag"> Price 2 </div>
-                <div class="cloudTag"> Price 3 </div>
+                <div class="cloudTag" ng-repeat="price in priceList" ng-click="selectPrice($index)" ng-class="{'active' : priceSelect[$index]}">{{price.text}}</div>
             </div>
             <span>
                <h4>Tags</h4>
             </span>
-            <!-- Item Type-->;
+            <!-- Item Tags-->
             <div>
-                <div ng-repeat="tag in getTags()" class="cloudTag" ng-click="selectTag($index);selectCategory($index);" ng-class="{'active' : tagSelect[$index]}">{{tag.tagName}}</div>
+                <div ng-repeat="tag in stashedTags" class="cloudTag" ng-click="selectTag($index);" ng-class="{'active' : tagSelect[$index]}">{{tag.tagName}}</div>
             </div>
         </ion-scroll>
     </ion-content>
