@@ -15,6 +15,8 @@ angular.module('starter.controllers', [])
     .controller('MainCtrl',['$scope',function($scope) {
 
      }])
+
+    // UNNEEDED
     .controller('NavCtrl', function($scope, $ionicSideMenuDelegate) {
 
         // Opens the left menu when left button is hit
@@ -135,6 +137,11 @@ angular.module('starter.controllers', [])
         // state of those deals ( user's reaction to deal, how long
         // they spent looking at the deal )
     }])
+    /**
+     *  This controller handles the deal stash pagea
+     *
+     *  TODO: allow user to click a button to map the deal with respect to their location
+     */
     .controller('StashCtrl',['$scope','dealCacheService','$log', function($scope, dealCacheService, $log){
         $scope.acceptedDeals = function () {
             return dealCacheService.stashedDeals();
@@ -183,6 +190,14 @@ angular.module('starter.controllers', [])
             $scope.detailView = !$scope.detailView;
         }
     }])
+/**
+ *  This controller handles user tags for:
+ *
+ *  prices - currently 3 options for low medium and high
+ *  categories - preset categories
+ *  specific tags - loaded from the server and can change based on user tastes
+ *
+ */
     .controller('TagsCtrl',['$scope','tagService','$log','$state', function($scope, tagService,$log,$state) {
         $scope.stashedTags = tagService.getCategories();
 

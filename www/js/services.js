@@ -144,7 +144,11 @@ angular.module('starter.services', [])
             });
         };
     }])
-
+    /**
+     *  This service handles the caching ot deals and facilitates communication between the deal finder
+     *  where deals are added to the stash and the stash list where the stashed deals are
+     *  displayed to the user.
+     */
     .service('dealCacheService', ['$log', function dealCacheService($log) {
         // Holds deals that user has stashed
         var stashedDeals = [];
@@ -195,7 +199,12 @@ angular.module('starter.services', [])
         };          
 
     }])
-    
+    /**
+     *  This service communicates with the backend and the tags controller
+     *  to handle different tags user has selected with which to filter deals.
+     *
+     *  TODO: Add ability to select distance thresholds for deals.
+     */
     .service('tagService', ['$log', function tagService($log) {
 
         var toSend = { tags: [],prices: [], categories:[] };
