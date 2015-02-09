@@ -214,7 +214,7 @@ angular.module('starter.controllers', [])
         ];
 
         // Default value when no prices are selected
-        $scope.priceSelect = -1;
+        $scope.priceSelect = 0;
 
         $scope.selectPrice = function(index) {
             // Clear old value if there was one set
