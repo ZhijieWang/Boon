@@ -6,7 +6,7 @@
             </span>
             <!-- Category -->
             <div>
-                <div class="cloudTag" ng-repeat="category in categories" ng-click="selectCategory($index)" ng-class="{'active' : categorySelect[$index]}">{{category.text}}</div>
+                <div class="cloudTag" ng-repeat="category in categories" ng-click="selectCategory($index)" ng-class="{'active' : categories[$index].checked}">{{category.text}}</div>
             </div>
             <span>
                  <h4>Prices</h4>
@@ -20,7 +20,7 @@
             </span>
             <!-- Item Tags-->
             <div>
-                <div ng-repeat="tag in stashedTags" class="cloudTag" ng-click="selectTag($index);" ng-class="{'active' : tagSelect[$index]}">{{tag.tagName}}</div>
+                <div ng-repeat="tag in stashedTags" class="cloudTag" ng-click="selectTag($index);" ng-class="{'active' : stashedTags[$index].selection}">{{tag.tagName}}</div>
             </div>
         </ion-scroll>
     </ion-content>

@@ -202,7 +202,7 @@ angular.module('starter.controllers', [])
         $scope.stashedTags = tagService.getCategories();
 
         $scope.priceList = [
-            { text: "$",   checked: false, priceID: 1},
+            { text: "$",   checked: true, priceID: 1},
             { text: "$$", checked: false, priceID: 2 },
             { text: "$$$", checked: false, priceID: 3 }
         ];
@@ -213,11 +213,8 @@ angular.module('starter.controllers', [])
             {text: "Ice Cream", checked: false, categoryID: 2 }
         ];
 
-        // Arrays storing the toggle state of the buttons
-        $scope.categorySelect = [];
         // Default value when no prices are selected
-        $scope.priceSelect = 0;
-        $scope.tagSelect = [];
+        $scope.priceSelect = -1;
 
         $scope.selectPrice = function(index) {
             // Clear old value if there was one set
@@ -238,25 +235,20 @@ angular.module('starter.controllers', [])
         // Since only one price can be highlighted at once it
         // highlights current price it equals the index
         $scope.priceHighlight = function (index) {
-            if ($scope.priceSelect === index) {
-                return true;
-            } else {
-                return false;
-            }
+            return ($scope.priceList[index].checked);
         }
 
         // Select new category and send to service for staging
         $scope.selectCategory = function(index) {
-            $scope.categorySelect[index] =  $scope.categorySelect[index] === false ? true: false;
-            tagService.switchCategory($scope.categories[index].categoryID,$scope.categories[index].selection );
+            // Toggle Values for given category
+            $scope.categories[index].checked = ($scope.categories[index].checked === false);
+            tagService.switchCategory($scope.categories[index].categoryID,$scope.categories[index].checked );
         };
 
         // Selects the catagory and sends it to tags service for processing
         $scope.selectTag = function(index) {
-            $scope.tagSelect[index] = $scope.tagSelect[index] === false ? true: false;
-
             // Toggle Value in tag representation
-            $scope.stashedTags[index].selection = $scope.stashedTags[index].selection === false ? true: false;
+            $scope.stashedTags[index].selection = ($scope.stashedTags[index].selection === false);
             var dealToSend = $scope.stashedTags[index];
 
             tagService.switchTag(dealToSend.tagID,dealToSend.selection);
