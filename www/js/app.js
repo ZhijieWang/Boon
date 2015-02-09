@@ -18,7 +18,11 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $httpProvider, $authProvider) {
+.config(function($stateProvider, $urlRouterProvider, $httpProvider, $authProvider,$ionicConfigProvider) {
+        // Bar to bottom for android even
+        $ionicConfigProvider.tabs.style('ios');
+        $ionicConfigProvider.tabs.position('ios');
+
         // We need to setup some parameters for http requests
         // These three lines are all you need for CORS support
         $httpProvider.defaults.useXDomain = true;
