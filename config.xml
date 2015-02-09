@@ -7,6 +7,9 @@
   <author email="hi@ionicframework" href="http://ionicframework.com/">
       Ionic Framework Team
     </author>
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation" />
+    </feature>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
@@ -16,4 +19,5 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+
 </widget>

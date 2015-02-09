@@ -123,16 +123,16 @@ angular.module('starter.services', [])
         };
 
         //request deals from backend
-        this.getDeals = function(location) {
+        this.getDeals = function() {
             var currentTime = new Date();
             var jsonPayload = {
                 action: 'getDeals',
-                latitude: location.latitude,
-                longitude: location.longitude,
+                //latitude: location.latitude,
+                //longitude: location.longitude,
                 csrfToken: '1234567890',
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
-
+            console.log("JSON object is: " + JSON.stringify(jsonPayload));
             $log.info("JSON object is: " + JSON.stringify(jsonPayload));
             return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
                 var promotions = [];

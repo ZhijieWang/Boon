@@ -117,15 +117,15 @@ angular.module('starter.controllers', [])
             $scope.deals.splice(index, 1);
         };
 
-        locationService.getCurrentLocation().then(function(response) {
-            $scope.coords = response.coords;
-            $log.info("currentLocation: " + JSON.stringify($scope.coords));
-            dealsService.getDeals($scope.coords).then(function(newDeals) {
-                $scope.deals = newDeals;
-                $log.info("deals is " + JSON.stringify($scope.deals));
-            });
-        });        
-
+        //locationService.getCurrentLocation().then(function(response) {
+        //    $scope.coords = response.coords;
+        //    $log.info("currentLocation: " + JSON.stringify($scope.coords));
+        //
+        //});
+        dealsService.getDeals().then(function(newDeals) {
+            $scope.deals = newDeals;
+            $log.info("deals is " + JSON.stringify($scope.deals));
+        });
         //locationService.updateLocation();
 
         /*
