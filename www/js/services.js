@@ -205,9 +205,9 @@ angular.module('starter.services', [])
      *
      *  TODO: Add ability to select distance thresholds for deals.
      */
-    .service('tagService', ['$log', function tagService($log) {
+    .service('tagService', ['$log','$http', function tagService($log,$http) {
 
-        var toSend = { tags: [],prices: [], categories:[] };
+        var toSend = { tags: {},prices: {}, categories:{} };
 
         var tags = [
             {
@@ -223,21 +223,34 @@ angular.module('starter.services', [])
         ];
 
         this.switchCategory = function(categoryID, value) {
-            toSend.categories[categoryID] = {categoryID: categoryID,selection:value};
+            toSend.categories[categoryID] = value;
         }
 
         this.switchPrice = function(priceID, value) {
-            toSend.prices[priceID] = {priceID: priceID,selection:value};
+            toSend.prices[priceID] = value;
         }
 
         this.switchTag = function(tagID,value) {
-            toSend.tags[tagID] = {tagID: tagID, selection:value};
+            toSend.tags[tagID] = value;
         }
 
-        // TODO: send the TagID and matching selection values
+        // sends the TagID and matching selection values
         // to backend
         this.sendResults = function () {
-            $log.info("Sending:" + JSON.stringify(toSend));
+
+            var currentTime = new Date();
+            var jsonPayload = {
+                    action: 'tagsUpdate',
+                    values: toSend,
+                    csrfToken: '1234567890',
+                    timestamp: currentTime.toDateString() + currentTime.getTime()
+            };
+
+            $log.info("Sending:" + JSON.stringify(jsonPayload));
+
+            return $http.post('http://intense-castle-3862.herokuapp.com/tags', jsonPayload).then(function(response) {
+                 return angular.fromJson(response.data).model.results;
+            });
         };
 
         // TODO implement http call to backend
