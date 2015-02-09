@@ -216,13 +216,14 @@ angular.module('starter.controllers', [])
         // Arrays storing the toggle state of the buttons
         $scope.categorySelect = [];
         // Default value when no prices are selected
-        $scope.priceSelect = -1;
+        $scope.priceSelect = 0;
         $scope.tagSelect = [];
 
         $scope.selectPrice = function(index) {
             // Clear old value if there was one set
             if ($scope.priceSelect >= 0) {
                 $scope.priceList[$scope.priceSelect].checked = false;
+                tagService.switchPrice($scope.priceList[$scope.priceSelect].priceID,$scope.priceList[$scope.priceSelect].checked);
             }
 
             // Select new price
