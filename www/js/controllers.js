@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
         // Adds deal to list of rejected deals
         $scope.cardSwipedLeft = function(currentDeal) {
             //dealsService.rejectDeal(currentDeal);
-            $log.info("REJECTING!");
+            console.log("REJECTING!");
             dealsService.rejectDeal(currentDeal).then(function(response) { 
             });
         };
@@ -72,7 +72,7 @@ angular.module('starter.controllers', [])
              // Within each catagory deal with closest expiry time appears first
              */
 
-            $log.info("ACCEPTING!");
+            console.log("ACCEPTING!");
             dealCacheService.stashDeal(currentDeal);
             dealsService.acceptDeal(currentDeal).then(function(response) {
 
@@ -121,10 +121,10 @@ angular.module('starter.controllers', [])
 
         navigator.geolocation.getCurrentPosition(function(locationObj) {
             $scope.coords = locationObj.coords;
-            $log.info("currentLocation: " + JSON.stringify($scope.coords));
+            console.log("currentLocation: " + JSON.stringify($scope.coords));
             dealsService.getDeals($scope.coords).then(function(newDeals) {
                 $scope.deals = newDeals;
-                $log.info("deals is " + JSON.stringify($scope.deals));
+                console.log("deals is " + JSON.stringify($scope.deals));
             });        
         }, function(error) {
           alert('Unable to get location coordinates: ' + error.message);
@@ -135,7 +135,7 @@ angular.module('starter.controllers', [])
 
         /*
         $scope.deals = dealsService.getDeals();
-        $log.info("$scope.deals is: " + JSON.stringify($scope.deals));
+        console.log("$scope.deals is: " + JSON.stringify($scope.deals));
         */
 
         // Controls deals that user has viewed and their selection
@@ -257,7 +257,7 @@ angular.module('starter.controllers', [])
             var dealToSend = $scope.stashedTags[index];
 
             tagService.switchTag(dealToSend.tagID,dealToSend.selection);
-            $log.info("Sending tag " + index +  " to tagService");
+            console.log("Sending tag " + index +  " to tagService");
         };
 
         $state.get('tab.tag-cloud').onExit = function() {

@@ -24,7 +24,7 @@ angular.module('starter.controllers')
     }
 
     $scope.attemptLogin = function(attemptedEmail, attemptedPassword) {
-        $log.info("attempting login with: " + attemptedEmail + " and " + attemptedPassword);  
+        console.log("attempting login with: " + attemptedEmail + " and " + attemptedPassword);  
         if (attemptedEmail === undefined || attemptedEmail === '' || 
             attemptedPassword === undefined || attemptedPassword === '') {
             $scope.notifications.push({
@@ -45,7 +45,7 @@ angular.module('starter.controllers')
             }
         }).catch(function(error) {
             if (error) {
-                $log.info("User authentication error: " + JSON.stringify(error));
+                console.log("User authentication error: " + JSON.stringify(error));
                 $scope.notifications.push({
                     msg: 'We weren\'t able to find a user with those credentials!',
                     type: 'danger'

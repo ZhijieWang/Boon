@@ -133,7 +133,7 @@ angular.module('starter.services', [])
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
             console.log("JSON object is: " + JSON.stringify(jsonPayload));
-            $log.info("JSON object is: " + JSON.stringify(jsonPayload));
+            console.log("JSON object is: " + JSON.stringify(jsonPayload));
             return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
                 var promotions = [];
                 var dealsList = angular.fromJson(response.data);
@@ -174,11 +174,11 @@ angular.module('starter.services', [])
             var currentDate = new Date();
             var validDeals = [];
             angular.forEach(stashedDeals, function(deal) {
-                $log.info("comparing " + currentDate.getTime() + " to " + Date.parse(deal.endTime));
+                console.log("comparing " + currentDate.getTime() + " to " + Date.parse(deal.endTime));
                 if (currentDate.getTime() < Date.parse(deal.endTime)) {
                     validDeals.push(deal);
                 } else {
-                    $log.info("PURGING DEAL with timestamp: " + Date.parse(deal.endTime));
+                    console.log("PURGING DEAL with timestamp: " + Date.parse(deal.endTime));
                 }
             });
             stashedDeals = validDeals;
@@ -246,7 +246,7 @@ angular.module('starter.services', [])
                     timestamp: currentTime.toDateString() + currentTime.getTime()
             };
 
-            $log.info("Sending:" + JSON.stringify(jsonPayload));
+            console.log("Sending:" + JSON.stringify(jsonPayload));
 
             return $http.post('http://intense-castle-3862.herokuapp.com/tags', jsonPayload).then(function(response) {
                  return angular.fromJson(response.data).model.results;
@@ -261,7 +261,7 @@ angular.module('starter.services', [])
     .service('locationService', ['$geolocation', '$http', '$cookieStore', '$log', '$q', function locationService($geolocation, $http, $cookieStore, $log, $q) {
         this.getCurrentLocation = function() {
             if ($cookieStore.get('longitude') === undefined) {
-                $log.info("no cookie set yet! Calling GoogleMaps API!");
+                console.log("no cookie set yet! Calling GoogleMaps API!");
                 return $geolocation.getCurrentPosition({
                     timeout: 60000
                 }).then(function(response) {
@@ -271,7 +271,7 @@ angular.module('starter.services', [])
                     return locationObj;
                 });                
             } else {
-                $log.info("Location data already exists; returning stored lat/long values.");
+                console.log("Location data already exists; returning stored lat/long values.");
                 var deferred = $q.defer();
                 setTimeout(function() {
                     deferred.resolve({
@@ -280,7 +280,7 @@ angular.module('starter.services', [])
                             longitude: $cookieStore.get('longitude')
                         }
                     });
-                    $log.info("cookies obj contains: " + $cookieStore.get('longitude') + " and " + $cookieStore.get('latitude'));
+                    console.log("cookies obj contains: " + $cookieStore.get('longitude') + " and " + $cookieStore.get('latitude'));
                 }, 1000);
                 return deferred.promise;
             }
@@ -290,11 +290,11 @@ angular.module('starter.services', [])
             var currentPosition = $geolocation.getCurrentPosition({
                 timeout: 60000
             }).then(function(response) {
-                $log.info("Updated gelocation data: " + JSON.stringify(response));
+                console.log("Updated gelocation data: " + JSON.stringify(response));
                 $cookies.longitude = angular.fromJson(response).longitude;
                 $cookies.latitude = angular.fromJson(response).latitude;
             });
-            $log.info("currentPosition is: " + JSON.stringify(currentPosition));
+            console.log("currentPosition is: " + JSON.stringify(currentPosition));
         };
     }])
 ;
