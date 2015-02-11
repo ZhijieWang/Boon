@@ -123,12 +123,12 @@ angular.module('starter.services', [])
         };
 
         //request deals from backend
-        this.getDeals = function() {
+        this.getDeals = function(location) {
             var currentTime = new Date();
             var jsonPayload = {
                 action: 'getDeals',
-                //latitude: location.latitude,
-                //longitude: location.longitude,
+                latitude: location.latitude,
+                longitude: location.longitude,
                 csrfToken: '1234567890',
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
