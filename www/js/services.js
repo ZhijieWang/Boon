@@ -133,7 +133,6 @@ angular.module('starter.services', [])
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
             console.log("JSON object is: " + JSON.stringify(jsonPayload));
-            console.log("JSON object is: " + JSON.stringify(jsonPayload));
             return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
                 var promotions = [];
                 var dealsList = angular.fromJson(response.data);

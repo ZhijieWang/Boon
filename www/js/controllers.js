@@ -29,7 +29,7 @@ angular.module('starter.controllers', [])
             $ionicSideMenuDelegate.toggleRight();
         };
     })
-    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', '$auth', 'locationService', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation, $auth, locationService) {
+    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', '$auth', 'locationService', '$cookieStore', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation, $auth, locationService, $cookieStore) {
         $scope.coords = {};
         $scope.deals = [];
 
@@ -117,18 +117,33 @@ angular.module('starter.controllers', [])
             $scope.deals.splice(index, 1);
         };
 
-        //locationService.test();
-
-        navigator.geolocation.getCurrentPosition(function(locationObj) {
-            $scope.coords = locationObj.coords;
-            console.log("currentLocation: " + JSON.stringify($scope.coords));
-            dealsService.getDeals($scope.coords).then(function(newDeals) {
+        //yucky!
+        if ($cookieStore.get('longitude') === undefined)  {
+            console.log("No stored location data detected - grabbing new data from API!");
+            navigator.geolocation.getCurrentPosition(function(locationObj) {
+                $scope.coords = locationObj.coords;
+                $cookieStore.put('latitude', $scope.coords.latitude);
+                $cookieStore.put('longitude', $scope.coords.longitude);
+                console.log("currentLocation: " + JSON.stringify($scope.coords));
+                dealsService.getDeals($scope.coords).then(function(newDeals) {
+                    $scope.deals = newDeals;
+                    console.log("deals is " + JSON.stringify($scope.deals));
+                });        
+            }, function(error) {
+              alert('Unable to get location coordinates: ' + error.message);
+            });     
+        } else {
+            console.log("Stored location data detected!");
+            var coords = {
+                latitude: $cookieStore.get('latitude'),
+                longitude: $cookieStore.get('longitude')
+            };
+            dealsService.getDeals(coords).then(function(newDeals) {
                 $scope.deals = newDeals;
                 console.log("deals is " + JSON.stringify($scope.deals));
-            });        
-        }, function(error) {
-          alert('Unable to get location coordinates: ' + error.message);
-        });     
+            });               
+        }
+
 
 
         //locationService.updateLocation();
