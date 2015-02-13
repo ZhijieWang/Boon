@@ -134,11 +134,10 @@ angular.module('starter.controllers', [])
                 dealsService.getDeals($scope.coords).then(function(newDeals) {
                     $scope.deals = newDeals;
                     console.log("deals is " + JSON.stringify($scope.deals));
-                },
-                geolocationOptions);        
+                });        
             }, function(error) {
               alert('Unable to get location coordinates: ' + error.message);
-            });     
+            }, geolocationOptions);     
         } else {
             console.log("Stored location data detected!");
             var coords = {
