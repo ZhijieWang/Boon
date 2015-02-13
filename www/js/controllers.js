@@ -117,6 +117,12 @@ angular.module('starter.controllers', [])
             $scope.deals.splice(index, 1);
         };
 
+        var geolocationOptions = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };        
+
         //yucky!
         if ($cookieStore.get('longitude') === undefined)  {
             console.log("No stored location data detected - grabbing new data from API!");
@@ -128,7 +134,8 @@ angular.module('starter.controllers', [])
                 dealsService.getDeals($scope.coords).then(function(newDeals) {
                     $scope.deals = newDeals;
                     console.log("deals is " + JSON.stringify($scope.deals));
-                });        
+                },
+                geolocationOptions);        
             }, function(error) {
               alert('Unable to get location coordinates: ' + error.message);
             });     
