@@ -125,13 +125,21 @@ angular.module('starter.services', [])
         //request deals from backend
         this.getDeals = function(location) {
             var currentTime = new Date();
+
             var jsonPayload = {
                 action: 'getDeals',
-                latitude: location.latitude,
-                longitude: location.longitude,
                 csrfToken: '1234567890',
+                latitude: "",
+                longitute: "",
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
+
+            // If location object is valid, then extract geo coords form it
+            if (location) {
+                jsonPayload.latitude = location.latitude;
+                jsonPayload.longitude =location.longitude;
+            }
+
             console.log("JSON object is: " + JSON.stringify(jsonPayload));
             return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
                 var promotions = [];
@@ -258,6 +266,7 @@ angular.module('starter.services', [])
         };
     }])
     .service('locationService', ['$geolocation', '$http', '$cookieStore', '$log', '$q', function locationService($geolocation, $http, $cookieStore, $log, $q) {
+
         this.getCurrentLocation = function() {
             if ($cookieStore.get('longitude') === undefined) {
                 console.log("no cookie set yet! Calling GoogleMaps API!");
@@ -285,15 +294,20 @@ angular.module('starter.services', [])
             }
         };
 
+        this.getCurrentLocation();
+
         this.updateLocation = function() {
-            var currentPosition = $geolocation.getCurrentPosition({
+            $geolocation.getCurrentPosition({
                 timeout: 60000
             }).then(function(response) {
                 console.log("Updated gelocation data: " + JSON.stringify(response));
-                $cookies.longitude = angular.fromJson(response).longitude;
-                $cookies.latitude = angular.fromJson(response).latitude;
+                var locationObj = angular.fromJson(response);
+                $cookieStore.put('longitude', locationObj.coords.longitude);
+                $cookieStore.put('latitude', locationObj.coords.longitude);
+
+                console.log("Long Lat" + locationObj.coords.longitude + " " + locationObj.coords.latitude);
+                return locationObj;
             });
-            console.log("currentPosition is: " + JSON.stringify(currentPosition));
         };
     }])
 ;

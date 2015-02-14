@@ -117,27 +117,15 @@ angular.module('starter.controllers', [])
             $scope.deals.splice(index, 1);
         };
 
-        var geolocationOptions = {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0
-        };        
-
-        //yucky!
+        // (still) yucky!
         if ($cookieStore.get('longitude') === undefined)  {
             console.log("No stored location data detected - grabbing new data from API!");
-            navigator.geolocation.getCurrentPosition(function(locationObj) {
-                $scope.coords = locationObj.coords;
-                $cookieStore.put('latitude', $scope.coords.latitude);
-                $cookieStore.put('longitude', $scope.coords.longitude);
-                console.log("currentLocation: " + JSON.stringify($scope.coords));
-                dealsService.getDeals($scope.coords).then(function(newDeals) {
-                    $scope.deals = newDeals;
-                    console.log("deals is " + JSON.stringify($scope.deals));
-                });        
-            }, function(error) {
-              alert('Unable to get location coordinates: ' + error.message);
-            }, geolocationOptions);     
+            locationService.updateLocation();
+
+            dealsService.getDeals(null).then(function(newDeals) {
+                $scope.deals = newDeals;
+                console.log("deals is " + JSON.stringify($scope.deals));
+            });
         } else {
             console.log("Stored location data detected!");
             var coords = {
@@ -151,8 +139,6 @@ angular.module('starter.controllers', [])
         }
 
 
-
-        //locationService.updateLocation();
 
         /*
         $scope.deals = dealsService.getDeals();
