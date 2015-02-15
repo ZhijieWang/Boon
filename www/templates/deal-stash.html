@@ -10,7 +10,7 @@
                 <timer  end-time="getDealTimes();" interval="1000" ng-style="timerStyle">  {{hours}}:{{mminutes}}:{{sseconds}}</timer>
             </div>
             <div ng-if="detailView" class="stashItem expanded" >
-                <span><img style="text-align: left;" src="{{deal.image}}"></span>
+                <span><img style="text-align: left;" src="{{deal.imageUrl}}"></span>
                 <h2>{{deal.name}}</h2>
             <span class="item-note">
                 {{deal.notes}}
