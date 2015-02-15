@@ -90,6 +90,11 @@ td-card img {
     height: 200px;
 }
 
+.stashImg {
+    width: 10%;
+    height: auto;
+}
+
 .cloudTag
 {
     display: inline-block;
