@@ -1,0 +1,26 @@
+
+<div class="modal">
+    <ion-header-bar>
+        <h1 class="title">{{deals[0].name}}</h1>
+    </ion-header-bar>
+    <ion-content class="deal-modal padding">
+        <!-- Div to hold deal and expanded options-->
+        <div>
+            <!-- Busines Title-->
+            <span>{{deals[0].name}}</span>
+            <!-- Slider for pics-->
+            <div class="bus-slider">
+                <ion-slide-box on-slide-changed="slideChanged(index)">
+                    <ion-slide>
+
+                    </ion-slide>
+                </ion-slide-box>
+            </div>
+            <div>
+                <button class="button energized" ng-click="closeModal();">
+                    Close
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</div>

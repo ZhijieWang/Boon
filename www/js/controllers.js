@@ -1,5 +1,4 @@
 angular.module('starter.controllers', [])
-
     .directive('noScroll', function() {
 
         return {
@@ -29,9 +28,28 @@ angular.module('starter.controllers', [])
             $ionicSideMenuDelegate.toggleRight();
         };
     })
-    .controller('DealsCtrl',[ '$scope','TDCardDelegate','dealsService','dealCacheService', '$log','$geolocation', '$auth', 'locationService', '$cookieStore', function($scope ,TDCardDelegate,dealsService,dealCacheService, $log,$geolocation, $auth, locationService, $cookieStore) {
+    .controller('DealsCtrl',[ '$scope','$ionicModal','dealsService','dealCacheService', '$log','$geolocation', '$auth', 'locationService', '$cookieStore', function($scope ,$ionicModal,dealsService,dealCacheService, $log,$geolocation, $auth, locationService, $cookieStore) {
         $scope.coords = {};
         $scope.deals = [];
+
+        $ionicModal.fromTemplateUrl('templates/deal-modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal
+        })
+
+        $scope.openModal = function() {
+            $scope.modal.show()
+        }
+
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
 
         // Placeholder function, since card is destroyed after being swiped the
         // placeholder will never execute
@@ -79,7 +97,6 @@ angular.module('starter.controllers', [])
             });
         };
 
-
         $scope.cardLeftSet = function() {
             $scope.cardExitAction = $scope.cardSwipedLeft;
         }
@@ -87,7 +104,6 @@ angular.module('starter.controllers', [])
         $scope.cardRightSet = function() {
             $scope.cardExitAction = $scope.cardSwipedRight;
         }
-
 
         /*
         Gets deals from dealservice
@@ -138,12 +154,6 @@ angular.module('starter.controllers', [])
             });               
         }
 
-
-
-        /*
-        $scope.deals = dealsService.getDeals();
-        console.log("$scope.deals is: " + JSON.stringify($scope.deals));
-        */
 
         // Controls deals that user has viewed and their selection
         // state of those deals ( user's reaction to deal, how long
