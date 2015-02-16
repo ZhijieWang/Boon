@@ -74,15 +74,6 @@ angular.module('starter', ['ionic','ionic.contrib.ui.tinderCards','starter.servi
                   }
               }
             })
-            .state('tab.deal-detail', {
-                url: '/deal-detail',
-                views: {
-                    'deal-detail': {
-                        templateUrl: 'templates/deal-detail.html',
-                        controller: 'DealsCtrl'
-                    }
-                }
-            })
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/splash');
 
