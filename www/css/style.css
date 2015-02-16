@@ -110,3 +110,7 @@ td-card img {
 .active {
     background-color: #84deee;
 }
+
+.deal-modal {
+    text-align: center;
+}
