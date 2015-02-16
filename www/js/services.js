@@ -255,9 +255,8 @@ angular.module('starter.services', [])
 
             console.log("Sending:" + JSON.stringify(jsonPayload));
 
-            return $http.post('http://intense-castle-3862.herokuapp.com/tags', jsonPayload).then(function(response) {
-                 return angular.fromJson(response.data).model.results;
-            });
+            $http.put('http://intense-castle-3862.herokuapp.com/tags/', jsonPayload);
+
         };
 
         // TODO implement http call to backend

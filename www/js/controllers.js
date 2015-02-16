@@ -14,20 +14,6 @@ angular.module('starter.controllers', [])
     .controller('MainCtrl',['$scope',function($scope) {
 
      }])
-
-    // UNNEEDED
-    .controller('NavCtrl', function($scope, $ionicSideMenuDelegate) {
-
-        // Opens the left menu when left button is hit
-        $scope.showMenu = function () {
-            $ionicSideMenuDelegate.toggleLeft();
-        };
-
-        // Opens the right menu when right button is hit
-        $scope.showRightMenu = function () {
-            $ionicSideMenuDelegate.toggleRight();
-        };
-    })
     .controller('DealsCtrl',[ '$scope','$ionicModal','dealsService','dealCacheService', '$log','$geolocation', '$auth', 'locationService', '$cookieStore', function($scope ,$ionicModal,dealsService,dealCacheService, $log,$geolocation, $auth, locationService, $cookieStore) {
         $scope.coords = {};
         $scope.deals = [];
