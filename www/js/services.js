@@ -274,7 +274,7 @@ angular.module('starter.services', [])
                 }).then(function(response) {
                     var locationObj = angular.fromJson(response);
                     $cookieStore.put('longitude', locationObj.coords.longitude);
-                    $cookieStore.put('latitude', locationObj.coords.longitude);
+                    $cookieStore.put('latitude', locationObj.coords.latitude);
                     return locationObj;
                 });                
             } else {
