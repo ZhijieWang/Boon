@@ -7,7 +7,7 @@
  *
  */
 
-angular.module('starter.services', [])
+angular.module('boon.services', [])
 
     .service('dealsService', ['$http', '$log', '$auth', function dealsService($http, $log, $auth) {
 
@@ -66,10 +66,16 @@ angular.module('starter.services', [])
             console.log("JSON object is: " + JSON.stringify(jsonPayload));
             return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
                 var promotions = [];
+                var stores = [];
                 var dealsList = angular.fromJson(response.data);
-                angular.forEach(dealsList, function(deal) {
+                angular.forEach(dealsList.promotions, function(deal) {
                     promotions.push(deal.promotion);
                 });
+
+                angular.forEach(dealsList.shops, function(deal) {
+                    stores.push(deal.store);
+                });
+
                 return promotions;
             });
         };

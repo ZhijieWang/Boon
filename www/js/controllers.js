@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('boon.controllers', [])
     .directive('noScroll', function() {
 
         return {

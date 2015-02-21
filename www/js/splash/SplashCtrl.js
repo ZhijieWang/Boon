@@ -1,5 +1,5 @@
     
-angular.module('starter.controllers')
+angular.module('boon.controllers')
 
 .controller('SplashCtrl', ['$scope', '$state', '$auth', '$log', function SplashCtrl($scope, $state, $auth, $log) {
     $scope.notifications = [{
@@ -18,13 +18,13 @@ angular.module('starter.controllers')
         $scope.notifications.splice(index, 1);
     };    
 
-    //TEMPORARY: for bypassing login page
+    //TEMPORARY: for bypassing splash page
     $scope.goToApp = function() {
         $state.go('tab.deal-finder');
     }
 
     $scope.attemptLogin = function(attemptedEmail, attemptedPassword) {
-        console.log("attempting login with: " + attemptedEmail + " and " + attemptedPassword);  
+        console.log("attempting splash with: " + attemptedEmail + " and " + attemptedPassword);
         if (attemptedEmail === undefined || attemptedEmail === '' || 
             attemptedPassword === undefined || attemptedPassword === '') {
             $scope.notifications.push({
@@ -54,6 +54,4 @@ angular.module('starter.controllers')
         });
         $scope.reset();
     };
-}])
-
-;
+}]);
