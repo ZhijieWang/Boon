@@ -45,11 +45,6 @@ angular.module('starter.services', [])
             });
         };
 
-        // TODO
-        this.getDeal = function (dealID) {
-
-        };
-
         //request deals from backend
         this.getDeals = function(location) {
             var currentTime = new Date();
