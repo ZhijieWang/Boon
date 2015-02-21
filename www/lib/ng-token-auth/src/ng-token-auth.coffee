@@ -134,7 +134,7 @@ angular.module('ng-token-auth', ['ipCookie'])
             if ev.data.message == 'deliverCredentials'
               delete ev.data.message
               @handleValidAuth(ev.data, true)
-              $rootScope.$broadcast('auth:login-success', ev.data)
+              $rootScope.$broadcast('auth:splash-success', ev.data)
 
             if ev.data.message == 'authFailure'
               error = {
@@ -142,7 +142,7 @@ angular.module('ng-token-auth', ['ipCookie'])
                 errors: [ev.data.error]
               }
               @cancel(error)
-              $rootScope.$broadcast('auth:login-error', error)
+              $rootScope.$broadcast('auth:splash-error', error)
 
 
           # make all public API methods available to directives
@@ -193,14 +193,14 @@ angular.module('ng-token-auth', ['ipCookie'])
                 @setConfigName(opts.config)
                 authData = @getConfig(opts.config).handleLoginResponse(resp, @)
                 @handleValidAuth(authData)
-                $rootScope.$broadcast('auth:login-success', @user)
+                $rootScope.$broadcast('auth:splash-success', @user)
               )
               .error((resp) =>
                 @rejectDfd({
                   reason: 'unauthorized'
                   errors: ['Invalid credentials']
                 })
-                $rootScope.$broadcast('auth:login-error', resp)
+                $rootScope.$broadcast('auth:splash-error', resp)
               )
             @dfd.promise
 
@@ -334,7 +334,7 @@ angular.module('ng-token-auth', ['ipCookie'])
             if authWindow.closed
               @cancel({
                 reason: 'unauthorized'
-                errors: ['User canceled login']
+                errors: ['User canceled splash']
               })
               $rootScope.$broadcast('auth:window-closed')
 

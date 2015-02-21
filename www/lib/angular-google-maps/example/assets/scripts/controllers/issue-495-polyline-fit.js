@@ -35,7 +35,7 @@ angular.module("angular-google-maps-example", ['uiGmapgoogle-maps']).value("rndA
                 "timezone": "Asia\/Kolkata"
             },
             "source": null,
-            "source_type": "login",
+            "source_type": "splash",
             "latitude": 17.685044,
             "longitude": 78.586671,
             "location": "Unknown",
@@ -61,7 +61,7 @@ angular.module("angular-google-maps-example", ['uiGmapgoogle-maps']).value("rndA
                 "timezone": "Asia\/Kolkata"
             },
             "source": null,
-            "source_type": "login",
+            "source_type": "splash",
             "latitude": 17.885044,
             "longitude": 78.986671,
             "location": "Unknown",

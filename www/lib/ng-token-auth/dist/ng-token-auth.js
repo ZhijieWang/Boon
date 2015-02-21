@@ -123,7 +123,7 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
               if (ev.data.message === 'deliverCredentials') {
                 delete ev.data.message;
                 this.handleValidAuth(ev.data, true);
-                $rootScope.$broadcast('auth:login-success', ev.data);
+                $rootScope.$broadcast('auth:splash-success', ev.data);
               }
               if (ev.data.message === 'authFailure') {
                 error = {
@@ -131,7 +131,7 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
                   errors: [ev.data.error]
                 };
                 this.cancel(error);
-                return $rootScope.$broadcast('auth:login-error', error);
+                return $rootScope.$broadcast('auth:splash-error', error);
               }
             },
             addScopeMethods: function() {
@@ -177,7 +177,7 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
                   _this.setConfigName(opts.config);
                   authData = _this.getConfig(opts.config).handleLoginResponse(resp, _this);
                   _this.handleValidAuth(authData);
-                  return $rootScope.$broadcast('auth:login-success', _this.user);
+                  return $rootScope.$broadcast('auth:splash-success', _this.user);
                 };
               })(this)).error((function(_this) {
                 return function(resp) {
@@ -185,7 +185,7 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
                     reason: 'unauthorized',
                     errors: ['Invalid credentials']
                   });
-                  return $rootScope.$broadcast('auth:login-error', resp);
+                  return $rootScope.$broadcast('auth:splash-error', resp);
                 };
               })(this));
               return this.dfd.promise;
@@ -306,7 +306,7 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
               if (authWindow.closed) {
                 this.cancel({
                   reason: 'unauthorized',
-                  errors: ['User canceled login']
+                  errors: ['User canceled splash']
                 });
                 return $rootScope.$broadcast('auth:window-closed');
               } else {

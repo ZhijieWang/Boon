@@ -11598,18 +11598,18 @@ function annotate(fn, strictDi, name) {
  *    }));
  *
  *    it('tracks events', inject(function(eventTracker) {
- *      expect(eventTracker.event('login')).toEqual(1);
- *      expect(eventTracker.event('login')).toEqual(2);
+ *      expect(eventTracker.event('splash')).toEqual(1);
+ *      expect(eventTracker.event('splash')).toEqual(2);
  *    }));
  *
  *    it('saves to the tracking url', inject(function(eventTracker, $http) {
  *      postSpy = spyOn($http, 'post');
- *      eventTracker.event('login');
+ *      eventTracker.event('splash');
  *      eventTracker.save();
  *      expect(postSpy).toHaveBeenCalled();
  *      expect(postSpy.mostRecentCall.args[0]).not.toEqual('/track');
  *      expect(postSpy.mostRecentCall.args[0]).toEqual('/custom-track');
- *      expect(postSpy.mostRecentCall.args[1]).toEqual({ 'login': 1 });
+ *      expect(postSpy.mostRecentCall.args[1]).toEqual({ 'splash': 1 });
  *    }));
  *  });
  * ```
