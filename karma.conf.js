@@ -21,10 +21,21 @@ module.exports = function(config) {
       "www/lib/ionic-contrib-tinder-cards/ionic.tdcards.js",
       "www/lib/angular-animate/angular-animate.js",
       "www/lib/angular-sanitize/angular-sanitize.js",
-      "www/lib/ngGeolocation/ngGeolocation.js",      
-      "www/js/controllers.js",
-      "www/js/services.js",
-      "www/js/app.js",
+      "www/lib/ngGeolocation/ngGeolocation.js",
+        "www/deals/DealController.js",
+        "www/splash/SplashCtrl.js",
+        "www/stash/DealCacheController.js",
+        "www/tags/TagController.js",
+        "www/location/LocationController.js",
+        "www/splash/LoginService.js",
+        "www/deals/DealsService.js",
+
+      "www/stash/DealCacheService.js",
+      "www/tags/TagService.js",
+        "www/location/LocationService.js",
+
+
+        "www/app/app.js",
       "jasmine/spec/*_test.js"            
     ],
 
