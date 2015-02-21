@@ -10,79 +10,7 @@
 angular.module('starter.services', [])
 
     .service('dealsService', ['$http', '$log', '$auth', function dealsService($http, $log, $auth) {
-        
-        //mock deal data
-        var freshDeals  = [{
-            dealId: 0,
-            priceCategory: 1,
-            name: 'Hemingway\'s Half Off Food',
-            image: 'test1.jpg',
-            notes: 'Voted best college bar in Oakland!',
-            startTime: 'December 17, 2015 17:30:00',
-            endTime: 'December 17, 2015 19:30:00'
-        }, {
-            dealId: 1,
-            priceCategory: 1,
-            name: 'Peter\'s Pub',
-            image: 'test1.jpg',
-            notes: 'Odd obsession with everything',
-            startTime: 'December 17, 2015 17:30:00',
-            endTime: 'December 17, 2015 19:30:00'
-        }, {
-            dealId: 2,
-            priceCategory: 1,
-            name: 'Hemingway\'s Free Drinks',
-            image: 'test1.jpg',
-            notes: 'Drinkup',
-            startTime: 'December 17, 2015 17:30:00',
-            endTime: 'December 17, 2015 19:30:00'
-        }, {
-            dealId: 3,
-            priceCategory: 1,
-            name: 'Five Guys Bacon Dog',
-            image: 'test1.jpg',
-            notes: 'Can\'t go wrong with bacon!',
-            startTime: 'December 17, 2015 17:30:00',
-            endTime: 'December 17, 2015 19:30:00'
-        }, {
-            dealId: 4,
-            priceCategory: 2,
-            name: 'Panera Free Drink With Purchase!',
-            image: 'test1.jpg',
-            notes: 'Freshly baked bread daily!',
-            startTime: 'December 17, 2015 17:30:00',
-            endTime: 'December 17, 2015 19:30:00'
-        }, {
-            dealId: 5,
-            priceCategory: 2,
-            name: 'Free alcohol!',
-            image: 'test2.jpg',
-            notes: 'deal stuff',
-            startTime: 'December 17, 2014 15:30:00',
-            endTime: 'December 17, 2014 17:30:00'
-        }];
 
-/*
-        [{
-          "promotion": {
-            "dealId": 1,
-            "priceCategory": 0,
-            "notes": "half price menu item",
-            "expire": "December 17, 1995, 03:24:00"
-          }
-        }, {
-          "promotion": {
-            "dealId": 2,
-            "priceCategory": 0,
-            "notes": "half price menu item",
-            "expire": "December 17, 1995, 03:24:00"
-          }
-        }]        
-*/
-
-        this.deals = function() {
-            return freshDeals;
-        };
 
         this.rejectDeal = function(currentDeal) {
 
