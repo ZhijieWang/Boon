@@ -37,21 +37,21 @@ angular.module('boon', ['ionic','ionic.contrib.ui.tinderCards','boon.services','
 
             .state('splash', {
                  url: "/splash",
-                 templateUrl: "templates/splash.html",
+                 templateUrl: "splash/splash.html",
                  controller: 'SplashCtrl'
             })
             // setup an abstract state for the tabs directive
             .state('tab', {
                 url: "/tab",
                 abstract: true,
-                templateUrl: "templates/tabs.html"
+                templateUrl: "app/tabs.html"
             })
             // Each tab has its own nav history stack:
             .state('tab.deal-finder', {
                 url: '/deal-finder',
                 views: {
                     'deal-finder': {
-                        templateUrl: 'templates/deal-finder.html',
+                        templateUrl: 'deals/deal-finder.html',
                         controller: 'DealsCtrl'
                     }
                 }
@@ -60,7 +60,7 @@ angular.module('boon', ['ionic','ionic.contrib.ui.tinderCards','boon.services','
                 url: '/deal-stash',
                 views: {
                     'deal-stash': {
-                        templateUrl: 'templates/deal-stash.html',
+                        templateUrl: 'stash/deal-stash.html',
                         controller: 'StashCtrl'
                     }
                 }
@@ -69,7 +69,7 @@ angular.module('boon', ['ionic','ionic.contrib.ui.tinderCards','boon.services','
               url: '/tag-cloud',
               views: {
                   'tag-cloud': {
-                      templateUrl: 'templates/tag-cloud.html',
+                      templateUrl: 'tags/tag-cloud.html',
                       controller: 'TagsCtrl'
                   }
               }

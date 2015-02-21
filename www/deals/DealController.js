@@ -7,7 +7,7 @@ angular.module('boon.controllers', [])
     $scope.coords = {};
     $scope.deals = [];
 
-    $ionicModal.fromTemplateUrl('templates/deal-modal.html', {
+    $ionicModal.fromTemplateUrl('deals/deal-modal.html', {
         scope: $scope,
         animation: 'slide-in-up'
     }).then(function(modal) {
