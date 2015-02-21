@@ -4,7 +4,7 @@
  */
 
 describe('controllers module', function() {
-    beforeEach(module('starter'));
+    beforeEach(module('boon'));
 
     var dealsService;
     var dealCacheService;
