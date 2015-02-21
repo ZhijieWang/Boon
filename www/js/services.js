@@ -130,7 +130,7 @@ angular.module('starter.services', [])
                 action: 'getDeals',
                 csrfToken: '1234567890',
                 latitude: "",
-                longitute: "",
+                longitude: "",
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
 
@@ -141,7 +141,7 @@ angular.module('starter.services', [])
             }
 
             console.log("JSON object is: " + JSON.stringify(jsonPayload));
-            return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
+            return $http.post('http://localhost:3000/promotions', jsonPayload).then(function(response) {
                 var promotions = [];
                 var dealsList = angular.fromJson(response.data);
                 angular.forEach(dealsList, function(deal) {
