@@ -1,7 +1,7 @@
 
 <div class="modal">
     <ion-header-bar>
-        <h1 class="title">{{deals[0].name}}</h1>
+        <h1 class="title">Special Notes</h1>
     </ion-header-bar>
     <ion-content class="deal-modal padding">
         <!-- Div to hold deal and expanded options-->
@@ -20,6 +20,17 @@
                     </ion-slide>
                 </ion-slide-box>
             </div>
+            <div class="row business-stats">
+                <div class="col-xs-6">
+                    <span>{{deals[0].name}}</span>
+                </div>
+                <div class="col-xs-6">
+                    <span>Rating</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">This place was founded in yada yada yada and was voted yada yada yada of the best yada yada.</div>
+            </div>
             <!-- Tags associated with business currently hardcoded until
                  tag data model is worked out. -->
             <div>
@@ -28,7 +39,7 @@
                 <div class="cloudTag" ng-class="active">Pizza</div>
                 <div class="cloudTag" ng-class="active">Pub Food</div>
             </div>
-            <div> This place was founded in yada yada yada and was voted yada yada yada of the best yada yada.</div>
+
             <div>
                 <button class="button energized" ng-click="closeModal();">
                     Done

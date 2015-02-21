@@ -81,7 +81,6 @@ td-card img {
 
 
 .stashItem {
-
     margin-bottom: 10px;
     background-color: #f7f7f7;
 }
@@ -91,26 +90,35 @@ td-card img {
 }
 
 .stashImg {
-    width: 10%;
-    height: auto;
+    width: 25%;
+    height: 25%;
 }
 
 .cloudTag
 {
-    display: inline-block;
-    text-align:center;
-    height:30px;
-    width: auto;
+
+    /*text-align:center;*/
+    height:40px;
     border: 1px solid #ababab;
-    border-radius:45px / 40px;
     margin:10px;
-    padding: 3px;
+    display: inline-block;
+    background: #81c5db;
+    border-radius: 28px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
 }
 
 .active {
-    background-color: #84deee;
+    background-color: #4b4bee;
 }
 
 .deal-modal {
+    text-align: center;
+}
+
+.grid-align {
     text-align: center;
 }
