@@ -5,6 +5,8 @@ angular.module('boon.services')
 
     .service('dealsService', ['$http', '$log', '$auth', function dealsService($http, $log, $auth) {
 
+        var deals = [];
+        var businesses = [];
 
     this.rejectDeal = function(currentDeal) {
 
@@ -63,13 +65,15 @@ angular.module('boon.services')
             var stores = [];
             var dealsList = angular.fromJson(response.data);
             angular.forEach(dealsList.promotions, function(deal) {
-                promotions.push(deal.promotion);
+                promotions.push(deal);
             });
 
             angular.forEach(dealsList.shops, function(deal) {
-                stores.push(deal.store);
+                stores.push(deal);
             });
 
+            deals = promotions;
+            businesses = stores;
             return promotions;
         });
     };

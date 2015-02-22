@@ -81,13 +81,6 @@ angular.module('boon.controllers', [])
     }
 
     /*
-     Gets deals from dealservice
-     */
-    $scope.getDeals = function() {
-        return dealsService.deals();
-    };
-
-    /*
      Adds deal to rejected list
      */
     $scope.rejectDeal = function ( currentDeal ) {
