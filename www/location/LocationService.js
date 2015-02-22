@@ -42,7 +42,7 @@ angular.module('boon.services')
             console.log("Updated gelocation data: " + JSON.stringify(response));
             var locationObj = angular.fromJson(response);
             $cookieStore.put('longitude', locationObj.coords.longitude);
-            $cookieStore.put('latitude', locationObj.coords.longitude);
+            $cookieStore.put('latitude', locationObj.coords.latitude);
 
             console.log("Long Lat" + locationObj.coords.longitude + " " + locationObj.coords.latitude);
             return locationObj;
