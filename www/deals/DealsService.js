@@ -63,7 +63,7 @@ angular.module('boon.services')
             var stores = [];
             var dealsList = angular.fromJson(response.data);
             angular.forEach(dealsList.promotions, function(deal) {
-                promotions.push(deal.promotion);
+                promotions.push(deal);
             });
 
             angular.forEach(dealsList.shops, function(deal) {
