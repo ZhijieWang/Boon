@@ -1,7 +1,7 @@
 <ion-view title="Finder">
     <ion-content class="dealview" scroll="false">
         <td-cards>
-            <td-card ng-repeat="deal in deals" on-destroy="cardExitAction(deal);cardDestroyed($index)" ng-click="openModal();" on-swipe-left="cardLeftSet()" on-swipe-right="cardRightSet()" on-partial-swipe="cardPartialSwipe(amt)" >
+            <td-card ng-repeat="deal in showDeals()" on-destroy="cardExitAction(deal);cardDestroyed($index)" ng-click="openModal();" on-swipe-left="cardLeftSet()" on-swipe-right="cardRightSet()" on-partial-swipe="cardPartialSwipe(amt)" >
                 <div class="deal-blurb">{{deal.name}}</div>
                 <div class="image">
                     <div class="no-text">No Thanks!</div>
