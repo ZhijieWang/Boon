@@ -65,11 +65,9 @@ angular.module('boon.services')
             angular.forEach(dealsList.promotions, function(deal) {
                 promotions.push(deal);
             });
-
             angular.forEach(dealsList.shops, function(deal) {
                 stores.push(deal.store);
             });
-
             return promotions;
         });
     };
