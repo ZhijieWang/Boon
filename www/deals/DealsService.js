@@ -5,8 +5,15 @@ angular.module('boon.services')
 
     .service('dealsService', ['$http', '$log', '$auth', function dealsService($http, $log, $auth) {
 
-        var deals = [];
-        var businesses = [];
+    var deals = [];
+
+    this.setDeals = function(newDeals) {
+            deals = newDeals;
+    };
+
+    this.getDeals = function() {
+            return deals;
+    };
 
     this.rejectDeal = function(currentDeal) {
 
@@ -41,40 +48,5 @@ angular.module('boon.services')
         });
     };
 
-    //request deals from backend
-    this.getDeals = function(location) {
-        var currentTime = new Date();
 
-        var jsonPayload = {
-            action: 'getDeals',
-            csrfToken: '1234567890',
-            latitude: "",
-            longitude: "",
-            timestamp: currentTime.toDateString() + currentTime.getTime()
-        };
-
-        // If location object is valid, then extract geo coords form it
-        if (location) {
-            jsonPayload.latitude = location.latitude;
-            jsonPayload.longitude =location.longitude;
-        }
-
-        console.log("JSON object is: " + JSON.stringify(jsonPayload));
-        return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
-            var promotions = [];
-            var stores = [];
-            var dealsList = angular.fromJson(response.data);
-            angular.forEach(dealsList.promotions, function(deal) {
-                promotions.push(deal);
-            });
-
-            angular.forEach(dealsList.shops, function(deal) {
-                stores.push(deal);
-            });
-
-            deals = promotions;
-            businesses = stores;
-            return promotions;
-        });
-    };
 }]);
