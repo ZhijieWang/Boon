@@ -8,16 +8,8 @@ angular.module('boon.services')
  */
 .service('CommService', ['dealsService','BusinessService','locationService','$http' ,'$cookieStore',function(dealsService,BusinessService,locationService,$http,$cookieStore) {
 
-        var businesses = [];
-
-        this.getBusinesses = function() {
-            return businesses;
-        };
-
-
-
         //request deals from backend
-        this.getDealsandBusinesses = function(location) {
+        this.getDealsandBusinesses = function() {
             var currentTime = new Date();
 
             var jsonPayload = {
@@ -28,45 +20,26 @@ angular.module('boon.services')
                 timestamp: currentTime.toDateString() + currentTime.getTime()
             };
 
-            // If location object is valid, then extract geo coords form it
-            if (location) {
-                jsonPayload.latitude = location.latitude;
-                jsonPayload.longitude =location.longitude;
-            }
+            // Populate payload with values if they exist
+            locationService.getStashedLocation(jsonPayload);
 
             console.log("JSON object is: " + JSON.stringify(jsonPayload));
-            return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
-                var promotions = [];
-                var stores = [];
-                var dealsList = angular.fromJson(response.data);
-                angular.forEach(dealsList.promotions, function(deal) {
-                    promotions.push(deal);
-                });
 
-                angular.forEach(dealsList.shops, function(deal) {
-                    stores.push(deal);
-                });
+            $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
+                var dealsList = angular.fromJson(response.data);
+
+                /**
+                 * Set promotions and stores
+                 */
+                var promotions = dealsList.promotions;
+                var stores = dealsList.shops;
 
                 BusinessService.setBusinesses(stores);
                 dealsService.setDeals(promotions);
-                businesses = stores;
-                return promotions;
+
             });
         };
 
-        // (still) yucky!
-        if ($cookieStore.get('longitude') === undefined)  {
-            console.log("No stored location data detected - grabbing new data from API!");
-            locationService.updateLocation();
-
-            this.getDealsandBusinesses(null);
-        } else {
-            console.log("Stored location data detected!");
-            var coords = {
-                latitude: $cookieStore.get('latitude'),
-                longitude: $cookieStore.get('longitude')
-            };
-            this.getDealsandBusinesses(coords);
-        }
+        this.getDealsandBusinesses();
 
     }]);

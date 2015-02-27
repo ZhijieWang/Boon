@@ -13,6 +13,11 @@ angular.module('boon.services')
 
     var toSend = { tags: {},prices: {}, categories:{} };
 
+
+        /**
+         *  Currently mocked tags
+         * @type {{tagName: string, tagID: number, selection: boolean}[]}
+         */
     var tags = [
         {
             tagName: 'Pizza',
@@ -20,7 +25,7 @@ angular.module('boon.services')
             selection: true
         },
         {
-            tagName: 'Pizza 2',
+            tagName: 'Subs',
             tagID: 2,
             selection: true
         }

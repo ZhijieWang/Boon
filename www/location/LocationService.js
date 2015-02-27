@@ -3,8 +3,16 @@
  */
 
 angular.module('boon.services')
+    .service('locationService', ['$geolocation', '$http', '$cookieStore', '$log', '$q','$interval', function locationService($geolocation, $http, $cookieStore, $log, $q, $interval) {
 
-    .service('locationService', ['$geolocation', '$http', '$cookieStore', '$log', '$q', function locationService($geolocation, $http, $cookieStore, $log, $q) {
+    this.getStashedLocation = function(payload) {
+        if ($cookieStore.get('latitude') !== null) {
+            console.log("Stored location data detected!");
+
+            payload.latitude = $cookieStore.get('latitude');
+            payload.longitude = $cookieStore.get('longitude');
+        }
+    };
 
     this.getCurrentLocation = function() {
         if ($cookieStore.get('longitude') === undefined) {
@@ -35,7 +43,7 @@ angular.module('boon.services')
 
     this.getCurrentLocation();
 
-    this.updateLocation = function() {
+    $interval(function() {
         $geolocation.getCurrentPosition({
             timeout: 60000
         }).then(function(response) {
@@ -47,5 +55,5 @@ angular.module('boon.services')
             console.log("Long Lat" + locationObj.coords.longitude + " " + locationObj.coords.latitude);
             return locationObj;
         });
-    };
+    },120000);
 }]);
