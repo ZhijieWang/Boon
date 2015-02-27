@@ -6,7 +6,7 @@ angular.module('boon.services')
  *  This service handles getting the primary batch of deals and businesses associated with those deals
  *  from backend server
  */
-.service('CommService', ['dealsService','BusinessService','$http' ,'$cookieStore',function(dealsService,BusinessService,$http,$cookieStore) {
+.service('CommService', ['dealsService','BusinessService','locationService','$http' ,'$cookieStore',function(dealsService,BusinessService,locationService,$http,$cookieStore) {
 
         var businesses = [];
 
