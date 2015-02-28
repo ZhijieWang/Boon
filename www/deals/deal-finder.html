@@ -10,13 +10,17 @@
                 </div>
             </td-card>
         </td-cards>
-        <div class="dealInfoPane">
-            <button class="button button-large button-positive deal-button" ng-click="rejectButton()" >
-                No Thanks!
-            </button>
-            <button class="button button-large button-positive deal-button" ng-click="acceptButton()">
-                Yes!
-            </button>
+        <div class="row dealInfoPane">
+            <div class="col-30 col-offset-16">
+                <button class="button button-positive button-block" ng-click="rejectButton()" >
+                    No Thanks!
+                </button>
+            </div>
+            <div class="col-30 col-offset-15">
+                <button class="button button-positive button-block" ng-click="acceptButton()">
+                    Yes!
+                </button>
+            </div>
         </div>
     </ion-content>
 </ion-view>

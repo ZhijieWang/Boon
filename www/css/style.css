@@ -22,7 +22,7 @@ td-cards {
 td-card {
     position: absolute;
     left: 50%;
-    margin-top: 80px;
+    margin-top: 40px;
     margin-bottom: 40px;
     margin-left: -150px;
     width: 300px;
@@ -66,12 +66,10 @@ td-card img {
 }
 
 .dealInfoPane {
-    width: 320px;
+    margin: 20px;
     text-align: center;
     top: 78%;
     z-index: 2;
-    margin-left:-160px;
-    left:50%;
     position: absolute;
 }
 
@@ -83,31 +81,43 @@ td-card img {
 .stashItem {
     margin-bottom: 10px;
     background-color: #f7f7f7;
+    padding-left: 10px;
 }
 
 .stashItem.expanded {
-    height: 200px;
+
 }
 
-.stashImg {
-    width: 25%;
-    height: 25%;
+.col-offset-15 {
+    margin-left: 15%;
 }
+
+.col-offset-16 {
+    margin-left: 16%;
+}
+
+.col-30 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 30.0%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 30.0%;
+    -ms-flex: 0 0 30.0%;
+    flex: 0 0 30.0%;
+    max-width: 30.0%; }
 
 .cloudTag
 {
-
     /*text-align:center;*/
-    height:40px;
+    height:25px;
     border: 1px solid #ababab;
-    margin:10px;
+    margin:5px;
     display: inline-block;
     background: #81c5db;
     border-radius: 28px;
     font-family: Arial;
     color: #ffffff;
     font-size: 20px;
-    padding: 10px 20px 10px 20px;
+    padding: 2px 20px 2px 20px;
     text-decoration: none;
 }
 
@@ -125,4 +135,8 @@ td-card img {
 
 .logininput {
     background-color: turquoise;
+}
+
+.tabs {
+    background-color: transparent;
 }

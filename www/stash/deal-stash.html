@@ -3,42 +3,46 @@
         <ion-list ng-repeat="deal in acceptedDeals()" ng-controller="StashItemCtrl"  ng-init="setDealTime(deal.startTime,deal.endTime);" ng-click="showDetailView()">
             <div ng-if="!detailView" class="stashItem" >
                 <div class="row">
-                    <div class="col-xs-6">
-                        {{deal.name}}
+                    <div class="col-50">
+                       <strong>{{deal.name}}</strong>
                     </div>
-                    <div class="col-xs-6">{{timeText}}
-                        <timer  end-time="getDealTimes();" interval="1000" ng-style="timerStyle">  {{hours}}:{{mminutes}}:{{sseconds}}</timer></div>
+                    <div class="col-50">{{timeText}}
+                        <timer  end-time="getDealTimes();" interval="1000" ng-style="timerStyle">  {{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-90">
                         {{deal.notes}}
                     </div>
                 </div>
             </div>
-            <div ng-if="detailView" class="stashItem expanded" >
+            <div ng-if="detailView" class="stashItem expanded">
                 <div class="row">
-                    <div class="col-xs-8">
-                        <img class="stashImg" ng-src="{{deal.imageUrl}}">
-                        {{deal.name}}
+                    <div class="col-50">
+                        <strong>{{deal.name}}</strong>
                     </div>
-                    <div class="col-xs-4">{{timeText}}
-                        <timer  end-time="getDealTimes();" interval="1000" ng-style="timerStyle">  {{hours}}:{{mminutes}}:{{sseconds}}</timer></div>
+                    <div class="col-50">{{timeText}}
+                        <timer end-time="getDealTimes();" interval="1000" ng-style="timerStyle">  {{hours}}:{{mminutes}}:{{sseconds}}</timer>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-90">
                         {{deal.notes}}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="cloudTag" ng-class="active">$</div>
+                    <div class="col-10"></div>
+                    <div class="cloudTag " ng-class="active">$</div>
                     <div class="cloudTag" ng-class="active">Beer</div>
                     <div class="cloudTag" ng-class="active">Pizza</div>
-                    <!--<div class="col-xs"-->
-                    <!--<img class="stashImg" ng-src="{{deal.imageUrl}}">-->
+                    <div class="col-10"></div>
                 </div>
                 <div class="row">
-                    <!--TODO: have stars scale from 1 to 5 in number based on rating associated with restuarant-->
-
+                    <div class="col-50 col-offset-25">
+                        <button class="button button-block button-positive">
+                            Show More
+                        </button>
+                    </div>
                 </div>
             </div>
         </ion-list>
