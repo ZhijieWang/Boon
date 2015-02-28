@@ -3,7 +3,7 @@
  */
 angular.module('boon.controllers', [])
 
-    .controller('DealsCtrl',[ '$scope','$ionicModal','dealsService','dealCacheService', '$log','$geolocation', '$auth','CommService', 'locationService', '$cookieStore', function($scope ,$ionicModal,dealsService,dealCacheService, $log,$geolocation, $auth,CommService, locationService, $cookieStore) {
+    .controller('DealsCtrl',[ '$scope','$ionicModal','dealsService','dealCacheService', '$log','$geolocation', '$auth','CommService', 'locationService', '$cookieStore','TDCardDelegate', function($scope ,$ionicModal,dealsService,dealCacheService, $log,$geolocation, $auth,CommService, locationService, $cookieStore, TDCardDelegate) {
     $scope.coords = {};
     $scope.deals = [];
 
@@ -45,6 +45,8 @@ angular.module('boon.controllers', [])
 
     // Reject button acts as if the card were swiped left
     $scope.rejectButton = function() {
+
+
         $scope.cardExitAction = $scope.cardSwipedLeft;
         var tempDeal = $scope.deals.shift();
         $scope.cardExitAction(tempDeal);
@@ -53,9 +55,12 @@ angular.module('boon.controllers', [])
 
     // Accept button acts as if card were swiped right
     $scope.acceptButton = function() {
+
         $scope.cardExitAction = $scope.cardSwipedRight;
         var tempDeal = $scope.deals.shift();
         $scope.cardExitAction(tempDeal);
+
+
     };
     /*
      Adds deal to stash

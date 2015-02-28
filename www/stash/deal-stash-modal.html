@@ -1,0 +1,18 @@
+<div class="modal">
+    <ion-header-bar>
+        <h1 class="title">Photos</h1>
+    </ion-header-bar>
+    <ion-content class="deal-modal padding">
+
+        <div>
+            <!-- Slider for pics-->
+            <div class="bus-slider">
+                <ion-slide-box>
+                    <ion-slide ng-repeat="imageURL in $scope.business_slide">
+                        <img src="{{imageURL}}">
+                    </ion-slide>
+                </ion-slide-box>
+            </div>
+        </div>
+    </ion-content>
+</div>
