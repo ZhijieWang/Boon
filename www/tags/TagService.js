@@ -33,15 +33,19 @@ angular.module('boon.services')
 
     this.switchCategory = function(categoryID, value) {
         toSend.categories[categoryID] = value;
-    }
+    };
 
     this.switchPrice = function(priceID, value) {
         toSend.prices[priceID] = value;
-    }
+    };
 
     this.switchTag = function(tagID,value) {
         toSend.tags[tagID] = value;
-    }
+    };
+
+        this.setTags = function(tagsToSet) {
+            tags = tagsToSet;
+        };
 
     // sends the TagID and matching selection values
     // to backend
@@ -65,4 +69,4 @@ angular.module('boon.services')
     this.getCategories = function() {
         return tags;
     };
-}])
+}]);

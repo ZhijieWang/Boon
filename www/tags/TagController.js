@@ -23,9 +23,9 @@ angular.module('boon.controllers')
     ];
 
     $scope.categories = [
-        {text: "Pizza", checked: false, categoryID: 4},
-        {text: "Bar Food", checked: false, categoryID: 3 },
-        {text: "Ice Cream", checked: false, categoryID: 2 }
+        {text: "Food", checked: false, categoryID: 4},
+        {text: "Drink", checked: false, categoryID: 3 },
+        {text: "Entertainment", checked: false, categoryID: 2 }
     ];
 
     // Default value when no prices are selected
@@ -45,7 +45,6 @@ angular.module('boon.controllers')
         // Send to tag service
         tagService.switchPrice($scope.priceList[index].priceID,$scope.priceList[index].checked);
     };
-
 
     // Since only one price can be highlighted at once it
     // highlights current price it equals the index
