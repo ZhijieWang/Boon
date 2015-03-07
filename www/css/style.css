@@ -71,6 +71,11 @@ td-card img {
     top: 78%;
     z-index: 2;
     position: absolute;
+
+}
+
+.deal-option {
+    font-size: 200%;
 }
 
 .deal-button {
