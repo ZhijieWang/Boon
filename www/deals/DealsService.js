@@ -7,12 +7,19 @@ angular.module('boon.services')
 
     var deals = [];
 
+    if (localStorage["deals"] !== null) {
+        deals = JSON.parse(localStorage["deals"]);
+    }
+
     this.setDeals = function(newDeals) {
-            deals = newDeals;
+        // direct assignment for first use
+        deals = newDeals;
+        // Deals cached in localstorage
+        localStorage["deals"] = JSON.stringify(newDeals);
     };
 
     this.getDeals = function() {
-            return deals;
+        return deals;
     };
 
     this.rejectDeal = function(currentDeal) {

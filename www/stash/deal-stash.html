@@ -18,9 +18,8 @@
                 <div ng-if="detailView" class="animate-if">
                     <div class="row">
                         <div class="col-10"></div>
-                        <div class="cloudTag " ng-class="active">$</div>
-                        <div class="cloudTag" ng-class="active">Beer</div>
-                        <div class="cloudTag" ng-class="active">Pizza</div>
+                        <div class="cloudTag" ng-class="active">{{getPrice(deal.pricecategory)}}</div>
+                        <div class="cloudTag" ng-class="active" ng-repeat="tag in deal.tags">{{tag.name}}</div>
                         <div class="col-10"></div>
                     </div>
                     <div class="row">
