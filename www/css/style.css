@@ -19,6 +19,18 @@ td-cards {
     display: block;
 }
 
+.boon-logo {
+    margin-top: 50px;
+    height: 100px;
+    font-family: arial, sans-serif;
+    font-size: 400%;
+    text-emphasis: #000001;
+}
+
+.boon-blurb {
+    background-color: #ababab;
+}
+
 td-card {
     position: absolute;
     left: 50%;
