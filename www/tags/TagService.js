@@ -65,7 +65,6 @@ angular.module('boon.services')
 
     };
 
-    // TODO implement http call to backend
     this.getCategories = function() {
         return tags;
     };

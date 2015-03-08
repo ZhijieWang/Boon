@@ -37,7 +37,7 @@ angular.module('boon.services')
                  */
                 var promotions = dealsList.promotions;
                 var stores = dealsList.shops;
-                var tags = dealsList.dealTags;
+                var tags = dealsList.tags;
 
                 BusinessService.setBusinesses(stores);
                 dealsService.setDeals(promotions);
