@@ -9,7 +9,7 @@
             <!-- Slider for pics-->
             <div class="bus-slider">
                 <ion-slide-box on-slide-changed="slideChanged(index)">
-                    <ion-slide ng-repeat="images in BusinessService.getBusinessById(deals[0].id).images">
+                    <ion-slide ng-repeat="images in modalBus.pictures">
                         <img src="{{image}}">
                     </ion-slide>
                 </ion-slide-box>
@@ -23,12 +23,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">{{ BusinessService.getBusinessById(deals[0].shopId).description}}</div>
+                <div class="col-xs-12">{{modalBus.description}}</div>
             </div>
             <!-- Tags associated with business currently hardcoded until
                  tag data model is worked out. -->
             <div>
-                <div class="cloudTag" ng-class="active" ng-repeat="tags in BusinessService.getBusinessById(deals[0].shopId)">{{tag.name}}</div>
+                <div class="cloudTag" ng-class="active" ng-repeat="tags in modalBus.tags">{{tag.name}}</div>
             </div>
             <div>
                 <button class="button button-positive" ng-click="closeModal();">
