@@ -18,10 +18,12 @@ angular.module('boon.services')
         }
 
 
-        if (typeof localStorage["businesses"] !== 'undefined') {
+
+        // If there are cached businesses and none currently in service
+        if (typeof localStorage["businesses"] !== 'undefined' && typeof businesses === 'undefined') {
             // Insert businesses into business cache using the storeId as the key.
-       ///     var temp_businesses = JSON.parse(localStorage["businesses"]);
-           /// mergeBusinesses(temp_businesses);
+           businesses = JSON.parse(localStorage["businesses"])
+
 
         }
         this.getBusinesses = function() {
@@ -30,12 +32,12 @@ angular.module('boon.services')
         };
 
         this.setBusinesses = function(newBusinesses) {
-            // TODO: instead of replacing add all businesses directly
-            // so that app can store businesses that may not directly correspond
-            // to current deals.
 
 
+            // Update businesses
             mergeBusinesses(newBusinesses);
+
+            // Update the stored JSON cache
             window.localStorage["businesses"] = JSON.stringify(businesses);
         };
 
