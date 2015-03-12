@@ -32,7 +32,9 @@ angular.module('boon.controllers')
         })
 
         $scope.openModal = function(storeID) {
-            $scope.business_slide = BusinessService.getBusinessById(storeID).photos;
+            $scope.business_slide = BusinessService.getBusinessById(storeID).pictures;
+            console.log(" There are: " + $scope.business_slide.length + " images.");
+
             $scope.modal.show()
         }
 
