@@ -15,10 +15,10 @@ angular.module('boon.controllers', [])
         $scope.modal = modal
     });
 
-    $scope.openModal = function() {
+    $scope.openModal = function(deal) {
 
-
-        $scope.modalBus = BusinessService.getBusinessById($scope.deals[0].shopId);
+        $scope.modalDeal = deal;
+        $scope.modalBus = BusinessService.getBusinessById(deal.shopId);
 
         $scope.modal.show()
     };
