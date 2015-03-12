@@ -1,24 +1,25 @@
 <ion-view title="Finder">
     <ion-content class="dealview" scroll="false">
         <td-cards>
-            <td-card ng-repeat="deal in showDeals()" on-destroy="cardExitAction(deal);cardDestroyed($index)" ng-click="openModal();" on-swipe-left="cardLeftSet()" on-swipe-right="cardRightSet()" >
+            <td-card ng-repeat="deal in showDeals()" on-destroy="cardExitAction(deal);cardDestroyed($index)" ng-click="openModal(deal);" on-swipe-left="cardLeftSet()" on-swipe-right="cardRightSet()" >
                 <div class="deal-blurb">{{deal.name}}</div>
                 <div class="image">
-                    <div class="no-text">No Thanks!</div>
+                    <div class="no-text">Trash</div>
                     <img ng-src="{{deal.imageUrl}}">
-                    <div class="yes-text">Yes Please!</div>
+                    <div class="yes-text">Stash</div>
                 </div>
+
             </td-card>
         </td-cards>
         <div class="row dealInfoPane">
-            <div class="col-30 col-offset-16">
-                <button class="button button-positive button-block" ng-click="rejectButton()" >
-                    No Thanks!
+            <div class="col-30 col-offset-16"  >
+                <button class="button button-icon ion-close-circled button-block" style="font-size: 200%; " ng-click="rejectButton()" >
+                    trash
                 </button>
             </div>
             <div class="col-30 col-offset-15">
-                <button class="button button-positive button-block" ng-click="acceptButton()">
-                    Yes!
+                <button class="button button-icon ion-checkmark-circled button-block" style="font-size: 200%;" ng-click="acceptButton()">
+                    stash
                 </button>
             </div>
         </div>

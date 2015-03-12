@@ -3,7 +3,7 @@
         <ion-list ng-repeat="deal in acceptedDeals()"  " ng-controller="StashItemCtrl"  ng-init="setDealTime(deal.startTime,deal.endTime);" >
             <div class="stashItem animate-if">
                 <div class="row" ng-click="showDetailView()">
-                    <div class="col-50">
+                    <div class="col-offset-10 col-50">
                        <strong>{{deal.name}}</strong>
                     </div>
                     <div class="col-50">{{timeText}}
@@ -11,21 +11,20 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-90">
+                    <div class=" col-offset-10 col-90">
                         {{deal.notes}}
                     </div>
                 </div>
                 <div ng-if="detailView" class="animate-if">
                     <div class="row">
                         <div class="col-10"></div>
-                        <div class="cloudTag " ng-class="active">$</div>
-                        <div class="cloudTag" ng-class="active">Beer</div>
-                        <div class="cloudTag" ng-class="active">Pizza</div>
+                        <div class="cloudTag" ng-class="active">{{getPrice(deal.pricecategory)}}</div>
+                        <div class="cloudTag" ng-class="active" ng-repeat="tag in deal.tags">{{tag.name}}</div>
                         <div class="col-10"></div>
                     </div>
                     <div class="row">
                         <div class="col-50 col-offset-25">
-                            <button ng-click="openModal(deal.shopId);" class="button button-block button-positive">
+                            <button ng-click="openModal(deal.shopId);" class="button button-block">
                                 Show More
                             </button>
                         </div>

@@ -11,6 +11,19 @@ angular.module('boon.controllers')
  */
 .controller('StashCtrl',['$scope','dealCacheService','BusinessService','$ionicModal','$log', function($scope, dealCacheService, BusinessService,$ionicModal, $log){
 
+        $scope.getPrice = function ( priceCat ) {
+            switch (priceCat ) {
+                case 1:
+                    return "$";
+                case 2:
+                    return "$$";
+                case 3:
+                    return "$$$";
+                default:
+                    return "-";
+            }
+        };
+
         $ionicModal.fromTemplateUrl('stash/deal-stash-modal.html', {
             scope: $scope,
             animation: 'slide-in-up'
@@ -19,7 +32,9 @@ angular.module('boon.controllers')
         })
 
         $scope.openModal = function(storeID) {
-            $scope.business_slide = BusinessService.getBusinessById(storeID).photos;
+            $scope.business_slide = BusinessService.getBusinessById(storeID).pictures;
+            console.log(" There are: " + $scope.business_slide.length + " images.");
+
             $scope.modal.show()
         }
 
@@ -39,6 +54,9 @@ angular.module('boon.controllers')
  *  This controller handles each stash element from the ng-repeat
  */
     .controller('StashItemCtrl',['$scope',function($scope) {
+
+
+
         // Strings to be displayed depending on if deal is active to waiting to be active
         var expireText = "Expires In:";
         var startText = "Starts In:";

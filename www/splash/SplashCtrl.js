@@ -1,7 +1,7 @@
     
 angular.module('boon.controllers')
 
-.controller('SplashCtrl', ['$scope', '$state', '$auth', '$log', function SplashCtrl($scope, $state, $auth, $log) {
+.controller('SplashCtrl', ['$scope', '$state', '$auth', '$log','CommService', function SplashCtrl($scope, $state, $auth, $log,CommService) {
     $scope.notifications = [{
         msg: 'Welcome!',
         type: 'success'

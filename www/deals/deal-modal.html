@@ -9,35 +9,26 @@
             <!-- Slider for pics-->
             <div class="bus-slider">
                 <ion-slide-box on-slide-changed="slideChanged(index)">
-                    <ion-slide>
-                        <img src="http://lorempixel.com/g/350/350/">
-                    </ion-slide>
-                    <ion-slide>
-                        <img src="http://lorempixel.com/g/350/350/">
-                    </ion-slide>
-                    <ion-slide>
-                        <img src="http://lorempixel.com/g/350/350/">
+                    <ion-slide ng-repeat="images in modalBus.pictures">
+                        <img src="{{image}}">
                     </ion-slide>
                 </ion-slide-box>
             </div>
             <div class="row business-stats">
                 <div class="col-xs-6">
-                    <span>{{deals[0].name}}</span>
+                    <span>{{modalDeal.name}} @ {{modalBus.name}}</span>
                 </div>
                 <div class="col-xs-6">
                     <span>Rating</span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">This place was founded in yada yada yada and was voted yada yada yada of the best yada yada.</div>
+                <div class="col-xs-12">{{modalBus.description}}</div>
             </div>
             <!-- Tags associated with business currently hardcoded until
                  tag data model is worked out. -->
             <div>
-                <div class="cloudTag" ng-class="active">$</div>
-                <div class="cloudTag" ng-class="active">Beer</div>
-                <div class="cloudTag" ng-class="active">Pizza</div>
-                <div class="cloudTag" ng-class="active">Pub Food</div>
+                <div class="cloudTag" ng-class="active" ng-repeat="tags in modalBus.tags">{{tag.name}}</div>
             </div>
             <div>
                 <button class="button button-positive" ng-click="closeModal();">

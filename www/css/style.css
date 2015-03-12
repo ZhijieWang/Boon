@@ -19,7 +19,20 @@ td-cards {
     display: block;
 }
 
+.boon-logo {
+    margin-top: 50px;
+    height: 100px;
+    font-family: arial, sans-serif;
+    font-size: 400%;
+    text-emphasis: #000001;
+}
+
+.boon-blurb {
+    background-color: #b4deec;
+}
+
 td-card {
+    background-color:white;
     position: absolute;
     left: 50%;
     margin-top: 40px;
@@ -113,17 +126,17 @@ td-card img {
     border: 1px solid #ababab;
     margin:5px;
     display: inline-block;
-    background: #81c5db;
+    background: rgba(125, 187, 219, 0.06);
     border-radius: 28px;
     font-family: Arial;
-    color: #ffffff;
+    color: #252326;
     font-size: 20px;
     padding: 2px 20px 2px 20px;
     text-decoration: none;
 }
 
 .active {
-    background-color: #4b4bee;
+    background-color: #b4deec;
 }
 .animate-if {
     padding:10px;
