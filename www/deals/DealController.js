@@ -3,7 +3,8 @@
  */
 angular.module('boon.controllers', [])
 
-    .controller('DealsCtrl',[ '$scope','$ionicModal','dealsService','dealCacheService', '$log','$geolocation', '$auth', 'locationService', '$cookieStore', function($scope ,$ionicModal,dealsService,dealCacheService, $log,$geolocation, $auth, locationService, $cookieStore) {
+    // TODO: record time when user enters swipes
+    .controller('DealsCtrl',[ '$scope','$ionicModal','dealsService','dealCacheService', '$log','$geolocation', '$auth','CommService', 'locationService', '$cookieStore', function($scope ,$ionicModal,dealsService,dealCacheService, $log,$geolocation, $auth,CommService, locationService, $cookieStore) {
     $scope.coords = {};
     $scope.deals = [];
 
@@ -37,6 +38,11 @@ angular.module('boon.controllers', [])
         dealsService.rejectDeal(currentDeal).then(function(response) {
         });
     };
+
+        $scope.showDeals = function() {
+            $scope.deals = dealsService.getDeals();
+            return $scope.deals;
+        };
 
     // Reject button acts as if the card were swiped left
     $scope.rejectButton = function() {
@@ -81,13 +87,6 @@ angular.module('boon.controllers', [])
     }
 
     /*
-     Gets deals from dealservice
-     */
-    $scope.getDeals = function() {
-        return dealsService.deals();
-    };
-
-    /*
      Adds deal to rejected list
      */
     $scope.rejectDeal = function ( currentDeal ) {
@@ -108,26 +107,6 @@ angular.module('boon.controllers', [])
         $scope.deals.splice(index, 1);
     };
 
-    // (still) yucky!
-    if ($cookieStore.get('longitude') === undefined)  {
-        console.log("No stored location data detected - grabbing new data from API!");
-        locationService.updateLocation();
-
-        dealsService.getDeals(null).then(function(newDeals) {
-            $scope.deals = newDeals;
-            console.log("deals is " + JSON.stringify($scope.deals));
-        });
-    } else {
-        console.log("Stored location data detected!");
-        var coords = {
-            latitude: $cookieStore.get('latitude'),
-            longitude: $cookieStore.get('longitude')
-        };
-        dealsService.getDeals(coords).then(function(newDeals) {
-            $scope.deals = newDeals;
-            console.log("deals is " + JSON.stringify($scope.deals));
-        });
-    }
 
 
     // Controls deals that user has viewed and their selection

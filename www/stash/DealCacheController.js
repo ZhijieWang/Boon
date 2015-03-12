@@ -9,7 +9,28 @@ angular.module('boon.controllers')
  *
  *  TODO: allow user to click a button to map the deal with respect to their location
  */
-.controller('StashCtrl',['$scope','dealCacheService','$log', function($scope, dealCacheService, $log){
+.controller('StashCtrl',['$scope','dealCacheService','BusinessService','$ionicModal','$log', function($scope, dealCacheService, BusinessService,$ionicModal, $log){
+
+        $ionicModal.fromTemplateUrl('stash/deal-stash-modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal
+        })
+
+        $scope.openModal = function(storeID) {
+            $scope.business_slide = BusinessService.getBusinessById(storeID).photos;
+            $scope.modal.show()
+        }
+
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
+
     $scope.acceptedDeals = function () {
         return dealCacheService.stashedDeals();
     };

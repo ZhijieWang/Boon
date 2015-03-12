@@ -5,6 +5,15 @@ angular.module('boon.services')
 
     .service('dealsService', ['$http', '$log', '$auth', function dealsService($http, $log, $auth) {
 
+    var deals = [];
+
+    this.setDeals = function(newDeals) {
+            deals = newDeals;
+    };
+
+    this.getDeals = function() {
+            return deals;
+    };
 
     this.rejectDeal = function(currentDeal) {
 
@@ -38,11 +47,6 @@ angular.module('boon.services')
             return angular.fromJson(response.data).model.results;
         });
     };
-
-    //request deals from backend
-    this.getDeals = function(location) {
-        var currentTime = new Date();
-
         var jsonPayload = {
             action: 'getDeals',
             csrfToken: '1234567890',
@@ -70,5 +74,4 @@ angular.module('boon.services')
             });
             return promotions;
         });
-    };
 }]);
