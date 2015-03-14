@@ -18,10 +18,10 @@ angular.module('boon.services')
         }
 
         // If there are cached businesses and none currently in service
-        if (typeof localStorage["businesses"] !== 'undefined' && typeof businesses === 'undefined') {
+        if (typeof localStorage["businesses"] !== 'undefined' && businesses.length === 0) {
 
-          console.log(" The parsed Businesses store is: " + JSON.parse(localStorage["businesses"]));
-
+          console.log(" The parsed Businesses store is: " + localStorage["businesses"]);
+          businesses = JSON.parse(localStorage["businesses"]);
 
         }
 
@@ -44,8 +44,10 @@ angular.module('boon.services')
             console.log("Getting businesses w/ ID" + id);
             if (typeof businesses[id] === 'undefined') {
                 // TODO: Query server for business with specified ID
+            } else {
+                console.log("Getting business " + businesses[id].name);
             }
-            console.log("Getting business " + businesses[id].name);
+
             return businesses[id];
         };
 }]);
