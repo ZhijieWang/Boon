@@ -3815,7 +3815,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   display: none; }
 
 .tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item {
-  font-size: 10px;
+  font-size: 18px;
   line-height: 14px; }
 
 .tab-item .icon {
@@ -3825,7 +3825,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   font-size: 32px; }
 
 .tabs-icon-left.tabs .tab-item, .tabs-icon-left > .tabs .tab-item, .tabs-icon-right.tabs .tab-item, .tabs-icon-right > .tabs .tab-item {
-  font-size: 10px; }
+  font-size: 18px; }
   .tabs-icon-left.tabs .tab-item .icon, .tabs-icon-left > .tabs .tab-item .icon, .tabs-icon-right.tabs .tab-item .icon, .tabs-icon-right > .tabs .tab-item .icon {
     display: inline-block;
     vertical-align: top;

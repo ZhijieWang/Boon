@@ -20,7 +20,7 @@
             </span>
             <!-- Item Tags-->
             <div>
-                <div ng-repeat="tag in stashedTags" class="cloudTag" ng-click="selectTag($index);" ng-class="{'active' : stashedTags[$index].selection}">{{tag.tagName}}</div>
+                <div ng-repeat="tag in stashedTags" class="cloudTag" ng-click="selectTag($index);" ng-class="{'active' : stashedTags[$index].selection}">{{tag.name}}</div>
             </div>
         </ion-scroll>
     </ion-content>

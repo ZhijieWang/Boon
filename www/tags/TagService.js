@@ -20,12 +20,12 @@ angular.module('boon.services')
          */
     var tags = [
         {
-            tagName: 'Pizza',
+            name: 'Pizza',
             tagID: 1,
             selection: true
         },
         {
-            tagName: 'Subs',
+            name: 'Subs',
             tagID: 2,
             selection: true
         }

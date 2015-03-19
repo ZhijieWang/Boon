@@ -17,15 +17,14 @@ angular.module('boon.services')
             }
         }
 
-
-
         // If there are cached businesses and none currently in service
-      ///  if (typeof localStorage["businesses"] !== 'undefined' && typeof businesses === 'undefined') {
-            // Insert businesses into business cache using the storeId as the key.
-         // console.log( JSON.parse(localStorage["businesses"]));
+        if (typeof localStorage["businesses"] !== 'undefined' && businesses.length === 0) {
 
+          console.log(" The parsed Businesses store is: " + localStorage["businesses"]);
+          businesses = JSON.parse(localStorage["businesses"]);
 
-     //   }
+        }
+
         this.getBusinesses = function() {
             return businesses;
 
@@ -38,15 +37,17 @@ angular.module('boon.services')
             mergeBusinesses(newBusinesses);
 
             // Update the stored JSON cache
-           // window.localStorage["businesses"] = JSON.stringify(businesses);
+            window.localStorage["businesses"] = JSON.stringify(businesses);
         };
 
         this.getBusinessById = function(id) {
             console.log("Getting businesses w/ ID" + id);
             if (typeof businesses[id] === 'undefined') {
                 // TODO: Query server for business with specified ID
+            } else {
+                console.log("Getting business " + businesses[id].name);
             }
-            console.log("Getting business " + businesses[id].name);
+
             return businesses[id];
         };
 }]);
