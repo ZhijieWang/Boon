@@ -7,7 +7,7 @@ angular.module('boon.services')
 
     var deals = [];
 
-    if (localStorage["deals"] !== null) {
+    if (localStorage["deals"]) {
         deals = JSON.parse(localStorage["deals"]);
     }
 
