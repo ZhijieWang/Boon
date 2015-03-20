@@ -54,31 +54,4 @@ angular.module('boon.services')
             return angular.fromJson(response.data).model.results;
         });
     };
-        var jsonPayload = {
-            action: 'getDeals',
-            csrfToken: '1234567890',
-            latitude: "",
-            longitude: "",
-            timestamp: currentTime.toDateString() + currentTime.getTime()
-        };
-
-        // If location object is valid, then extract geo coords form it
-        if (location) {
-            jsonPayload.latitude = location.latitude;
-            jsonPayload.longitude =location.longitude;
-        }
-
-        console.log("JSON object is: " + JSON.stringify(jsonPayload));
-        return $http.post('http://intense-castle-3862.herokuapp.com/promotions', jsonPayload).then(function(response) {
-            var promotions = [];
-            var stores = [];
-            var dealsList = angular.fromJson(response.data);
-            angular.forEach(dealsList.promotions, function(deal) {
-                promotions.push(deal);
-            });
-            angular.forEach(dealsList.shops, function(deal) {
-                stores.push(deal.store);
-            });
-            return promotions;
-        });
 }]);

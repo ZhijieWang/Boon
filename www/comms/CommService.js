@@ -29,7 +29,6 @@ angular.module('boon.services')
 
                 console.log("JSON object is: " + JSON.stringify(response.data));
 
-
                 var dealsList = angular.fromJson(response.data);
 
                 /**
